@@ -284,11 +284,24 @@ function renderVentas() {
         if (isExpanded) {
             ventas.forEach(v => {
                 const estado = v.estado || 'iniciada';
+                // Mostrar líneas de producto si existen
+                let productosHtml = '';
+                if (v.productos && v.productos.length > 0) {
+                    productosHtml = `<div style="margin:0.5rem 0;padding:0.5rem;background:var(--bg-secondary);border-radius:6px">
+                        ${v.productos.map(p => `<div style="display:flex;justify-content:space-between;font-size:0.8rem;padding:0.25rem 0;border-bottom:1px solid var(--border)">
+                            <span>☕ ${p.origen} (${p.formato})</span>
+                            <span>${p.kg}kg • $${p.precio?.toLocaleString() || 0}</span>
+                        </div>`).join('')}
+                    </div>`;
+                }
                 html += `
                     <div class="card" style="border-left:4px solid ${estado === 'entregada' ? 'var(--success)' : estado === 'proceso' ? '#3b82f6' : 'var(--text-secondary)'}">
                         <div class="card-header">
                             <span class="card-title">${v.cliente}</span>
-                            <span style="font-size:0.75rem;color:var(--text-secondary)">#${v.id}</span>
+                            <div style="display:flex;gap:0.5rem;align-items:center">
+                                <button onclick="editVenta(${v.id})" style="background:var(--bg-secondary);border:none;padding:0.25rem 0.5rem;border-radius:4px;cursor:pointer;font-size:0.75rem" title="Editar venta">✏️</button>
+                                <span style="font-size:0.75rem;color:var(--text-secondary)">#${v.id}</span>
+                            </div>
                         </div>
                         <div style="display:flex;justify-content:space-between;align-items:center;margin:0.5rem 0">
                             <span style="font-size:1.25rem;font-weight:700;color:var(--accent)">$${v.monto.toLocaleString()}</span>
@@ -299,6 +312,7 @@ function renderVentas() {
                             <span>⚖️ ${v.kg}kg</span>
                             <span>☕ ${v.origen}</span>
                         </div>
+                        ${productosHtml}
                         <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
                             <span class="badge badge-${estadoColores[estado]}" onclick="cycleVentaEstado(${v.id})" style="cursor:pointer" title="Click para cambiar">
                                 ${estadoEmojis[estado]} ${estado.charAt(0).toUpperCase() + estado.slice(1)}
@@ -534,19 +548,65 @@ function closeModal() {
 function renderModalBody(type, id) {
     let html = '';
     if (type === 'venta') {
+        const origenes = ['Brasil', 'Colombia', 'Peru', 'Bolivia', 'Costa Rica', 'Honduras', 'Etiopia', 'Robusta', 'Blend', 'Mix'];
+        const formatos = ['1kg Grano', '1kg Molido', '500g Grano', '500g Molido', '250g Grano', '250g Molido', 'Granel'];
+
+        // Si estamos editando, cargar datos existentes
+        const venta = id ? data.ventas.find(v => v.id === id) : null;
+        const productos = venta?.productos || [];
+
         html = `
-            <div class="form-group"><label class="form-label">Cliente</label><input type="text" class="form-input" id="venta-cliente"></div>
-            <div class="form-group"><label class="form-label">Tipo</label><select class="form-select" id="venta-tipo"><option value="b2b">B2B</option><option value="b2p">B2P</option></select></div>
-            <div class="form-group"><label class="form-label">Monto (CLP)</label><input type="number" class="form-input" id="venta-monto"></div>
-            <div class="form-group"><label class="form-label">Kg</label><input type="number" step="0.5" class="form-input" id="venta-kg"></div>
-            <div class="form-group"><label class="form-label">Origen</label><input type="text" class="form-input" id="venta-origen"></div>
-            <div class="form-group"><label class="form-label">Fecha</label><input type="date" class="form-input" id="venta-fecha"></div>
-            <div class="form-group"><label class="form-label">Estado</label><select class="form-select" id="venta-estado"><option value="iniciada">Iniciada</option><option value="proceso">En Proceso</option><option value="entregada">Entregada</option></select></div>
-            <div class="form-group" style="display:flex;gap:1rem">
-                <label style="display:flex;align-items:center;gap:0.5rem"><input type="checkbox" id="venta-facturado"> Facturado</label>
-                <label style="display:flex;align-items:center;gap:0.5rem"><input type="checkbox" id="venta-pagado"> Pagado</label>
+            <div class="form-group"><label class="form-label">Cliente</label><input type="text" class="form-input" id="venta-cliente" value="${venta?.cliente || ''}"></div>
+            <div class="form-group"><label class="form-label">Tipo</label><select class="form-select" id="venta-tipo">
+                <option value="b2b" ${venta?.tipo === 'b2b' ? 'selected' : ''}>B2B</option>
+                <option value="b2p" ${venta?.tipo === 'b2p' ? 'selected' : ''}>B2P</option>
+            </select></div>
+            <div class="form-group"><label class="form-label">Fecha</label><input type="date" class="form-input" id="venta-fecha" value="${venta?.fecha || new Date().toISOString().split('T')[0]}"></div>
+            
+            <div style="background:var(--bg-secondary);padding:1rem;border-radius:8px;margin:1rem 0">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">
+                    <label class="form-label" style="margin:0">📦 Líneas de Producto</label>
+                    <button type="button" onclick="agregarLineaProducto()" style="background:var(--accent);color:white;border:none;padding:0.5rem 1rem;border-radius:6px;cursor:pointer;font-size:0.85rem">+ Agregar Línea</button>
+                </div>
+                <div id="productos-container">
+                    ${productos.length > 0 ? productos.map((p, i) => `
+                        <div class="linea-producto" data-index="${i}" style="display:grid;grid-template-columns:2fr 1.5fr 1fr 1fr auto;gap:0.5rem;margin-bottom:0.5rem;align-items:center">
+                            <select class="form-select producto-origen">
+                                ${origenes.map(o => `<option value="${o}" ${p.origen === o ? 'selected' : ''}>${o}</option>`).join('')}
+                            </select>
+                            <select class="form-select producto-formato">
+                                ${formatos.map(f => `<option value="${f}" ${p.formato === f ? 'selected' : ''}>${f}</option>`).join('')}
+                            </select>
+                            <input type="number" step="0.5" class="form-input producto-kg" placeholder="Kg" value="${p.kg || ''}" style="width:100%">
+                            <input type="number" class="form-input producto-precio" placeholder="$" value="${p.precio || ''}" style="width:100%">
+                            <button type="button" onclick="eliminarLineaProducto(this)" style="background:var(--danger);color:white;border:none;width:30px;height:30px;border-radius:4px;cursor:pointer">×</button>
+                        </div>
+                    `).join('') : ''}
+                </div>
             </div>
-            <div class="form-group"><label class="form-label">Notas</label><textarea class="form-textarea" id="venta-notas"></textarea></div>
+            
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+                <div class="form-group"><label class="form-label">Kg Total</label><input type="number" step="0.5" class="form-input" id="venta-kg" value="${venta?.kg || ''}"></div>
+                <div class="form-group"><label class="form-label">Monto Total (CLP)</label><input type="number" class="form-input" id="venta-monto" value="${venta?.monto || ''}"></div>
+            </div>
+            
+            <div class="form-group"><label class="form-label">Origen Principal</label>
+                <select class="form-select" id="venta-origen">
+                    ${origenes.map(o => `<option value="${o}" ${venta?.origen === o ? 'selected' : ''}>${o}</option>`).join('')}
+                </select>
+            </div>
+            
+            <div class="form-group"><label class="form-label">Estado</label><select class="form-select" id="venta-estado">
+                <option value="iniciada" ${venta?.estado === 'iniciada' ? 'selected' : ''}>📝 Iniciada</option>
+                <option value="proceso" ${venta?.estado === 'proceso' ? 'selected' : ''}>🔄 En Proceso</option>
+                <option value="entregada" ${venta?.estado === 'entregada' ? 'selected' : ''}>✅ Entregada</option>
+            </select></div>
+            
+            <div class="form-group" style="display:flex;gap:1rem">
+                <label style="display:flex;align-items:center;gap:0.5rem"><input type="checkbox" id="venta-facturado" ${venta?.facturado ? 'checked' : ''}> Facturado</label>
+                <label style="display:flex;align-items:center;gap:0.5rem"><input type="checkbox" id="venta-pagado" ${venta?.pagado ? 'checked' : ''}> Pagado</label>
+            </div>
+            <div class="form-group"><label class="form-label">Notas</label><textarea class="form-textarea" id="venta-notas">${venta?.notas || ''}</textarea></div>
         `;
     } else if (type === 'cliente') {
         html = `
@@ -602,8 +662,16 @@ function renderModalBody(type, id) {
 
 document.getElementById('modal-save').addEventListener('click', () => {
     if (currentModal === 'venta') {
-        const newVenta = {
-            id: Date.now(),
+        // Recopilar líneas de producto
+        const lineas = document.querySelectorAll('.linea-producto');
+        const productos = Array.from(lineas).map(linea => ({
+            origen: linea.querySelector('.producto-origen').value,
+            formato: linea.querySelector('.producto-formato').value,
+            kg: parseFloat(linea.querySelector('.producto-kg').value) || 0,
+            precio: parseInt(linea.querySelector('.producto-precio').value) || 0
+        })).filter(p => p.kg > 0);
+
+        const ventaData = {
             cliente: document.getElementById('venta-cliente').value,
             tipo: document.getElementById('venta-tipo').value,
             monto: parseInt(document.getElementById('venta-monto').value) || 0,
@@ -613,10 +681,23 @@ document.getElementById('modal-save').addEventListener('click', () => {
             estado: document.getElementById('venta-estado').value,
             facturado: document.getElementById('venta-facturado').checked,
             pagado: document.getElementById('venta-pagado').checked,
-            notas: document.getElementById('venta-notas').value
+            notas: document.getElementById('venta-notas').value,
+            productos: productos
         };
+
         data.ventas = data.ventas || [];
-        data.ventas.unshift(newVenta);
+
+        if (editingId) {
+            // Editar venta existente
+            const index = data.ventas.findIndex(v => v.id === editingId);
+            if (index !== -1) {
+                data.ventas[index] = { ...data.ventas[index], ...ventaData };
+            }
+        } else {
+            // Nueva venta
+            ventaData.id = Date.now();
+            data.ventas.unshift(ventaData);
+        }
     } else if (currentModal === 'cliente') {
         const newCliente = {
             id: Date.now(),
@@ -681,7 +762,54 @@ document.getElementById('modal-save').addEventListener('click', () => {
 });
 
 function editCliente(id) { openModal('cliente', id); }
+function editVenta(id) { openModal('venta', id); }
 function contactCliente(nombre) { window.open(`https://wa.me/?text=Hola ${encodeURIComponent(nombre)}, te escribo de Candela Coffee...`); }
+
+// Funciones para líneas de producto en modal de venta
+function agregarLineaProducto() {
+    const origenes = ['Brasil', 'Colombia', 'Peru', 'Bolivia', 'Costa Rica', 'Honduras', 'Etiopia', 'Robusta', 'Blend', 'Mix'];
+    const formatos = ['1kg Grano', '1kg Molido', '500g Grano', '500g Molido', '250g Grano', '250g Molido', 'Granel'];
+    const container = document.getElementById('productos-container');
+    const index = container.children.length;
+    const div = document.createElement('div');
+    div.className = 'linea-producto';
+    div.dataset.index = index;
+    div.style.cssText = 'display:grid;grid-template-columns:2fr 1.5fr 1fr 1fr auto;gap:0.5rem;margin-bottom:0.5rem;align-items:center';
+    div.innerHTML = `
+        <select class="form-select producto-origen">
+            ${origenes.map(o => `<option value="${o}">${o}</option>`).join('')}
+        </select>
+        <select class="form-select producto-formato">
+            ${formatos.map(f => `<option value="${f}">${f}</option>`).join('')}
+        </select>
+        <input type="number" step="0.5" class="form-input producto-kg" placeholder="Kg" style="width:100%">
+        <input type="number" class="form-input producto-precio" placeholder="$" style="width:100%">
+        <button type="button" onclick="eliminarLineaProducto(this)" style="background:var(--danger);color:white;border:none;width:30px;height:30px;border-radius:4px;cursor:pointer">×</button>
+    `;
+    container.appendChild(div);
+
+    // Agregar listeners para calcular totales automáticamente
+    div.querySelectorAll('.producto-kg, .producto-precio').forEach(input => {
+        input.addEventListener('input', calcularTotalesVenta);
+    });
+}
+
+function eliminarLineaProducto(btn) {
+    btn.closest('.linea-producto').remove();
+    calcularTotalesVenta();
+}
+
+function calcularTotalesVenta() {
+    const lineas = document.querySelectorAll('.linea-producto');
+    let totalKg = 0;
+    let totalMonto = 0;
+    lineas.forEach(linea => {
+        totalKg += parseFloat(linea.querySelector('.producto-kg').value) || 0;
+        totalMonto += parseInt(linea.querySelector('.producto-precio').value) || 0;
+    });
+    document.getElementById('venta-kg').value = totalKg;
+    document.getElementById('venta-monto').value = totalMonto;
+}
 
 // Init
 loadData();
