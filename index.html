@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candela CRM Pro</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">🔥 <span>Candela CRM</span></div>
+            <div class="sync-status">
+                <div class="sync-dot"></div><span>Sincronizado</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <button class="nav-btn active" data-section="dashboard">📊 Dashboard</button>
+        <button class="nav-btn" data-section="metas">🎯 Metas</button>
+        <button class="nav-btn" data-section="ventas">💰 Ventas</button>
+        <button class="nav-btn" data-section="flujo">💸 Flujo Caja</button>
+        <button class="nav-btn" data-section="agentes">🤖 Agentes</button>
+        <button class="nav-btn" data-section="planes">📋 Planes</button>
+        <button class="nav-btn" data-section="clientes">👥 Clientes</button>
+        <button class="nav-btn" data-section="calendario">📅 Calendario</button>
+        <button class="nav-btn" data-section="tareas">✅ Tareas</button>
+        <button class="nav-btn" data-section="inventario">📦 Inventario</button>
+    </nav>
+
+    <main class="main">
+        <section id="dashboard" class="section active">
+            <div class="stats-bar" id="stats"></div>
+            <div class="two-col">
+                <div>
+                    <h3 class="section-subtitle">🎯 Progreso hacia metas</h3>
+                    <div id="metas-progress"></div>
+                </div>
+                <div>
+                    <h3 class="section-subtitle">⚡ Tareas Urgentes</h3>
+                    <div class="cards-grid" id="urgent-tasks"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="metas" class="section">
+            <div class="section-header">
+                <h2 class="section-title">🎯 Estado de Resultados</h2>
+            </div>
+            <div id="metas-overview"></div>
+            <h3 class="section-subtitle" style="margin-top:1.5rem">📈 Evolución Mensual</h3>
+            <div id="estado-resultados"></div>
+        </section>
+
+        <section id="ventas" class="section">
+            <div class="section-header">
+                <h2 class="section-title">💰 Registro de Ventas</h2>
+                <button class="add-btn" onclick="openModal('venta')">+ Nueva Venta</button>
+            </div>
+            <div id="ventas-resumen" class="stats-bar" style="margin-bottom:1rem"></div>
+            <div class="filter-bar" id="ventas-filters">
+                <button class="filter-btn active" data-filter="todas">Todas</button>
+                <button class="filter-btn" data-filter="pendientes">💵 Pendientes</button>
+                <button class="filter-btn" data-filter="pagadas">✅ Pagadas</button>
+                <button class="filter-btn" data-filter="sin-factura">📄 Sin Factura</button>
+            </div>
+            <div class="cards-grid" id="ventas-grid"></div>
+        </section>
+
+        <section id="flujo" class="section">
+            <div class="section-header">
+                <h2 class="section-title">💸 Flujo de Caja</h2>
+                <button class="add-btn" onclick="openModal('gasto')">+ Nuevo Gasto</button>
+            </div>
+            <div id="flujo-resumen" class="stats-bar"></div>
+            <h3 class="section-subtitle" style="margin-top:1rem">📤 Egresos</h3>
+            <div class="cards-grid" id="flujo-grid"></div>
+        </section>
+
+        <section id="agentes" class="section">
+            <div class="section-header">
+                <h2 class="section-title">🤖 Sistema de Agentes</h2>
+            </div>
+            <div class="cards-grid" id="agentes-grid"></div>
+        </section>
+
+        <section id="planes" class="section">
+            <div class="section-header">
+                <h2 class="section-title">📋 Planes de Acción</h2>
+            </div>
+            <div class="cards-grid" id="planes-grid"></div>
+        </section>
+
+        <section id="clientes" class="section">
+            <div class="section-header">
+                <h2 class="section-title">👥 Clientes B2B</h2>
+                <button class="add-btn" onclick="openModal('cliente')">+ Agregar</button>
+            </div>
+            <div class="cards-grid" id="clientes-grid"></div>
+        </section>
+
+        <section id="calendario" class="section">
+            <div class="section-header">
+                <h2 class="section-title">📅 Calendario Editorial</h2>
+                <button class="add-btn" onclick="openModal('post')">+ Nuevo Post</button>
+            </div>
+            <div class="cards-grid" id="calendario-grid"></div>
+        </section>
+
+        <section id="tareas" class="section">
+            <div class="section-header">
+                <h2 class="section-title">✅ Tareas de la Semana</h2>
+                <button class="add-btn" onclick="openModal('tarea')">+ Nueva Tarea</button>
+            </div>
+            <div class="cards-grid" id="tareas-grid"></div>
+        </section>
+
+        <section id="inventario" class="section">
+            <div class="section-header">
+                <h2 class="section-title">📦 Inventario Café Verde</h2>
+                <button class="add-btn" onclick="openModal('inventario')">+ Agregar</button>
+            </div>
+            <div class="cards-grid" id="inventario-grid"></div>
+        </section>
+    </main>
+
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Agregar</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+                <button class="btn btn-primary" id="modal-save">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">✓ Guardado correctamente</div>
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js"></script>
+</body>
+
+</html>
