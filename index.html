@@ -25,6 +25,7 @@
         <button class="nav-btn" data-section="metas">🎯 Metas</button>
         <button class="nav-btn" data-section="ventas">💰 Ventas</button>
         <button class="nav-btn" data-section="flujo">💸 Flujo Caja</button>
+        <button class="nav-btn" data-section="caja-diaria">🏪 Caja Diaria</button>
         <button class="nav-btn" data-section="agentes">🤖 Agentes</button>
         <button class="nav-btn" data-section="planes">📋 Planes</button>
         <button class="nav-btn" data-section="clientes">👥 Clientes</button>
@@ -68,6 +69,7 @@
                 <button class="filter-btn" data-filter="pendientes">💵 Pendientes</button>
                 <button class="filter-btn" data-filter="pagadas">✅ Pagadas</button>
                 <button class="filter-btn" data-filter="sin-factura">📄 Sin Factura</button>
+                <input type="text" id="venta-client-search" placeholder="Buscar cliente..." class="form-input" style="width: 200px; padding: 0.4rem 0.75rem; font-size: 0.8rem; margin-left: auto;">
             </div>
             <div class="cards-grid" id="ventas-grid"></div>
         </section>
@@ -75,11 +77,48 @@
         <section id="flujo" class="section">
             <div class="section-header">
                 <h2 class="section-title">💸 Flujo de Caja</h2>
-                <button class="add-btn" onclick="openModal('gasto')">+ Nuevo Gasto</button>
+                <div style="display:flex;gap:0.5rem">
+                    <button class="add-btn" onclick="openModal('venta_web')">🌐 + Venta Web</button>
+                    <button class="add-btn" onclick="openModal('gasto')">+ Nuevo Gasto</button>
+                </div>
             </div>
             <div id="flujo-resumen" class="stats-bar"></div>
-            <h3 class="section-subtitle" style="margin-top:1rem">📤 Egresos</h3>
+
+            <div class="two-col" style="margin-top:1rem">
+                <div>
+                    <h3 class="section-subtitle">📥 Ingresos del Mes</h3>
+                    <div id="flujo-ingresos-lista"></div>
+                </div>
+                <div>
+                    <h3 class="section-subtitle">💵 Por Cobrar (Pendientes)</h3>
+                    <div id="flujo-por-cobrar"></div>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle" style="margin-top:1.5rem">📤 Egresos del Mes</h3>
             <div class="cards-grid" id="flujo-grid"></div>
+        </section>
+
+
+        <section id="caja-diaria" class="section">
+            <div class="section-header">
+                <h2 class="section-title">🏪 Caja Diaria (Local)</h2>
+                <div style="display:flex;gap:0.5rem">
+                    <button class="add-btn" style="background:var(--success)" onclick="openModal('venta_local')">+ Venta Local</button>
+                    <button class="add-btn" style="background:var(--warning)" onclick="openModal('cierre_caja')">🔒 Cerrar Caja</button>
+                </div>
+            </div>
+            <div id="caja-resumen" class="stats-bar"></div>
+            <div class="two-col">
+                <div>
+                    <h3 class="section-subtitle">☕ Ventas del Día</h3>
+                    <div id="ventas-locales-lista" class="cards-grid"></div>
+                </div>
+                <div>
+                    <h3 class="section-subtitle">🗒️ Últimos Cierres / Arqueos</h3>
+                    <div id="cierres-lista" class="cards-grid"></div>
+                </div>
+            </div>
         </section>
 
         <section id="agentes" class="section">

@@ -10,6 +10,7 @@ async function loadData() {
         if (!data.gastos) data.gastos = [];
         renderAll();
         setupVentasFilters();
+        setupClientSearch();
     } catch (err) {
         console.error('Error cargando datos:', err);
     }
@@ -49,6 +50,7 @@ function renderAll() {
     renderTareas();
     renderInventario();
     renderUrgentTasks();
+    renderCajaDiaria();
 }
 
 function setupVentasFilters() {
@@ -62,6 +64,15 @@ function setupVentasFilters() {
     });
 }
 
+function setupClientSearch() {
+    const search = document.getElementById('venta-client-search');
+    if (search) {
+        search.addEventListener('input', () => {
+            renderVentas();
+        });
+    }
+}
+
 function renderVentasResumen() {
     if (!data.ventas) return;
     const pagadas = data.ventas.filter(v => v.pagado);
@@ -72,9 +83,13 @@ function renderVentasResumen() {
     const totalPendiente = pendientes.reduce((s, v) => s + v.monto, 0);
     const totalSinFactura = sinFactura.reduce((s, v) => s + v.monto, 0);
 
+    // Calcular IVA Acumulado (19% de impuestos incluidos en el total)
+    // Formula: IVA = Total - (Total / 1.19)
+    const totalIVA = data.ventas.reduce((s, v) => s + (v.monto - (v.monto / 1.19)), 0);
+
     document.getElementById('ventas-resumen').innerHTML = `
         <div class="stat-card">
-            <div class="stat-value" style="color:var(--success)">$${(totalPagado / 1000000).toFixed(1)}M</div>
+            <div class="stat-value" style="color:var(--success)">$${(totalPagado / 1000).toFixed(0)}k</div>
             <div class="stat-label">✅ Pagado (${pagadas.length})</div>
         </div>
         <div class="stat-card">
@@ -82,8 +97,8 @@ function renderVentasResumen() {
             <div class="stat-label">💵 Por Cobrar (${pendientes.length})</div>
         </div>
         <div class="stat-card">
-            <div class="stat-value" style="color:var(--warning)">$${(totalSinFactura / 1000).toFixed(0)}k</div>
-            <div class="stat-label">📄 Sin Factura (${sinFactura.length})</div>
+            <div class="stat-value" style="color:var(--warning)">$${(totalIVA / 1000).toFixed(0)}k</div>
+            <div class="stat-label">📉 IVA Acumulado</div>
         </div>
         <div class="stat-card">
             <div class="stat-value">${data.ventas.length}</div>
@@ -94,62 +109,210 @@ function renderVentasResumen() {
 
 function renderFlujo() {
     if (!data.gastos) data.gastos = [];
+    if (!data.ventasWeb) data.ventasWeb = [];
 
-    // Calcular totales por categoría
-    const categorias = {
-        'materia_prima': { nombre: '☕ Café Verde', total: 0, emoji: '☕' },
-        'logistica': { nombre: '🚚 Logística', total: 0, emoji: '🚚' },
-        'marketing': { nombre: '📣 Marketing', total: 0, emoji: '📣' },
-        'empaque': { nombre: '📦 Empaque', total: 0, emoji: '📦' },
-        'otros': { nombre: '📋 Otros', total: 0, emoji: '📋' }
-    };
+    const hoy = new Date();
+    const mesActual = hoy.toISOString().substring(0, 7);
 
-    data.gastos.forEach(g => {
-        if (categorias[g.categoria]) {
-            categorias[g.categoria].total += g.monto;
-        }
-    });
+    // === INGRESOS ===
+    const ventasB2Bmes = data.ventas ? data.ventas.filter(v => v.pagado && v.fecha.startsWith(mesActual)) : [];
+    const ventasLocalMes = data.ventasLocales ? data.ventasLocales.filter(v => v.fecha.startsWith(mesActual)) : [];
+    const ventasWebMes = data.ventasWeb ? data.ventasWeb.filter(v => v.fecha.startsWith(mesActual)) : [];
 
-    const totalGastos = data.gastos.reduce((s, g) => s + g.monto, 0);
-    const totalIngresos = data.ventas ? data.ventas.filter(v => v.pagado).reduce((s, v) => s + v.monto, 0) : 0;
-    const flujoNeto = totalIngresos - totalGastos;
+    const ingB2B = ventasB2Bmes.reduce((s, v) => s + v.monto, 0);
+    const ingLocal = ventasLocalMes.reduce((s, v) => s + v.monto, 0);
+    const ingWeb = ventasWebMes.reduce((s, v) => s + v.monto, 0);
+    const totalIngresos = ingB2B + ingLocal + ingWeb;
 
+    // === POR COBRAR ===
+    const porCobrar = data.ventas ? data.ventas.filter(v => !v.pagado) : [];
+    const totalPorCobrar = porCobrar.reduce((s, v) => s + v.monto, 0);
+
+    // === EGRESOS ===
+    const gastosMes = data.gastos.filter(g => g.fecha.startsWith(mesActual));
+    const totalGastosMes = gastosMes.reduce((s, g) => s + g.monto, 0);
+
+    // === BALANCE ===
+    const balance = totalIngresos - totalGastosMes;
+
+    // Resumen KPIs
     document.getElementById('flujo-resumen').innerHTML = `
-        <div class="stat-card">
-            <div class="stat-value" style="color:var(--success)">$${(totalIngresos / 1000000).toFixed(1)}M</div>
-            <div class="stat-label">📥 Ingresos (Pagados)</div>
+        <div class="stat-card" style="border-top: 3px solid var(--success)">
+            <div class="stat-value" style="color:var(--success)">$${totalIngresos.toLocaleString()}</div>
+            <div class="stat-label">📥 Ingresos ${mesActual}</div>
         </div>
-        <div class="stat-card">
-            <div class="stat-value" style="color:var(--danger)">$${(totalGastos / 1000).toFixed(0)}k</div>
-            <div class="stat-label">📤 Egresos</div>
+        <div class="stat-card" style="border-top: 3px solid var(--danger)">
+            <div class="stat-value" style="color:var(--danger)">$${totalGastosMes.toLocaleString()}</div>
+            <div class="stat-label">📤 Egresos ${mesActual}</div>
         </div>
-        <div class="stat-card">
-            <div class="stat-value" style="color:${flujoNeto >= 0 ? 'var(--success)' : 'var(--danger)'}">$${(flujoNeto / 1000000).toFixed(2)}M</div>
-            <div class="stat-label">💰 Flujo Neto</div>
+        <div class="stat-card" style="border-top: 3px solid var(--accent)">
+            <div class="stat-value" style="color:${balance >= 0 ? 'var(--success)' : 'var(--danger)'}">$${balance.toLocaleString()}</div>
+            <div class="stat-label">💰 Balance Mes</div>
         </div>
-        ${Object.entries(categorias).map(([k, v]) => `
-            <div class="stat-card">
-                <div class="stat-value" style="font-size:1.25rem">$${(v.total / 1000).toFixed(0)}k</div>
-                <div class="stat-label">${v.emoji} ${k.charAt(0).toUpperCase() + k.slice(1).replace('_', ' ')}</div>
-            </div>
-        `).join('')}
+        <div class="stat-card" style="border-top: 3px solid var(--warning)">
+            <div class="stat-value" style="color:var(--warning)">$${totalPorCobrar.toLocaleString()}</div>
+            <div class="stat-label">💵 Por Cobrar (${porCobrar.length})</div>
+        </div>
     `;
 
-    // Renderizar lista de gastos
-    document.getElementById('flujo-grid').innerHTML = data.gastos.length ? data.gastos.slice(0, 20).map(g => `
+    // === INGRESOS DETALLADOS ===
+    let ingresosHTML = `
+        <div class="card" style="margin-bottom:0.5rem">
+            <div class="kpi-grid">
+                <div class="kpi-item"><span>🏢 B2B Mayorista</span><span style="font-weight:700;color:var(--success)">$${ingB2B.toLocaleString()} (${ventasB2Bmes.length})</span></div>
+                <div class="kpi-item"><span>🏪 Local (Cafetería)</span><span style="font-weight:700;color:var(--success)">$${ingLocal.toLocaleString()} (${ventasLocalMes.length})</span></div>
+                <div class="kpi-item"><span>🌐 Web (Shopify)</span><span style="font-weight:700;color:var(--success)">$${ingWeb.toLocaleString()} (${ventasWebMes.length})</span></div>
+            </div>
+        </div>
+    `;
+
+    // Lista de ventas pagadas del mes
+    const ventasPagadasMes = ventasB2Bmes.concat(ventasWebMes).sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+    ingresosHTML += ventasPagadasMes.slice(0, 10).map(v => `
+        <div class="card" style="padding:0.75rem;margin-bottom:0.25rem">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+                <div>
+                    <span style="font-weight:600">${v.cliente}</span>
+                    <span class="badge badge-${v.canal === 'web' ? 'educacion' : 'b2b'}" style="margin-left:0.5rem">${v.canal === 'web' ? '🌐 Web' : '🏢 B2B'}</span>
+                </div>
+                <span style="color:var(--success);font-weight:700">+$${v.monto.toLocaleString()}</span>
+            </div>
+            <div style="font-size:0.7rem;color:var(--text-secondary);margin-top:0.25rem">📅 ${v.fecha}</div>
+        </div>
+    `).join('');
+
+    document.getElementById('flujo-ingresos-lista').innerHTML = ingresosHTML || '<div class="card">Sin ingresos este mes.</div>';
+
+    // === POR COBRAR + FACTURAS PENDIENTES (últimos 2 meses) ===
+    const hace2Meses = new Date();
+    hace2Meses.setMonth(hace2Meses.getMonth() - 2);
+    const fechaCorte = hace2Meses.toISOString().split('T')[0];
+
+    const sinFactura = data.ventas ? data.ventas.filter(v => !v.facturado && v.fecha >= fechaCorte) : [];
+    const totalSinFactura = sinFactura.reduce((s, v) => s + v.monto, 0);
+
+    let cobrarHTML = '';
+
+    // KPI resumen
+    cobrarHTML += `
+        <div class="card" style="margin-bottom:0.5rem">
+            <div class="kpi-grid">
+                <div class="kpi-item"><span>💵 Por Cobrar</span><span style="font-weight:700;color:var(--warning)">$${totalPorCobrar.toLocaleString()} (${porCobrar.length})</span></div>
+                <div class="kpi-item"><span>📄 Sin Factura (2 meses)</span><span style="font-weight:700;color:var(--danger)">$${totalSinFactura.toLocaleString()} (${sinFactura.length})</span></div>
+            </div>
+        </div>
+    `;
+
+    // Ventas no pagadas
+    if (porCobrar.length) {
+        cobrarHTML += `<div style="font-size:0.8rem;font-weight:600;margin:0.5rem 0;color:var(--warning)">💵 PENDIENTES DE PAGO</div>`;
+        cobrarHTML += porCobrar.sort((a, b) => new Date(a.fecha) - new Date(b.fecha)).slice(0, 15).map(v => `
+            <div class="card" style="padding:0.75rem;margin-bottom:0.25rem;border-left:3px solid var(--warning)">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                    <div>
+                        <span style="font-weight:600">${v.cliente}</span>
+                        <span class="badge badge-pendiente" style="margin-left:0.5rem">No Pagado</span>
+                    </div>
+                    <span style="color:var(--warning);font-weight:700">$${v.monto.toLocaleString()}</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--text-secondary);margin-top:0.25rem">
+                    <span>📅 ${v.fecha} · ${v.kg || 0}kg</span>
+                    <button onclick="marcarPagado(${v.id})" style="background:var(--success);color:white;border:none;padding:0.15rem 0.5rem;border-radius:4px;cursor:pointer;font-size:0.7rem">✅ Marcar Pagado</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Facturas pendientes de últimos 2 meses
+    if (sinFactura.length) {
+        cobrarHTML += `<div style="font-size:0.8rem;font-weight:600;margin:0.75rem 0 0.5rem;color:var(--danger)">📄 SIN FACTURA (últimos 2 meses)</div>`;
+        cobrarHTML += sinFactura.sort((a, b) => new Date(a.fecha) - new Date(b.fecha)).slice(0, 15).map(v => `
+            <div class="card" style="padding:0.75rem;margin-bottom:0.25rem;border-left:3px solid var(--danger)">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                    <div>
+                        <span style="font-weight:600">${v.cliente}</span>
+                        <span class="badge badge-alta" style="margin-left:0.5rem">Sin Factura</span>
+                        ${v.pagado ? '<span class="badge badge-activo" style="margin-left:0.25rem">Pagado</span>' : '<span class="badge badge-pendiente" style="margin-left:0.25rem">No Pagado</span>'}
+                    </div>
+                    <span style="color:var(--danger);font-weight:700">$${v.monto.toLocaleString()}</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--text-secondary);margin-top:0.25rem">
+                    <span>📅 ${v.fecha} · ${v.kg || 0}kg</span>
+                    <button onclick="marcarFacturado(${v.id})" style="background:var(--accent);color:white;border:none;padding:0.15rem 0.5rem;border-radius:4px;cursor:pointer;font-size:0.7rem">📄 Marcar Facturado</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    if (!porCobrar.length && !sinFactura.length) {
+        cobrarHTML += '<div class="card">🎉 ¡Todo al día!</div>';
+    }
+
+    document.getElementById('flujo-por-cobrar').innerHTML = cobrarHTML;
+
+
+    // === EGRESOS ===
+    const categorias = {
+        'fijo': { emoji: '🏠' }, 'variable': { emoji: '📉' }, 'materia_prima': { emoji: '☕' },
+        'logistica': { emoji: '🚚' }, 'marketing': { emoji: '📣' }, 'otros': { emoji: '📋' }
+    };
+
+    document.getElementById('flujo-grid').innerHTML = gastosMes.length ? gastosMes.map(g => `
         <div class="card">
             <div class="card-header">
                 <span class="card-title">${categorias[g.categoria]?.emoji || '📋'} ${g.descripcion}</span>
-                <span class="badge badge-${g.categoria === 'materia_prima' ? 'b2b' : g.categoria === 'logistica' ? 'proceso' : 'idea'}">${g.categoria.replace('_', ' ')}</span>
+                <span class="badge badge-${g.categoria === 'fijo' ? 'b2b' : g.categoria === 'variable' ? 'proceso' : 'idea'}">${g.categoria}</span>
             </div>
             <div style="font-size:1.5rem;font-weight:700;color:var(--danger)">-$${g.monto.toLocaleString()}</div>
             <div class="card-meta">
                 <span class="card-detail">📅 ${g.fecha}</span>
-                ${g.proveedor ? `<span class="card-detail">🏢 ${g.proveedor}</span>` : ''}
+                ${g.notas ? `<span class="card-detail">📝 ${g.notas}</span>` : ''}
             </div>
-            ${g.notas ? `<div class="card-detail" style="margin-top:0.5rem">${g.notas}</div>` : ''}
         </div>
-    `).join('') : '<div class="card">Aún no hay gastos registrados. Usa "+ Nuevo Gasto" para agregar.</div>';
+    `).join('') : '<div class="card">No hay gastos este mes.</div>';
+}
+
+
+function renderCajaDiaria() {
+    const hoy = new Date().toISOString().split('T')[0];
+    const ventasHoy = data.ventasLocales ? data.ventasLocales.filter(v => v.fecha === hoy) : [];
+    const totalHoy = ventasHoy.reduce((s, v) => s + v.monto, 0);
+
+    const efectivo = ventasHoy.filter(v => v.metodo === 'efectivo').reduce((s, v) => s + v.monto, 0);
+    const tarjeta = ventasHoy.filter(v => v.metodo === 'tarjeta').reduce((s, v) => s + v.monto, 0);
+    const transferencia = ventasHoy.filter(v => v.metodo === 'transferencia').reduce((s, v) => s + v.monto, 0);
+
+    document.getElementById('caja-resumen').innerHTML = `
+        <div class="stat-card"><div class="stat-value">$${totalHoy.toLocaleString()}</div><div class="stat-label">Ventas Hoy</div></div>
+        <div class="stat-card"><div class="stat-value">$${efectivo.toLocaleString()}</div><div class="stat-label">💵 Efectivo</div></div>
+        <div class="stat-card"><div class="stat-value">$${tarjeta.toLocaleString()}</div><div class="stat-label">💳 Tarjeta</div></div>
+        <div class="stat-card"><div class="stat-value">$${transferencia.toLocaleString()}</div><div class="stat-label">📲 Transf</div></div>
+    `;
+
+    document.getElementById('ventas-locales-lista').innerHTML = ventasHoy.length ? ventasHoy.map(v => `
+        <div class="card" style="padding:0.75rem">
+            <div style="display:flex;justify-content:space-between">
+                <span style="font-weight:600">${v.items}</span>
+                <span style="color:var(--success);font-weight:700">$${v.monto.toLocaleString()}</span>
+            </div>
+            <div class="card-meta" style="font-size:0.7rem">
+                <span>🕒 ${v.hora}</span>
+                <span>💳 ${v.metodo}</span>
+            </div>
+        </div>
+    `).reverse().join('') : '<div class="card">No hay ventas registradas hoy.</div>';
+
+    // Lista de cierres
+    document.getElementById('cierres-lista').innerHTML = data.cierresCaja ? data.cierresCaja.slice(0, 5).map(c => `
+        <div class="card">
+            <div class="card-header"><span class="card-title">🔒 Cierre ${c.fecha}</span></div>
+            <div class="kpi-grid">
+                <div class="kpi-item"><span>Ventas Sistema</span><span>$${c.ventasSistema.toLocaleString()}</span></div>
+                <div class="kpi-item"><span>Caja Real</span><span>$${c.cajaReal.toLocaleString()}</span></div>
+                <div class="kpi-item"><span>Diferencia</span><span style="color:${c.diferencia === 0 ? 'var(--success)' : 'var(--danger)'}">$${c.diferencia.toLocaleString()}</span></div>
+            </div>
+        </div>
+    `).join('') : '<div class="card">Sin cierres previos.</div>';
 }
 
 function renderStats() {
@@ -239,6 +402,12 @@ function renderVentas() {
         ventasFiltradas = ventasFiltradas.filter(v => !v.facturado);
     }
 
+    // Filtro por cliente (buscador)
+    const searchVal = document.getElementById('venta-client-search')?.value.toLowerCase();
+    if (searchVal) {
+        ventasFiltradas = ventasFiltradas.filter(v => v.cliente.toLowerCase().includes(searchVal));
+    }
+
     // Ordenar por fecha (más recientes primero)
     ventasFiltradas.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
 
@@ -300,6 +469,7 @@ function renderVentas() {
                             <span class="card-title">${v.cliente}</span>
                             <div style="display:flex;gap:0.5rem;align-items:center">
                                 <button onclick="editVenta(${v.id})" style="background:var(--bg-secondary);border:none;padding:0.25rem 0.5rem;border-radius:4px;cursor:pointer;font-size:0.75rem" title="Editar venta">✏️</button>
+                                <button onclick="generarCotizacion(${v.id})" style="background:var(--success);color:white;border:none;padding:0.25rem 0.5rem;border-radius:4px;cursor:pointer;font-size:0.75rem" title="Generar cotización">💬</button>
                                 <span style="font-size:0.75rem;color:var(--text-secondary)">#${v.id}</span>
                             </div>
                         </div>
@@ -578,7 +748,7 @@ function renderModalBody(type, id) {
                                 ${formatos.map(f => `<option value="${f}" ${p.formato === f ? 'selected' : ''}>${f}</option>`).join('')}
                             </select>
                             <input type="number" step="0.5" class="form-input producto-kg" placeholder="Kg" value="${p.kg || ''}" style="width:100%">
-                            <input type="number" class="form-input producto-precio" placeholder="$" value="${p.precio || ''}" style="width:100%">
+                            <input type="number" class="form-input producto-precio" placeholder="$ Neto/Kg" value="${p.precio || ''}" style="width:100%">
                             <button type="button" onclick="eliminarLineaProducto(this)" style="background:var(--danger);color:white;border:none;width:30px;height:30px;border-radius:4px;cursor:pointer">×</button>
                         </div>
                     `).join('') : ''}
@@ -586,8 +756,8 @@ function renderModalBody(type, id) {
             </div>
             
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-                <div class="form-group"><label class="form-label">Kg Total</label><input type="number" step="0.5" class="form-input" id="venta-kg" value="${venta?.kg || ''}"></div>
-                <div class="form-group"><label class="form-label">Monto Total (CLP)</label><input type="number" class="form-input" id="venta-monto" value="${venta?.monto || ''}"></div>
+                <div class="form-group"><label class="form-label">Kg Total</label><input type="number" step="0.5" class="form-input" id="venta-kg" value="${venta?.kg || ''}" readonly></div>
+                <div class="form-group"><label class="form-label">Monto Total (IVA Inc)</label><input type="number" class="form-input" id="venta-monto" value="${venta?.monto || ''}" readonly></div>
             </div>
             
             <div class="form-group"><label class="form-label">Origen Principal</label>
@@ -641,20 +811,71 @@ function renderModalBody(type, id) {
         `;
     } else if (type === 'gasto') {
         html = `
-            <div class="form-group"><label class="form-label">Descripción</label><input type="text" class="form-input" id="gasto-desc" placeholder="Ej: Compra café verde Brasil"></div>
+            <div class="form-group"><label class="form-label">Descripción</label><input type="text" class="form-input" id="gasto-desc" placeholder="Ej: Pago Arriendo"></div>
             <div class="form-group"><label class="form-label">Categoría</label>
                 <select class="form-select" id="gasto-cat">
+                    <option value="fijo">🏠 Gasto Fijo (Arriendo, Luz, Sueldos)</option>
+                    <option value="variable">📉 Gasto Variable (Insumos, Reparaciones)</option>
                     <option value="materia_prima">☕ Materia Prima (Café Verde)</option>
                     <option value="logistica">🚚 Logística (Envíos)</option>
-                    <option value="empaque">📦 Empaque</option>
                     <option value="marketing">📣 Marketing</option>
                     <option value="otros">📋 Otros</option>
                 </select>
             </div>
             <div class="form-group"><label class="form-label">Monto (CLP)</label><input type="number" class="form-input" id="gasto-monto"></div>
-            <div class="form-group"><label class="form-label">Fecha</label><input type="date" class="form-input" id="gasto-fecha"></div>
-            <div class="form-group"><label class="form-label">Proveedor (opcional)</label><input type="text" class="form-input" id="gasto-prov"></div>
+            <div class="form-group"><label class="form-label">Fecha</label><input type="date" class="form-input" id="gasto-fecha" value="${new Date().toISOString().split('T')[0]}"></div>
             <div class="form-group"><label class="form-label">Notas</label><textarea class="form-textarea" id="gasto-notas"></textarea></div>
+        `;
+    } else if (type === 'venta_local') {
+        html = `
+            <div class="form-group"><label class="form-label">Items / Pedido</label><input type="text" class="form-input" id="local-items" placeholder="Ej: 2 Latte + 1 Muffin"></div>
+            <div class="form-group"><label class="form-label">Total Venta ($)</label><input type="number" class="form-input" id="local-monto"></div>
+            <div class="form-group"><label class="form-label">Método de Pago</label>
+                <select class="form-select" id="local-metodo">
+                    <option value="efectivo">💵 Efectivo</option>
+                    <option value="tarjeta">💳 Tarjeta (Débito/Crédito)</option>
+                    <option value="transferencia">📲 Transferencia</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label"><input type="checkbox" id="local-descontar-bolsa"> ¿Descontar Bolsa de Café (250g)?</label>
+                <select class="form-select" id="local-origen-bolsa" style="margin-top:0.5rem">
+                    <option value="Brasil">Brasil</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Peru">Perú</option>
+                </select>
+            </div>
+        `;
+    } else if (type === 'cierre_caja') {
+        const hoy = new Date().toISOString().split('T')[0];
+        const ventasHoy = data.ventasLocales ? data.ventasLocales.filter(v => v.fecha === hoy) : [];
+        const totalSistema = ventasHoy.reduce((s, v) => s + v.monto, 0);
+
+        html = `
+            <div class="card" style="margin-bottom:1rem; background:var(--bg-secondary)">
+                <div style="font-size:0.875rem">Ventas en Sistema (Hoy):</div>
+                <div style="font-size:1.5rem; font-weight:700; color:var(--success)">$${totalSistema.toLocaleString()}</div>
+            </div>
+            <div class="form-group"><label class="form-label">Efectivo Real en Caja</label><input type="number" class="form-input" id="cierre-real" placeholder="Cuenta el dinero físico"></div>
+            <div class="form-group"><label class="form-label">Notas del Cierre</label><textarea class="form-textarea" id="cierre-notas" placeholder="Ej: Diferencia por sencillo..."></textarea></div>
+            <input type="hidden" id="cierre-sistema" value="${totalSistema}">
+        `;
+    } else if (type === 'venta_web') {
+        html = `
+            <div class="form-group"><label class="form-label">Cliente / Nombre Pedido</label><input type="text" class="form-input" id="web-cliente" placeholder="Nombre del comprador"></div>
+            <div class="form-group"><label class="form-label">Nº Pedido Shopify</label><input type="text" class="form-input" id="web-orden" placeholder="#1001"></div>
+            <div class="form-group"><label class="form-label">Monto Total ($)</label><input type="number" class="form-input" id="web-monto"></div>
+            <div class="form-group"><label class="form-label">Productos</label><input type="text" class="form-input" id="web-productos" placeholder="Ej: 2x Brasil 250g + 1x Colombia 1kg"></div>
+            <div class="form-group"><label class="form-label">Fecha</label><input type="date" class="form-input" id="web-fecha" value="${new Date().toISOString().split('T')[0]}"></div>
+            <div class="form-group"><label class="form-label">Estado</label>
+                <select class="form-select" id="web-estado">
+                    <option value="pagado">✅ Pagado</option>
+                    <option value="pendiente">⏳ Pendiente envío</option>
+                    <option value="enviado">📦 Enviado</option>
+                    <option value="entregado">🏠 Entregado</option>
+                </select>
+            </div>
+            <div class="form-group"><label class="form-label">Notas</label><textarea class="form-textarea" id="web-notas"></textarea></div>
         `;
     }
     document.getElementById('modal-body').innerHTML = html;
@@ -697,6 +918,9 @@ document.getElementById('modal-save').addEventListener('click', () => {
             // Nueva venta
             ventaData.id = Date.now();
             data.ventas.unshift(ventaData);
+
+            // DESCONTAR DEL INVENTARIO
+            descontarInventario(productos);
         }
     } else if (currentModal === 'cliente') {
         const newCliente = {
@@ -750,11 +974,53 @@ document.getElementById('modal-save').addEventListener('click', () => {
             categoria: document.getElementById('gasto-cat').value,
             monto: parseInt(document.getElementById('gasto-monto').value) || 0,
             fecha: document.getElementById('gasto-fecha').value || new Date().toISOString().split('T')[0],
-            proveedor: document.getElementById('gasto-prov').value,
             notas: document.getElementById('gasto-notas').value
         };
         data.gastos = data.gastos || [];
         data.gastos.unshift(newGasto);
+    } else if (currentModal === 'venta_local') {
+        const ventaLocal = {
+            id: Date.now(),
+            items: document.getElementById('local-items').value,
+            monto: parseInt(document.getElementById('local-monto').value) || 0,
+            metodo: document.getElementById('local-metodo').value,
+            fecha: new Date().toISOString().split('T')[0],
+            hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        };
+        data.ventasLocales = data.ventasLocales || [];
+        data.ventasLocales.push(ventaLocal);
+
+        if (document.getElementById('local-descontar-bolsa').checked) {
+            const origen = document.getElementById('local-origen-bolsa').value;
+            descontarInventario([{ origen: origen, kg: 0.25 }]);
+        }
+    } else if (currentModal === 'cierre_caja') {
+        const real = parseInt(document.getElementById('cierre-real').value) || 0;
+        const sistema = parseInt(document.getElementById('cierre-sistema').value) || 0;
+        const cierre = {
+            id: Date.now(),
+            fecha: new Date().toISOString().split('T')[0],
+            ventasSistema: sistema,
+            cajaReal: real,
+            diferencia: real - sistema,
+            notas: document.getElementById('cierre-notas').value
+        };
+        data.cierresCaja = data.cierresCaja || [];
+        data.cierresCaja.unshift(cierre);
+    } else if (currentModal === 'venta_web') {
+        const ventaWeb = {
+            id: Date.now(),
+            cliente: document.getElementById('web-cliente').value,
+            orden: document.getElementById('web-orden').value,
+            monto: parseInt(document.getElementById('web-monto').value) || 0,
+            productos: document.getElementById('web-productos').value,
+            fecha: document.getElementById('web-fecha').value || new Date().toISOString().split('T')[0],
+            estado: document.getElementById('web-estado').value,
+            canal: 'web',
+            notas: document.getElementById('web-notas').value
+        };
+        data.ventasWeb = data.ventasWeb || [];
+        data.ventasWeb.unshift(ventaWeb);
     }
     saveData();
     closeModal();
@@ -764,6 +1030,62 @@ document.getElementById('modal-save').addEventListener('click', () => {
 function editCliente(id) { openModal('cliente', id); }
 function editVenta(id) { openModal('venta', id); }
 function contactCliente(nombre) { window.open(`https://wa.me/?text=Hola ${encodeURIComponent(nombre)}, te escribo de Candela Coffee...`); }
+
+function marcarPagado(id) {
+    const venta = data.ventas.find(v => v.id === id);
+    if (venta) {
+        venta.pagado = true;
+        saveData();
+        renderAll();
+        showToast('✅ Venta marcada como pagada');
+    }
+}
+
+function marcarFacturado(id) {
+    const venta = data.ventas.find(v => v.id === id);
+    if (venta) {
+        venta.facturado = true;
+        saveData();
+        renderAll();
+        showToast('📄 Venta marcada como facturada');
+    }
+}
+function descontarInventario(productosVendidos) {
+    if (!data.inventario) return;
+    productosVendidos.forEach(p => {
+        // Buscamos el origen en el inventario
+        const itemInv = data.inventario.find(i => i.origen.toLowerCase() === p.origen.toLowerCase());
+        if (itemInv) {
+            itemInv.stockActual = Math.max(0, itemInv.stockActual - p.kg);
+        }
+    });
+}
+
+function generarCotizacion(id) {
+    const v = data.ventas.find(x => x.id === id);
+    if (!v) return;
+
+    let mensaje = `*COTIZACIÓN CANDELA COFFEE*\n`;
+    mensaje += `--------------------------\n`;
+    mensaje += `*Cliente:* ${v.cliente}\n`;
+    mensaje += `*Fecha:* ${v.fecha}\n\n`;
+    mensaje += `*PRODUCTOS:*\n`;
+
+    v.productos.forEach(p => {
+        const neto = p.precio * p.kg;
+        mensaje += `• ${p.origen} (${p.formato})\n`;
+        mensaje += `  ${p.kg}kg x $${p.precio.toLocaleString()} = $${neto.toLocaleString()} (Neto)\n`;
+    });
+
+    const iva = v.monto - (v.monto / 1.19);
+    mensaje += `\n--------------------------\n`;
+    mensaje += `*Neto:* $${Math.round(v.monto / 1.19).toLocaleString()}\n`;
+    mensaje += `*IVA (19%):* $${Math.round(iva).toLocaleString()}\n`;
+    mensaje += `*TOTAL (IVA Inc):* $${v.monto.toLocaleString()}\n\n`;
+    mensaje += `_Maestría en fuego · Chillán_`;
+
+    window.open(`https://wa.me/?text=${encodeURIComponent(mensaje)}`);
+}
 
 // Funciones para líneas de producto en modal de venta
 function agregarLineaProducto() {
@@ -783,7 +1105,7 @@ function agregarLineaProducto() {
             ${formatos.map(f => `<option value="${f}">${f}</option>`).join('')}
         </select>
         <input type="number" step="0.5" class="form-input producto-kg" placeholder="Kg" style="width:100%">
-        <input type="number" class="form-input producto-precio" placeholder="$" style="width:100%">
+        <input type="number" class="form-input producto-precio" placeholder="$ Neto/Kg" style="width:100%">
         <button type="button" onclick="eliminarLineaProducto(this)" style="background:var(--danger);color:white;border:none;width:30px;height:30px;border-radius:4px;cursor:pointer">×</button>
     `;
     container.appendChild(div);
@@ -804,11 +1126,18 @@ function calcularTotalesVenta() {
     let totalKg = 0;
     let totalMonto = 0;
     lineas.forEach(linea => {
-        totalKg += parseFloat(linea.querySelector('.producto-kg').value) || 0;
-        totalMonto += parseInt(linea.querySelector('.producto-precio').value) || 0;
+        const kg = parseFloat(linea.querySelector('.producto-kg').value) || 0;
+        const precioUnitario = parseInt(linea.querySelector('.producto-precio').value) || 0;
+
+        totalKg += kg;
+        // Cálculo: (Precio Unitario * Kg) + 19% IVA
+        const neto = kg * precioUnitario;
+        const totalLinea = neto * 1.19;
+
+        totalMonto += totalLinea;
     });
     document.getElementById('venta-kg').value = totalKg;
-    document.getElementById('venta-monto').value = totalMonto;
+    document.getElementById('venta-monto').value = Math.round(totalMonto);
 }
 
 // Init
