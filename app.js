@@ -349,39 +349,125 @@ function renderMetasProgress() {
 
 function renderMetasOverview() {
     if (!data.metas) return;
-    const tb2b = data.ventas?.filter(v => v.tipo === 'b2b').reduce((s, v) => s + v.kg, 0) || 0;
-    const tb2p = data.ventas?.filter(v => v.tipo === 'b2p').reduce((s, v) => s + v.monto, 0) || 0;
+
+    // Calcular métricas del MES ACTUAL
+    const hoy = new Date();
+    const mesActual = hoy.toISOString().substring(0, 7); // YYYY-MM
+
+    // Ventas del mes (B2B + Web + Local)
+    const ventasMes = (data.ventas || []).filter(v => v.fecha.startsWith(mesActual));
+    const ventasWebMes = (data.ventasWeb || []).filter(v => v.fecha.startsWith(mesActual));
+    const ventasLocalMes = (data.ventasLocales || []).filter(v => v.fecha.startsWith(mesActual));
+
+    // Kg B2B (solo ventas B2B tienen Kg relevante)
+    const actualKg = ventasMes.reduce((s, v) => s + (v.kg || 0), 0);
+
+    // Ingresos Totales (Meta Financiera)
+    const ingresoB2B = ventasMes.filter(v => v.pagado).reduce((s, v) => s + v.monto, 0);
+    const ingresoWeb = ventasWebMes.reduce((s, v) => s + v.monto, 0);
+    const ingresoLocal = ventasLocalMes.reduce((s, v) => s + v.monto, 0);
+    const actualMonto = ingresoB2B + ingresoWeb + ingresoLocal;
+
+    // Metas fijas (pueden venir de config o data.json)
+    const metaKg = 300; // 300 Kg/mes
+    const metaMonto = 3000000; // $3.000.000/mes (proyectado a 10k/kg aprox)
 
     document.getElementById('metas-overview').innerHTML = `
         <div class="cards-grid">
             <div class="card">
-                <div class="card-header"><span class="card-title">🎯 Meta B2B</span><span class="badge badge-b2b">B2B</span></div>
-                <div style="font-size:2rem;font-weight:700;color:var(--accent)">${tb2b.toFixed(1)} / ${data.metas.b2b.meta}</div>
-                <div class="card-detail">${data.metas.b2b.unidad}</div>
-                <div class="progress-bar"><div class="progress-fill" style="width:${Math.min(100, tb2b / data.metas.b2b.meta * 100)}%"></div></div>
+                <div class="card-header">
+                    <span class="card-title">🎯 Meta B2B (${mesActual})</span>
+                    <span class="badge badge-b2b">Kg</span>
+                </div>
+                <div style="font-size:2rem;font-weight:700;color:var(--accent)">
+                    ${actualKg.toFixed(1)} <span style="font-size:1rem;color:var(--text-secondary)">/ ${metaKg} kg</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width:${Math.min(100, actualKg / metaKg * 100)}%">
+                        ${Math.round(actualKg / metaKg * 100)}%
+                    </div>
+                </div>
+                <div class="card-detail" style="margin-top:0.5rem">🛒 Promedio diario: ${(actualKg / hoy.getDate()).toFixed(1)} kg</div>
             </div>
+            
             <div class="card">
-                <div class="card-header"><span class="card-title">🛒 Meta B2P</span><span class="badge badge-b2p">B2P</span></div>
-                <div style="font-size:2rem;font-weight:700;color:var(--accent)">$${(tb2p / 1000).toFixed(0)}k / $${(data.metas.b2p.meta / 1000000).toFixed(1)}M</div>
-                <div class="card-detail">${data.metas.b2p.unidad}</div>
-                <div class="progress-bar"><div class="progress-fill" style="width:${Math.min(100, tb2p / data.metas.b2p.meta * 100)}%"></div></div>
+                <div class="card-header">
+                    <span class="card-title">💰 Meta Financiera (${mesActual})</span>
+                    <span class="badge badge-success">CLP</span>
+                </div>
+                <div style="font-size:2rem;font-weight:700;color:var(--success)">
+                    $${(actualMonto / 1000).toFixed(0)}k <span style="font-size:1rem;color:var(--text-secondary)">/ $${(metaMonto / 1000).toFixed(0)}k</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width:${Math.min(100, actualMonto / metaMonto * 100)}%; background:var(--success)">
+                        ${Math.round(actualMonto / metaMonto * 100)}%
+                    </div>
+                </div>
+                 <div class="card-detail" style="margin-top:0.5rem">💵 Falta: $${Math.max(0, metaMonto - actualMonto).toLocaleString()}</div>
             </div>
         </div>
     `;
 }
 
 function renderEstadoResultados() {
-    if (!data.estadoResultados?.meses) return;
-    document.getElementById('estado-resultados').innerHTML = data.estadoResultados.meses.map(m => `
-        <div class="card">
-            <div class="card-header"><span class="card-title">📊 ${m.mes}</span></div>
-            <div class="kpi-grid">
-                <div class="kpi-item"><span class="kpi-label">Ingresos</span><span class="kpi-value" style="color:var(--success)">$${(m.ingresos.total / 1000).toFixed(0)}k</span></div>
-                <div class="kpi-item"><span class="kpi-label">Costos</span><span class="kpi-value" style="color:var(--danger)">-$${(m.costos.total / 1000).toFixed(0)}k</span></div>
-                <div class="kpi-item"><span class="kpi-label">Utilidad</span><span class="kpi-value" style="color:${m.utilidad >= 0 ? 'var(--success)' : 'var(--danger)'}">$${(m.utilidad / 1000).toFixed(0)}k</span></div>
-            </div>
+    // Generar reporte dinámico desde Feb 2026
+    const reporte = [];
+    const fechaInicio = new Date('2026-02-01');
+    const hoy = new Date();
+    let iterador = new Date(fechaInicio);
+
+    while (iterador <= hoy) {
+        const mesStr = iterador.toISOString().substring(0, 7); // YYYY-MM
+
+        // Calcular Ingresos
+        const ingB2B = (data.ventas || []).filter(v => v.pagado && v.fecha.startsWith(mesStr)).reduce((s, v) => s + v.monto, 0);
+        const ingWeb = (data.ventasWeb || []).filter(v => v.fecha.startsWith(mesStr)).reduce((s, v) => s + v.monto, 0);
+        const ingLocal = (data.ventasLocales || []).filter(v => v.fecha.startsWith(mesStr)).reduce((s, v) => s + v.monto, 0);
+        const totalIngresos = ingB2B + ingWeb + ingLocal;
+
+        // Calcular Egresos
+        const totalGastos = (data.gastos || []).filter(g => g.fecha.startsWith(mesStr)).reduce((s, g) => s + g.monto, 0);
+
+        // Calcular Utilidad
+        const utilidad = totalIngresos - totalGastos;
+
+        reporte.unshift({ // Más recientes primero
+            mes: mesStr,
+            ingresos: totalIngresos,
+            gastos: totalGastos,
+            utilidad: utilidad
+        });
+
+        // Avanzar mes
+        iterador.setMonth(iterador.getMonth() + 1);
+    }
+
+    document.getElementById('estado-resultados').innerHTML = `
+        <div class="cards-grid">
+            ${reporte.map(m => `
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">📅 ${m.mes}</span>
+                        <span class="badge badge-${m.utilidad >= 0 ? 'activo' : 'perdido'}">${m.utilidad >= 0 ? 'Ganancia' : 'Pérdida'}</span>
+                    </div>
+                    <div class="kpi-grid">
+                        <div class="kpi-item">
+                            <span class="kpi-label">Ingresos</span>
+                            <span class="kpi-value" style="color:var(--success)">$${m.ingresos.toLocaleString()}</span>
+                        </div>
+                        <div class="kpi-item">
+                            <span class="kpi-label">Gastos</span>
+                            <span class="kpi-value" style="color:var(--danger)">$${m.gastos.toLocaleString()}</span>
+                        </div>
+                        <div class="kpi-item" style="border-top:1px solid var(--border);padding-top:0.5rem;margin-top:0.25rem">
+                            <span class="kpi-label" style="font-weight:700">Utilidad</span>
+                            <span class="kpi-value" style="color:${m.utilidad >= 0 ? 'var(--success)' : 'var(--danger)'};font-size:1.1rem">$${m.utilidad.toLocaleString()}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('')}
         </div>
-    `).join('');
+    `;
 }
 
 // Estado de meses expandidos
