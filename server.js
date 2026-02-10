@@ -61,17 +61,18 @@ async function initDatabase() {
         `);
 
         // Check if we need to seed initial data
-        const result = await pool.query("SELECT COUNT(*) FROM crm_data");
-        if (parseInt(result.rows[0].count) === 0) {
-            // Load initial data from JSON file
-            if (fs.existsSync(DATA_FILE)) {
-                const initialData = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
-                await pool.query(
-                    "INSERT INTO crm_data (key, value) VALUES ($1, $2)",
-                    ['main', initialData]
-                );
-                console.log('📥 Datos iniciales cargados a PostgreSQL');
-            }
+        // Forzar actualización de datos desde JSON local en cada despliegue
+        // Esto asegura que la nube siempre refleje los datos del repositorio
+        if (fs.existsSync(DATA_FILE)) {
+            const initialData = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+            await pool.query(
+                `INSERT INTO crm_data (key, value, updated_at) 
+                 VALUES ($1, $2, CURRENT_TIMESTAMP)
+                 ON CONFLICT (key) 
+                 DO UPDATE SET value = $2, updated_at = CURRENT_TIMESTAMP`,
+                ['main', initialData]
+            );
+            console.log('📥 Datos sincronizados: JSON Local -> PostgreSQL');
         }
         console.log('✅ Base de datos inicializada');
     } catch (error) {
