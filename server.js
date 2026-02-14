@@ -60,7 +60,7 @@ const server = http.createServer(async (req, res) => {
 
     try {
         // 1. HEALTH CHECKS
-        if (req.url === '/' || req.url === '/api/health') {
+        if (req.url === '/api/health') {
             return sendJSON(res, 200, { status: 'ok', uptime: process.uptime() });
         }
 
