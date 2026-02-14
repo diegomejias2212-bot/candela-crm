@@ -77,23 +77,30 @@ async function login() {
     const pass = document.getElementById('login-pass').value;
     const errorMsg = document.getElementById('login-error');
 
+    console.log('Intento de login:', user);
+
     try {
         const res = await fetch('/api/login', {
             method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username: user, password: pass })
         });
 
+        console.log('Login Status:', res.status);
         const json = await res.json();
+        console.log('Login Response:', json);
 
         if (res.ok) {
             localStorage.setItem('candela_token', json.token);
-            checkAuth();
+            // Force reload to clear any stale state
+            location.reload();
         } else {
             errorMsg.textContent = json.error || 'Error de login';
             errorMsg.style.display = 'block';
         }
     } catch (e) {
-        errorMsg.textContent = 'Error de conexión';
+        console.error('Login Error:', e);
+        errorMsg.textContent = 'Error de conexión: ' + e.message;
         errorMsg.style.display = 'block';
     }
 }
