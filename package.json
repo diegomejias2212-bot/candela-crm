@@ -10,7 +10,10 @@
     "engines": {
         "node": ">=18.0.0"
     },
-    "dependencies": {},
+    "dependencies": {
+        "bcryptjs": "^3.0.3",
+        "jsonwebtoken": "^9.0.3"
+    },
     "keywords": [
         "crm",
         "coffee",
