@@ -1,35 +1,29 @@
 /**
- * Candela CRM - Server (No-Database Version)
- * Ensures startup by removing 'pg' dependency.
+ * Candela CRM - Pure Node Server (Zero Dependencies)
+ * Implements simplified JWT manually to avoid build issues.
  */
 
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const os = require('os');
 const crypto = require('crypto');
 
 const PORT = process.env.PORT || 5000;
 const SECRET_KEY = process.env.SECRET_KEY || 'candela_super_secret_key_2026';
 
-// Files (Ephemeral on Railway, but allows startup)
-const DATA_FILE = path.join(__dirname, 'data.json');
-const USERS_FILE = path.join(__dirname, 'users.json');
-
-// Dependencies
-let bcrypt, jwt;
-try {
-    bcrypt = require('bcryptjs');
-    jwt = require('jsonwebtoken');
-} catch (e) {
-    console.error('⚠️ Critical Deps Missing:', e.message);
-    // Mock if install failed, to allow at least 200 OK Response
-    bcrypt = { compare: async () => true, hash: async (p) => p };
-    jwt = { sign: () => 'mock', verify: () => ({ username: 'admin' }) };
+// === HELPER: Manual JWT Generation (HS256) ===
+function signToken(payload) {
+    const header = { alg: 'HS256', typ: 'JWT' };
+    const h = Buffer.from(JSON.stringify(header)).toString('base64url');
+    const p = Buffer.from(JSON.stringify(payload)).toString('base64url');
+    const signature = crypto.createHmac('sha256', SECRET_KEY)
+        .update(`${h}.${p}`)
+        .digest('base64url');
+    return `${h}.${p}.${signature}`;
 }
 
 // === SERVER ===
-const server = http.createServer(async (req, res) => {
+const server = http.createServer((req, res) => {
     // CORS
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -53,23 +47,22 @@ const server = http.createServer(async (req, res) => {
 
         // 1. HEALTH CHECKS
         if (req.url === '/' || req.url === '/api/health') {
-            return send(200, { status: 'ok', mode: 'json-only', uptime: process.uptime() });
+            return send(200, { status: 'ok', mode: 'pure-node', uptime: process.uptime() });
         }
 
-        // 2. LOGIN
+        // 2. LOGIN (Emergency Bypass)
         if (req.method === 'POST' && req.url === '/api/login') {
-            const { username, password } = await getBody();
-
-            // EMERGENCY BYPASS
-            if (username === 'admin' && password === 'admin123') {
-                const token = jwt.sign({ id: 'admin', username: 'admin', plan: 'pro' }, SECRET_KEY);
-                return send(200, {
-                    token,
-                    user: { id: 'admin', username: 'admin', plan: 'pro' }
-                });
-            }
-
-            return send(401, { error: 'Invalid credentials' });
+            getBody().then(({ username, password }) => {
+                if (username === 'admin' && password === 'admin123') {
+                    const user = { id: 'admin', username: 'admin', plan: 'pro' };
+                    return send(200, {
+                        token: signToken(user),
+                        user
+                    });
+                }
+                send(401, { error: 'Invalid credentials' });
+            });
+            return;
         }
 
         // 3. STATIC FILES
@@ -79,7 +72,6 @@ const server = http.createServer(async (req, res) => {
 
         fs.readFile(safePath, (err, content) => {
             if (err) {
-                // Return index.html for SPA
                 fs.readFile(path.join(__dirname, 'index.html'), (e, index) => {
                     if (e) return send(404, { error: 'Not Found' });
                     res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -99,11 +91,6 @@ const server = http.createServer(async (req, res) => {
     }
 });
 
-// START
 server.listen(PORT, '0.0.0.0', () => {
-    console.log(`🚀 Server (No-DB) running on ${PORT}`);
-
-    // Create dummy files if missing
-    if (!fs.existsSync(DATA_FILE)) fs.writeFileSync(DATA_FILE, '{}');
-    if (!fs.existsSync(USERS_FILE)) fs.writeFileSync(USERS_FILE, '[]');
+    console.log(`🚀 Pure Node Server running on ${PORT}`);
 });
