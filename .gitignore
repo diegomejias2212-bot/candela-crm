@@ -21,3 +21,4 @@ npm-debug.log*
 
 # Datos locales (no sobreescribir datos de la nube)
 data.json
+users.json

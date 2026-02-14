@@ -1,29 +1,248 @@
 // Candela CRM App
 let data = {};
 let ventasFilter = 'todas';
+let currentUser = null;
 
+// === API WRAPPER ===
+const api = {
+    token: localStorage.getItem('candela_token'),
+
+    getHeaders() {
+        return {
+            'Content-Type': 'application/json',
+            'Authorization': this.token ? `Bearer ${this.token}` : ''
+        };
+    },
+
+    async request(url, method = 'GET', body = null) {
+        try {
+            const opts = { method, headers: this.getHeaders() };
+            if (body) opts.body = JSON.stringify(body);
+
+            const res = await fetch(url, opts);
+
+            if (res.status === 401) {
+                logout(); // Token expired or invalid
+                return null;
+            }
+
+            return await res.json();
+        } catch (e) {
+            console.error('API Error:', e);
+            throw e;
+        }
+    },
+
+    get(url) { return this.request(url, 'GET'); },
+    post(url, body) { return this.request(url, 'POST', body); },
+    push(arrayName, item) { return this.request(`/api/push?array=${arrayName}`, 'POST', item); }
+};
+
+// === AUTH ===
+async function checkAuth() {
+    const token = localStorage.getItem('candela_token');
+
+    if (token) {
+        api.token = token;
+        try {
+            const user = await api.get('/api/me');
+            if (user && user.username) {
+                currentUser = user;
+                localStorage.setItem('candela_user', JSON.stringify(user));
+
+                // Update header
+                const headerUser = document.getElementById('header-username');
+                if (headerUser) headerUser.textContent = user.username;
+
+                document.getElementById('login-overlay').classList.remove('active');
+                // Show Admin Tab if admin
+                if (user.username === 'admin') {
+                    document.getElementById('nav-suscriptores').style.display = 'block';
+                }
+
+                loadData();
+            } else {
+                logout();
+            }
+        } catch (e) {
+            logout();
+        }
+    } else {
+        document.getElementById('login-overlay').classList.add('active');
+    }
+}
+
+async function login() {
+    const user = document.getElementById('login-user').value;
+    const pass = document.getElementById('login-pass').value;
+    const errorMsg = document.getElementById('login-error');
+
+    try {
+        const res = await fetch('/api/login', {
+            method: 'POST',
+            body: JSON.stringify({ username: user, password: pass })
+        });
+
+        const json = await res.json();
+
+        if (res.ok) {
+            localStorage.setItem('candela_token', json.token);
+            checkAuth();
+        } else {
+            errorMsg.textContent = json.error || 'Error de login';
+            errorMsg.style.display = 'block';
+        }
+    } catch (e) {
+        errorMsg.textContent = 'Error de conexión';
+        errorMsg.style.display = 'block';
+    }
+}
+
+let isRegisterMode = false;
+function toggleRegisterMode() {
+    isRegisterMode = !isRegisterMode;
+    const btn = document.getElementById('btn-login');
+    const link = document.getElementById('btn-register-mode');
+    const title = document.querySelector('#login-overlay .modal-title');
+
+    if (isRegisterMode) {
+        title.textContent = '📝 Crear Cuenta';
+        btn.textContent = 'Registrarse';
+        btn.onclick = register;
+        link.textContent = 'Volver a Login';
+    } else {
+        title.textContent = '🔐 Iniciar Sesión';
+        btn.textContent = 'Entrar';
+        btn.onclick = login;
+        link.textContent = 'Crear Cuenta';
+    }
+}
+
+async function register() {
+    const user = document.getElementById('login-user').value;
+    const pass = document.getElementById('login-pass').value;
+    const errorMsg = document.getElementById('login-error');
+
+    try {
+        const res = await fetch('/api/register', {
+            method: 'POST',
+            body: JSON.stringify({ username: user, password: pass })
+        });
+
+        const json = await res.json();
+
+        if (res.ok) {
+            alert('Cuenta creada. Ahora inicia sesión.');
+            toggleRegisterMode();
+        } else {
+            errorMsg.textContent = json.error || 'Error al registrar';
+            errorMsg.style.display = 'block';
+        }
+    } catch (e) {
+        errorMsg.textContent = 'Error de conexión';
+        errorMsg.style.display = 'block';
+    }
+}
+
+function logout() {
+    localStorage.removeItem('candela_token');
+    localStorage.removeItem('candela_user');
+    location.reload();
+}
+
+// === SAAS UI ===
+function openProfile() {
+    if (!currentUser) return;
+    document.getElementById('profile-user').textContent = currentUser.username;
+
+    const planBadge = document.getElementById('profile-plan');
+    const uBtn = document.getElementById('btn-upgrade');
+    const exp = document.getElementById('profile-expires');
+
+    if (currentUser.plan === 'pro') {
+        planBadge.textContent = 'PLAN PRO 💎';
+        planBadge.style.background = 'var(--accent)';
+        planBadge.style.color = 'black';
+        uBtn.style.display = 'none';
+        if (currentUser.plan_expires) {
+            const date = new Date(currentUser.plan_expires).toLocaleDateString();
+            exp.textContent = `Renueva el: ${date}`;
+        }
+    } else {
+        planBadge.textContent = 'PLAN GRATUITO';
+        planBadge.style.background = 'var(--bg-secondary)';
+        planBadge.style.color = 'var(--text-secondary)';
+        uBtn.style.display = 'block';
+        exp.textContent = 'Funciones limitadas';
+    }
+
+    document.getElementById('profile-overlay').classList.add('active');
+}
+
+function closeProfile() {
+    document.getElementById('profile-overlay').classList.remove('active');
+}
+
+function openUpgrade() {
+    closeProfile();
+    document.getElementById('upgrade-overlay').classList.add('active');
+}
+
+function closeUpgrade() {
+    document.getElementById('upgrade-overlay').classList.remove('active');
+}
+
+async function processUpgrade() {
+    if (confirm('¿Confirmar pago simulado de $13 USD?')) {
+        try {
+            const res = await api.post('/api/upgrade', {});
+            if (res && res.success) {
+                alert('¡Bienvenido a Candela PRO! 💎');
+                closeUpgrade();
+                checkAuth(); // Refresh
+            }
+        } catch (e) {
+            alert('Error en el pago');
+        }
+    }
+}
+
+// === DATA ===
 async function loadData() {
     try {
-        const res = await fetch('/api/data');
-        data = await res.json();
-        // Inicializar gastos si no existe
-        if (!data.gastos) data.gastos = [];
+        console.log('🚀 loadData initiating...');
+        const res = await api.get('/api/data');
+
+        if (!res) {
+            console.error('❌ No response from /api/data');
+            return;
+        }
+
+        console.log('✅ Data received from API:', Object.keys(res).length, 'keys');
+        // alert('Debug: Datos recibidos del servidor. Ventas: ' + (res.ventas ? res.ventas.length : 0));
+
+        data = res;
+        // Inicializar arrays vacíos si es nueva cuenta
+        ['ventas', 'gastos', 'clientes', 'tareas', 'inventario', 'ventasLocales', 'ventasWeb', 'cierresCaja'].forEach(k => {
+            if (!data[k]) data[k] = [];
+        });
+
+        console.log('🔄 Calling renderAll...');
         renderAll();
         setupVentasFilters();
         setupClientSearch();
     } catch (err) {
-        console.error('Error cargando datos:', err);
+        console.error('❌ Error cargando datos:', err);
+        alert('Error Crítico: ' + err.message);
     }
 }
 
+// Legacy save (overwrite) - used for edits or small updates
 async function saveData() {
     try {
-        const res = await fetch('/api/data', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-        if (res.ok) showToast();
+        await api.post('/api/data', data);
+        showToast();
+        // No reload needed as we updated local state
     } catch (err) {
         console.error('Error guardando:', err);
     }
@@ -36,21 +255,28 @@ function showToast() {
 }
 
 function renderAll() {
-    renderStats();
-    renderMetasProgress();
-    renderMetasOverview();
-    renderEstadoResultados();
-    renderVentasResumen();
-    renderVentas();
-    renderFlujo();
-    renderAgentes();
-    renderPlanes();
-    renderClientes();
-    renderCalendario();
-    renderTareas();
-    renderInventario();
-    renderUrgentTasks();
-    renderCajaDiaria();
+    console.log('🎨 renderAll executing...');
+    try {
+        renderStats();
+        renderMetasProgress();
+        renderMetasOverview();
+        renderEstadoResultados();
+        renderVentasResumen();
+        renderVentas();
+        renderFlujo();
+        renderAgentes();
+        renderPlanes();
+        renderClientes();
+        renderCalendario();
+        renderTareas();
+        renderInventario();
+        renderUrgentTasks();
+        renderCajaDiaria();
+        console.log('✅ renderAll completed successfully');
+    } catch (e) {
+        console.error('❌ Error inside renderAll:', e);
+        alert('Error Renderizando: ' + e.message);
+    }
 }
 
 function setupVentasFilters() {
@@ -332,10 +558,13 @@ function renderStats() {
 
 function renderMetasProgress() {
     if (!data.metas) return;
+    const el = document.getElementById('metas-progress');
+    if (!el) return; // Silent fail if element missing
+
     const b2bProg = Math.min(100, (data.ventas?.filter(v => v.tipo === 'b2b').reduce((s, v) => s + v.kg, 0) / data.metas.b2b.meta) * 100 || 0);
     const b2pProg = Math.min(100, (data.ventas?.filter(v => v.tipo === 'b2p').reduce((s, v) => s + v.monto, 0) / data.metas.b2p.meta) * 100 || 0);
 
-    document.getElementById('metas-progress').innerHTML = `
+    el.innerHTML = `
         <div class="card">
             <div style="display:flex;justify-content:space-between"><span>B2B</span><span>${data.metas.b2b.meta} ${data.metas.b2b.unidad}</span></div>
             <div class="progress-bar"><div class="progress-fill" style="width:${b2bProg}%">${b2bProg.toFixed(0)}%</div></div>
@@ -349,6 +578,8 @@ function renderMetasProgress() {
 
 function renderMetasOverview() {
     if (!data.metas) return;
+    const el = document.getElementById('metas-overview');
+    if (!el) return;
 
     // Calcular métricas del MES ACTUAL
     const hoy = new Date();
@@ -372,7 +603,7 @@ function renderMetasOverview() {
     const metaKg = 300; // 300 Kg/mes
     const metaMonto = 3000000; // $3.000.000/mes (proyectado a 10k/kg aprox)
 
-    document.getElementById('metas-overview').innerHTML = `
+    el.innerHTML = `
         <div class="cards-grid">
             <div class="card">
                 <div class="card-header">
@@ -442,32 +673,35 @@ function renderEstadoResultados() {
         iterador.setMonth(iterador.getMonth() + 1);
     }
 
-    document.getElementById('estado-resultados').innerHTML = `
-        <div class="cards-grid">
-            ${reporte.map(m => `
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-title">📅 ${m.mes}</span>
-                        <span class="badge badge-${m.utilidad >= 0 ? 'activo' : 'perdido'}">${m.utilidad >= 0 ? 'Ganancia' : 'Pérdida'}</span>
+    const el = document.getElementById('estado-resultados');
+    if (el) {
+        el.innerHTML = `
+            <div class="cards-grid">
+                ${reporte.map(m => `
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">📅 ${m.mes}</span>
+                            <span class="badge badge-${m.utilidad >= 0 ? 'activo' : 'perdido'}">${m.utilidad >= 0 ? 'Ganancia' : 'Pérdida'}</span>
+                        </div>
+                        <div class="kpi-grid">
+                            <div class="kpi-item">
+                                <span class="kpi-label">Ingresos</span>
+                                <span class="kpi-value" style="color:var(--success)">$${m.ingresos.toLocaleString()}</span>
+                            </div>
+                            <div class="kpi-item">
+                                <span class="kpi-label">Gastos</span>
+                                <span class="kpi-value" style="color:var(--danger)">$${m.gastos.toLocaleString()}</span>
+                            </div>
+                            <div class="kpi-item" style="border-top:1px solid var(--border);padding-top:0.5rem;margin-top:0.25rem">
+                                <span class="kpi-label" style="font-weight:700">Utilidad</span>
+                                <span class="kpi-value" style="color:${m.utilidad >= 0 ? 'var(--success)' : 'var(--danger)'};font-size:1.1rem">$${m.utilidad.toLocaleString()}</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="kpi-grid">
-                        <div class="kpi-item">
-                            <span class="kpi-label">Ingresos</span>
-                            <span class="kpi-value" style="color:var(--success)">$${m.ingresos.toLocaleString()}</span>
-                        </div>
-                        <div class="kpi-item">
-                            <span class="kpi-label">Gastos</span>
-                            <span class="kpi-value" style="color:var(--danger)">$${m.gastos.toLocaleString()}</span>
-                        </div>
-                        <div class="kpi-item" style="border-top:1px solid var(--border);padding-top:0.5rem;margin-top:0.25rem">
-                            <span class="kpi-label" style="font-weight:700">Utilidad</span>
-                            <span class="kpi-value" style="color:${m.utilidad >= 0 ? 'var(--success)' : 'var(--danger)'};font-size:1.1rem">$${m.utilidad.toLocaleString()}</span>
-                        </div>
-                    </div>
-                </div>
-            `).join('')}
-        </div>
-    `;
+                `).join('')}
+            </div>
+        `;
+    }
 }
 
 // Estado de meses expandidos
@@ -475,6 +709,9 @@ let mesesExpandidos = {};
 
 function renderVentas() {
     if (!data.ventas) return;
+    const el = document.getElementById('ventas-grid');
+    if (!el) return;
+
     const estadoEmojis = { iniciada: '📝', proceso: '🔄', entregada: '✅' };
     const estadoColores = { iniciada: 'iniciada', proceso: 'proceso', entregada: 'entregada' };
 
@@ -587,7 +824,7 @@ function renderVentas() {
         }
     });
 
-    document.getElementById('ventas-grid').innerHTML = html || '<div class="card">No hay ventas con este filtro</div>';
+    el.innerHTML = html || '<div class="card">No hay ventas con este filtro</div>';
 }
 
 function toggleMes(mes) {
@@ -622,7 +859,10 @@ function toggleVentaPagado(id) {
 
 function renderAgentes() {
     if (!data.agentes) return;
-    document.getElementById('agentes-grid').innerHTML = data.agentes.map(a => `
+    const el = document.getElementById('agentes-grid');
+    if (!el) return;
+
+    el.innerHTML = data.agentes.map(a => `
         <div class="card">
             <div class="card-header">
                 <span class="card-title">${a.emoji} ${a.nombre}</span>
@@ -963,13 +1203,56 @@ function renderModalBody(type, id) {
             </div>
             <div class="form-group"><label class="form-label">Notas</label><textarea class="form-textarea" id="web-notas"></textarea></div>
         `;
+    } else if (type === 'create_user') {
+        html = `
+            <div class="form-group"><label class="form-label">Nuevo Usuario (Email/Nombre)</label><input type="text" class="form-input" id="new-user-name"></div>
+            <div class="form-group"><label class="form-label">Contraseña</label><input type="text" class="form-input" id="new-user-pass" value="123456"></div>
+            <div class="form-group"><label class="form-label">Plan</label>
+                <select class="form-select" id="new-user-plan">
+                    <option value="free">Gratuito</option>
+                    <option value="pro">PRO</option>
+                </select>
+            </div>
+        `;
     }
     document.getElementById('modal-body').innerHTML = html;
 }
 
-document.getElementById('modal-save').addEventListener('click', () => {
-    if (currentModal === 'venta') {
-        // Recopilar líneas de producto
+document.getElementById('modal-save').addEventListener('click', async () => {
+    // Helper to safely push and update local state
+    const pushAndReload = async (arrayName, item) => {
+        try {
+            const updatedList = await api.push(arrayName, item);
+            if (updatedList) {
+                // Update local data with the server response (which is the full new list)
+                data[arrayName] = updatedList;
+                renderAll();
+                showToast();
+                closeModal();
+            }
+        } catch (e) {
+            console.error(e);
+            alert('Error guardando. Intenta de nuevo.');
+        }
+    };
+
+    if (currentModal === 'create_user') {
+        const username = document.getElementById('new-user-name').value;
+        const password = document.getElementById('new-user-pass').value;
+        const plan = document.getElementById('new-user-plan').value;
+
+        if (!username || !password) return alert('Datos incompletos');
+
+        try {
+            const res = await api.post('/api/register', { username, password, plan });
+            if (res.error) throw new Error(res.error);
+            alert('✅ Usuario creado correctamente');
+            closeModal();
+            if (typeof renderSubscribers === 'function') renderSubscribers();
+        } catch (e) {
+            alert('❌ Error: ' + e.message);
+        }
+    } else if (currentModal === 'venta') {
         const lineas = document.querySelectorAll('.linea-producto');
         const productos = Array.from(lineas).map(linea => ({
             origen: linea.querySelector('.producto-origen').value,
@@ -992,21 +1275,27 @@ document.getElementById('modal-save').addEventListener('click', () => {
             productos: productos
         };
 
-        data.ventas = data.ventas || [];
-
         if (editingId) {
-            // Editar venta existente
+            // EDIT: Use legacy full save
             const index = data.ventas.findIndex(v => v.id === editingId);
             if (index !== -1) {
                 data.ventas[index] = { ...data.ventas[index], ...ventaData };
+                saveData(); // Legacy save
+                closeModal();
+                renderAll();
             }
         } else {
-            // Nueva venta
+            // NEW: Use Atomic Push
             ventaData.id = Date.now();
-            data.ventas.unshift(ventaData);
+            await pushAndReload('ventas', ventaData);
 
-            // DESCONTAR DEL INVENTARIO
-            descontarInventario(productos);
+            // Side Effects (Inventory) - This still needs to be saved manually or pushed?
+            // Inventory is complex. For now let's keep it as legacy save since it modifies existing items.
+            // Ideally we should have an inventory transaction endpoint.
+            if (productos.length > 0) {
+                descontarInventario(productos);
+                saveData(); // This might race, but less critical than sales loss.
+            }
         }
     } else if (currentModal === 'cliente') {
         const newCliente = {
@@ -1017,8 +1306,13 @@ document.getElementById('modal-save').addEventListener('click', () => {
             kgPromedio: parseInt(document.getElementById('cliente-kg').value) || 0,
             notas: document.getElementById('cliente-notas').value
         };
-        data.clientes = data.clientes || [];
-        data.clientes.push(newCliente);
+        if (editingId) {
+            // Edit logic... (omitted for brevity, assume similar to original if needed or just use Push for new)
+            const index = data.clientes.findIndex(c => c.id === editingId);
+            if (index !== -1) { data.clientes[index] = newCliente; saveData(); closeModal(); renderAll(); }
+        } else {
+            await pushAndReload('clientes', newCliente);
+        }
     } else if (currentModal === 'post') {
         const newPost = {
             id: Date.now(),
@@ -1029,8 +1323,7 @@ document.getElementById('modal-save').addEventListener('click', () => {
             estado: 'idea',
             copy: document.getElementById('post-copy').value
         };
-        data.calendario = data.calendario || [];
-        data.calendario.push(newPost);
+        await pushAndReload('calendario', newPost);
     } else if (currentModal === 'tarea') {
         const newTarea = {
             id: Date.now(),
@@ -1041,8 +1334,7 @@ document.getElementById('modal-save').addEventListener('click', () => {
             fechaLimite: document.getElementById('tarea-fecha').value,
             completado: false
         };
-        data.tareas = data.tareas || [];
-        data.tareas.push(newTarea);
+        await pushAndReload('tareas', newTarea);
     } else if (currentModal === 'inventario') {
         const newInv = {
             id: Date.now(),
@@ -1051,8 +1343,7 @@ document.getElementById('modal-save').addEventListener('click', () => {
             puntoReorden: parseInt(document.getElementById('inv-reorden').value) || 10,
             proveedor: document.getElementById('inv-prov').value
         };
-        data.inventario = data.inventario || [];
-        data.inventario.push(newInv);
+        await pushAndReload('inventario', newInv);
     } else if (currentModal === 'gasto') {
         const newGasto = {
             id: Date.now(),
@@ -1062,8 +1353,7 @@ document.getElementById('modal-save').addEventListener('click', () => {
             fecha: document.getElementById('gasto-fecha').value || new Date().toISOString().split('T')[0],
             notas: document.getElementById('gasto-notas').value
         };
-        data.gastos = data.gastos || [];
-        data.gastos.unshift(newGasto);
+        await pushAndReload('gastos', newGasto);
     } else if (currentModal === 'venta_local') {
         const ventaLocal = {
             id: Date.now(),
@@ -1073,12 +1363,29 @@ document.getElementById('modal-save').addEventListener('click', () => {
             fecha: new Date().toISOString().split('T')[0],
             hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         };
-        data.ventasLocales = data.ventasLocales || [];
-        data.ventasLocales.push(ventaLocal);
 
+        let deduct = [];
         if (document.getElementById('local-descontar-bolsa').checked) {
             const origen = document.getElementById('local-origen-bolsa').value;
-            descontarInventario([{ origen: origen, kg: 0.25 }]);
+            deduct.push({ origen: origen, kg: 0.25 });
+        }
+
+        try {
+            // Atomic update via new endpoint
+            const res = await api.post('/api/sales/local', {
+                sale: ventaLocal,
+                deductInventory: deduct
+            });
+
+            if (res && res.sales) {
+                data.ventasLocales = res.sales;
+                if (res.inventory) data.inventario = res.inventory;
+                renderAll();
+                showToast();
+                closeModal();
+            }
+        } catch (e) {
+            alert('Error guardando venta local');
         }
     } else if (currentModal === 'cierre_caja') {
         const real = parseInt(document.getElementById('cierre-real').value) || 0;
@@ -1091,8 +1398,7 @@ document.getElementById('modal-save').addEventListener('click', () => {
             diferencia: real - sistema,
             notas: document.getElementById('cierre-notas').value
         };
-        data.cierresCaja = data.cierresCaja || [];
-        data.cierresCaja.unshift(cierre);
+        await pushAndReload('cierresCaja', cierre);
     } else if (currentModal === 'venta_web') {
         const ventaWeb = {
             id: Date.now(),
@@ -1105,12 +1411,8 @@ document.getElementById('modal-save').addEventListener('click', () => {
             canal: 'web',
             notas: document.getElementById('web-notas').value
         };
-        data.ventasWeb = data.ventasWeb || [];
-        data.ventasWeb.unshift(ventaWeb);
+        await pushAndReload('ventasWeb', ventaWeb);
     }
-    saveData();
-    closeModal();
-    renderAll();
 });
 
 function editCliente(id) { openModal('cliente', id); }
@@ -1223,8 +1525,63 @@ function calcularTotalesVenta() {
         totalMonto += totalLinea;
     });
     document.getElementById('venta-kg').value = totalKg;
+
+
     document.getElementById('venta-monto').value = Math.round(totalMonto);
 }
 
+async function renderSubscribers() {
+    if (currentUser.username !== 'admin') return;
+    try {
+        const users = await api.get('/api/admin/users');
+        const tbody = document.getElementById('subscribers-table');
+
+        // Stats
+        const total = users.length;
+        const pros = users.filter(u => u.plan === 'pro').length;
+        const mrr = pros * 13; // $13 USD
+
+        document.getElementById('subscribers-table').innerHTML = users.map(u => {
+            const isPro = u.plan === 'pro';
+            const expires = u.plan_expires ? new Date(u.plan_expires).toLocaleDateString() : '-';
+            return `
+                <tr style="border-bottom:1px solid var(--border)">
+                    <td style="padding:1rem">
+                        <div style="font-weight:bold">${u.username}</div>
+                        <div style="font-size:0.8rem;color:var(--text-secondary)">ID: ${u.id}</div>
+                    </td>
+                    <td style="padding:1rem">
+                        <span class="badge ${isPro ? 'badge-activo' : 'badge-idea'}">${u.plan || 'free'}</span>
+                    </td>
+                    <td style="padding:1rem">
+                        <span style="color:${isPro ? 'var(--success)' : 'var(--text-secondary)'}">● ${isPro ? 'Activo' : 'Inactivo'}</span>
+                    </td>
+                    <td style="padding:1rem">${expires}</td>
+                    <td style="padding:1rem">
+                        <button class="btn btn-secondary" style="font-size:0.8rem" onclick="alert('Funcionalidad en desarrollo')">Gestionar</button>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+
+        document.getElementById('sub-total').textContent = total;
+        document.getElementById('sub-pro').textContent = pros;
+        document.getElementById('sub-mrr').textContent = `$${mrr} USD`;
+
+    } catch (e) {
+        console.error(e);
+        document.getElementById('subscribers-table').innerHTML = '<tr><td colspan="5" style="padding:1rem;text-align:center">Error cargando usuarios</td></tr>';
+    }
+}
+
+// Hook into navigation to load subscribers
+document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (btn.dataset.section === 'suscriptores') {
+            renderSubscribers();
+        }
+    });
+});
+
 // Init
-loadData();
+checkAuth();

@@ -14,160 +14,241 @@
     <header class="header">
         <div class="header-content">
             <div class="logo">🔥 <span>Candela CRM</span></div>
-            <div class="sync-status">
-                <div class="sync-dot"></div><span>Sincronizado</span>
+            <div style="display:flex;gap:1rem;align-items:center">
+                <div class="sync-status">
+                    <div class="sync-dot"></div><span>Sincronizado</span>
+                </div>
+                <button onclick="openProfile()"
+                    style="background:none;border:none;color:white;cursor:pointer;display:flex;align-items:center;gap:0.5rem">
+                    👤 <span id="header-username">Cuenta</span>
+                </button>
+                <button onclick="logout()"
+                    style="background:none;border:1px solid #ffffff40;color:white;padding:0.25rem 0.75rem;border-radius:20px;cursor:pointer;font-size:0.8rem">Salir</button>
             </div>
         </div>
     </header>
 
     <nav class="nav">
         <button class="nav-btn active" data-section="dashboard">📊 Dashboard</button>
-        <button class="nav-btn" data-section="metas">🎯 Metas</button>
         <button class="nav-btn" data-section="ventas">💰 Ventas</button>
-        <button class="nav-btn" data-section="flujo">💸 Flujo Caja</button>
-        <button class="nav-btn" data-section="caja-diaria">🏪 Caja Diaria</button>
-        <button class="nav-btn" data-section="agentes">🤖 Agentes</button>
-        <button class="nav-btn" data-section="planes">📋 Planes</button>
-        <button class="nav-btn" data-section="clientes">👥 Clientes</button>
-        <button class="nav-btn" data-section="calendario">📅 Calendario</button>
+        <button class="nav-btn" data-section="flujo">📈 Flujo</button>
+        <button class="nav-btn" data-section="crm">👥 Clientes</button>
+        <button class="nav-btn" data-section="marketing">📣 Marketing</button>
         <button class="nav-btn" data-section="tareas">✅ Tareas</button>
         <button class="nav-btn" data-section="inventario">📦 Inventario</button>
+        <button class="nav-btn" data-section="caja">💵 Caja</button>
+        <button class="nav-btn" data-section="suscriptores" id="nav-suscriptores" style="display:none">💎
+            Suscriptores</button>
     </nav>
 
     <main class="main">
+        <!-- DASHBOARD -->
         <section id="dashboard" class="section active">
-            <div class="stats-bar" id="stats"></div>
-            <div class="two-col">
-                <div>
-                    <h3 class="section-subtitle">🎯 Progreso hacia metas</h3>
-                    <div id="metas-progress"></div>
-                </div>
-                <div>
-                    <h3 class="section-subtitle">⚡ Tareas Urgentes</h3>
-                    <div class="cards-grid" id="urgent-tasks"></div>
-                </div>
+            <div class="stats-grid" id="stats"></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem">
+                <div id="metas-overview"></div>
+                <div id="urgent-tasks"></div>
             </div>
-        </section>
-
-        <section id="metas" class="section">
-            <div class="section-header">
-                <h2 class="section-title">🎯 Estado de Resultados</h2>
-            </div>
-            <div id="metas-overview"></div>
-            <h3 class="section-subtitle" style="margin-top:1.5rem">📈 Evolución Mensual</h3>
+            <h3 style="margin:2rem 0 1rem">Estado de Resultados</h3>
             <div id="estado-resultados"></div>
         </section>
 
+        <!-- VENTAS -->
         <section id="ventas" class="section">
-            <div class="section-header">
-                <h2 class="section-title">💰 Registro de Ventas</h2>
-                <button class="add-btn" onclick="openModal('venta')">+ Nueva Venta</button>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+                <div class="filters" id="ventas-filters">
+                    <button class="filter-btn active" data-filter="todas">Todas</button>
+                    <button class="filter-btn" data-filter="pendientes">Por Cobrar</button>
+                    <button class="filter-btn" data-filter="pagadas">Pagadas</button>
+                    <button class="filter-btn" data-filter="sin-factura">Sin Factura</button>
+                </div>
+                <input type="text" id="venta-client-search" placeholder="🔍 Buscar cliente..." class="form-input"
+                    style="width:200px">
+                <button class="btn btn-primary" onclick="openModal('venta')">+ Nueva Venta</button>
             </div>
-            <div id="ventas-resumen" class="stats-bar" style="margin-bottom:1rem"></div>
-            <div class="filter-bar" id="ventas-filters">
-                <button class="filter-btn active" data-filter="todas">Todas</button>
-                <button class="filter-btn" data-filter="pendientes">💵 Pendientes</button>
-                <button class="filter-btn" data-filter="pagadas">✅ Pagadas</button>
-                <button class="filter-btn" data-filter="sin-factura">📄 Sin Factura</button>
-                <input type="text" id="venta-client-search" placeholder="Buscar cliente..." class="form-input" style="width: 200px; padding: 0.4rem 0.75rem; font-size: 0.8rem; margin-left: auto;">
-            </div>
-            <div class="cards-grid" id="ventas-grid"></div>
+            <div id="ventas-resumen" class="stats-grid" style="margin-bottom:1.5rem"></div>
+            <div class="grid" id="ventas-grid"></div>
         </section>
 
+        <!-- FLUJO -->
         <section id="flujo" class="section">
-            <div class="section-header">
-                <h2 class="section-title">💸 Flujo de Caja</h2>
-                <div style="display:flex;gap:0.5rem">
-                    <button class="add-btn" onclick="openModal('venta_web')">🌐 + Venta Web</button>
-                    <button class="add-btn" onclick="openModal('gasto')">+ Nuevo Gasto</button>
-                </div>
-            </div>
-            <div id="flujo-resumen" class="stats-bar"></div>
-
-            <div class="two-col" style="margin-top:1rem">
+            <div style="display:grid;grid-template-columns:2fr 1fr;gap:1.5rem">
                 <div>
-                    <h3 class="section-subtitle">📥 Ingresos del Mes</h3>
+                    <h3>Flujo de Caja (Actual)</h3>
+                    <div id="flujo-resumen" class="stats-grid"
+                        style="grid-template-columns:repeat(2,1fr);margin-bottom:1rem"></div>
                     <div id="flujo-ingresos-lista"></div>
+                    <h3 style="margin-top:1.5rem">Egresos del Mes</h3>
+                    <div class="grid" id="flujo-grid"></div>
                 </div>
                 <div>
-                    <h3 class="section-subtitle">💵 Por Cobrar (Pendientes)</h3>
+                    <button class="btn btn-primary" onclick="openModal('gasto')" style="width:100%;margin-bottom:1rem">-
+                        Registrar Gasto</button>
+                    <h3>Por Cobrar / Pendientes</h3>
                     <div id="flujo-por-cobrar"></div>
                 </div>
             </div>
-
-            <h3 class="section-subtitle" style="margin-top:1.5rem">📤 Egresos del Mes</h3>
-            <div class="cards-grid" id="flujo-grid"></div>
         </section>
 
-
-        <section id="caja-diaria" class="section">
-            <div class="section-header">
-                <h2 class="section-title">🏪 Caja Diaria (Local)</h2>
-                <div style="display:flex;gap:0.5rem">
-                    <button class="add-btn" style="background:var(--success)" onclick="openModal('venta_local')">+ Venta Local</button>
-                    <button class="add-btn" style="background:var(--warning)" onclick="openModal('cierre_caja')">🔒 Cerrar Caja</button>
-                </div>
+        <!-- CLIENTES -->
+        <section id="crm" class="section">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+                <h3>Cartera de Clientes</h3>
+                <button class="btn btn-primary" onclick="openModal('cliente')">+ Nuevo Cliente</button>
             </div>
-            <div id="caja-resumen" class="stats-bar"></div>
-            <div class="two-col">
+            <div class="grid" id="clientes-grid"></div>
+        </section>
+
+        <!-- MARKETING -->
+        <section id="marketing" class="section">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
                 <div>
-                    <h3 class="section-subtitle">☕ Ventas del Día</h3>
-                    <div id="ventas-locales-lista" class="cards-grid"></div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+                        <h3>Calendario de Contenidos</h3>
+                        <button class="btn btn-primary" onclick="openModal('post')">+ Post</button>
+                    </div>
+                    <div class="grid" id="calendario-grid"></div>
                 </div>
                 <div>
-                    <h3 class="section-subtitle">🗒️ Últimos Cierres / Arqueos</h3>
-                    <div id="cierres-lista" class="cards-grid"></div>
+                    <h3>Planes de Acción</h3>
+                    <div class="grid" id="planes-grid"></div>
                 </div>
             </div>
         </section>
 
-        <section id="agentes" class="section">
-            <div class="section-header">
-                <h2 class="section-title">🤖 Sistema de Agentes</h2>
-            </div>
-            <div class="cards-grid" id="agentes-grid"></div>
-        </section>
-
-        <section id="planes" class="section">
-            <div class="section-header">
-                <h2 class="section-title">📋 Planes de Acción</h2>
-            </div>
-            <div class="cards-grid" id="planes-grid"></div>
-        </section>
-
-        <section id="clientes" class="section">
-            <div class="section-header">
-                <h2 class="section-title">👥 Clientes B2B</h2>
-                <button class="add-btn" onclick="openModal('cliente')">+ Agregar</button>
-            </div>
-            <div class="cards-grid" id="clientes-grid"></div>
-        </section>
-
-        <section id="calendario" class="section">
-            <div class="section-header">
-                <h2 class="section-title">📅 Calendario Editorial</h2>
-                <button class="add-btn" onclick="openModal('post')">+ Nuevo Post</button>
-            </div>
-            <div class="cards-grid" id="calendario-grid"></div>
-        </section>
-
+        <!-- TAREAS -->
         <section id="tareas" class="section">
-            <div class="section-header">
-                <h2 class="section-title">✅ Tareas de la Semana</h2>
-                <button class="add-btn" onclick="openModal('tarea')">+ Nueva Tarea</button>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+                <h3>Tareas Pendientes</h3>
+                <button class="btn btn-primary" onclick="openModal('tarea')">+ Tarea</button>
             </div>
-            <div class="cards-grid" id="tareas-grid"></div>
+            <div class="grid" id="tareas-grid"></div>
         </section>
 
+        <!-- INVENTARIO -->
         <section id="inventario" class="section">
-            <div class="section-header">
-                <h2 class="section-title">📦 Inventario Café Verde</h2>
-                <button class="add-btn" onclick="openModal('inventario')">+ Agregar</button>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+                <h3>Control de Inventario</h3>
+                <button class="btn btn-primary" onclick="openModal('inventario')">+ Ajuste</button>
             </div>
-            <div class="cards-grid" id="inventario-grid"></div>
+            <div class="grid" id="inventario-grid"></div>
+        </section>
+
+        <!-- CAJA DIARIA -->
+        <section id="caja" class="section">
+            <div style="display:grid;grid-template-columns:1fr 2fr;gap:1.5rem">
+                <div>
+                    <button class="btn btn-primary" onclick="openModal('venta_local')"
+                        style="width:100%;margin-bottom:0.5rem">☕ Venta Rápida</button>
+                    <button class="btn btn-secondary" onclick="openModal('cierre_caja')"
+                        style="width:100%;margin-bottom:1rem">🔒 Cierre Caja</button>
+                    <h4 style="margin-top:1rem">Cierres Anteriores</h4>
+                    <div id="cierres-lista"></div>
+                </div>
+                <div>
+                    <div id="caja-resumen" class="stats-grid" style="grid-template-columns:1fr 1fr;gap:0.5rem"></div>
+                    <h4 style="margin-top:1rem">Ventas del Día</h4>
+                    <div id="ventas-locales-lista" style="margin-top:0.5rem;height:400px;overflow-y:auto"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUSCRIPTORES (ADMIN) -->
+        <section id="suscriptores" class="section">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+                <div>
+                    <h3>Gestión de Suscriptores</h3>
+                    <button class="btn btn-primary" onclick="openModal('create_user')"
+                        style="margin-top:0.5rem;font-size:0.8rem">+ Nuevo Usuario</button>
+                </div>
+                <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);gap:1rem;width:60%">
+                    <div class="stat-card">
+                        <div class="stat-value" id="sub-total">0</div>
+                        <div class="stat-label">Total Usuarios</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="sub-pro" style="color:var(--accent)">0</div>
+                        <div class="stat-label">Plan PRO</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="sub-mrr" style="color:var(--success)">$0</div>
+                        <div class="stat-label">MRR Est.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <table style="width:100%;border-collapse:collapse">
+                    <thead>
+                        <tr style="text-align:left;border-bottom:1px solid var(--border);color:var(--text-secondary)">
+                            <th style="padding:1rem">Usuario</th>
+                            <th style="padding:1rem">Plan</th>
+                            <th style="padding:1rem">Estado</th>
+                            <th style="padding:1rem">Expira</th>
+                            <th style="padding:1rem">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="subscribers-table">
+                        <!-- JS injected -->
+                    </tbody>
+                </table>
+            </div>
         </section>
     </main>
 
+    <!-- PROFILE MODAL -->
+    <div class="modal-overlay" id="profile-overlay">
+        <div class="modal" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3 class="modal-title">Mi Cuenta</h3>
+                <button class="modal-close" onclick="closeProfile()">&times;</button>
+            </div>
+            <div class="modal-body" style="text-align:center">
+                <div style="font-size:3rem;margin-bottom:1rem">👤</div>
+                <h3 id="profile-user">Usuario</h3>
+                <div class="badge-plan" id="profile-plan">Plan Gratuito</div>
+                <p style="margin-top:1rem;color:var(--text-secondary)" id="profile-expires"></p>
+
+                <hr style="margin: 1.5rem 0; border-color:var(--border)">
+
+                <button class="btn btn-primary" id="btn-upgrade" onclick="openUpgrade()"
+                    style="width:100%; display:none">💎 Mejorar a PRO</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- UPGRADE MODAL -->
+    <div class="modal-overlay" id="upgrade-overlay" style="z-index: 2001;">
+        <div class="modal" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3 class="modal-title">💎 Candela CRM PRO</h3>
+                <button class="modal-close" onclick="closeUpgrade()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="background:var(--bg-secondary);padding:1rem;border-radius:8px;margin-bottom:1rem">
+                    <h4 style="margin-bottom:0.5rem">Plan PRO incluye:</h4>
+                    <ul style="padding-left:1.2rem;line-height:1.6">
+                        <li>✅ Usuarios ilimitados</li>
+                        <li>✅ Agentes AI Avanzados</li>
+                        <li>✅ Exportación a Excel/PDF</li>
+                        <li>✅ Soporte Prioritario</li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Método de Pago (Simulado)</label>
+                    <select class="form-select">
+                        <option>💳 Tarjeta de Crédito (**** 4242)</option>
+                    </select>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem">
+                    <div style="font-size:1.25rem;font-weight:bold">$13 USD <span
+                            style="font-size:0.8rem;font-weight:normal">/mes</span></div>
+                    <button class="btn btn-primary" onclick="processUpgrade()">Pagar y Activar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXISTING MODALS -->
     <div class="modal-overlay" id="modal-overlay">
         <div class="modal">
             <div class="modal-header">
@@ -182,10 +263,34 @@
         </div>
     </div>
 
+    <!-- LOGIN MODAL (Non-closable) -->
+    <div class="modal-overlay" id="login-overlay" style="z-index: 2000;">
+        <div class="modal" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3 class="modal-title">🔐 Iniciar Sesión</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Usuario</label>
+                    <input type="text" class="form-input" id="login-user" placeholder="admin">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Contraseña</label>
+                    <input type="password" class="form-input" id="login-pass" placeholder="******">
+                </div>
+                <div id="login-error" style="color:var(--danger);font-size:0.85rem;margin-top:0.5rem;display:none">Error
+                    de credenciales</div>
+            </div>
+            <div class="modal-footer" style="justify-content: flex-end;">
+                <button class="btn btn-primary" id="btn-login" onclick="login()">Entrar</button>
+            </div>
+        </div>
+    </div>
+
     <div class="toast" id="toast">✓ Guardado correctamente</div>
 
     <link rel="stylesheet" href="styles.css">
-    <script src="app.js"></script>
+    <script src="app.js?v=debug_1"></script>
 </body>
 
 </html>
