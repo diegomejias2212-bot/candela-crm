@@ -1,14 +1,24 @@
 const http = require('http');
 
-const hostname = '0.0.0.0';
+// Log environment for debugging
+console.log('--- SERVER STARTING ---');
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('PORT env var:', process.env.PORT);
+
 const port = process.env.PORT || 3000;
 
 const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Candela CRM: Hello World - Si ves esto, el servidor funciona.');
+    console.log(`[REQUEST] ${req.method} ${req.url}`);
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end(`Candela CRM: Online on port ${port}`);
 });
 
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+// Listen on all interfaces (no host argument) to avoid IPv4/6 issues
+server.listen(port, () => {
+    console.log(`--- SERVER LISTENING ON PORT ${port} ---`);
+});
+
+// Prevent immediate exit if something throws
+process.on('uncaughtException', (err) => {
+    console.error('UNCAUGHT EXCEPTION:', err);
 });
