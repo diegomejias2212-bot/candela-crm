@@ -128,6 +128,21 @@ const server = http.createServer(async (req, res) => {
             }
         }
 
+        // 2.5 AUTH - ME (Session Check)
+        if (req.method === 'GET' && req.url === '/api/me') {
+            const authHeader = req.headers.authorization;
+            if (!authHeader || !authHeader.startsWith('Bearer ')) {
+                return sendJSON(res, 401, { error: 'No token' });
+            }
+            const token = authHeader.split(' ')[1];
+            try {
+                const decoded = jwt.verify(token, SECRET_KEY);
+                return sendJSON(res, 200, decoded);
+            } catch (e) {
+                return sendJSON(res, 401, { error: 'Invalid token' });
+            }
+        }
+
         // 4. DATA - GET
         if (req.method === 'GET' && req.url === '/api/data') {
             // Extract user from token manually for simplicity
