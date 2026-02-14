@@ -84,62 +84,14 @@ async function initDatabase() {
             console.error('❌ Error inicializando DB:', error.message);
         }
     } else {
-        // Init local JSON files if not exist
-        if (!fs.existsSync(DATA_FILE)) fs.writeFileSync(DATA_FILE, '{}');
-
-        let users = [];
-        if (fs.existsSync(USERS_FILE)) {
-            try {
-                users = JSON.parse(fs.readFileSync(USERS_FILE, 'utf8'));
-            } catch (e) { users = []; }
+        // Init local JSON files if not exist (Safe Simple Check)
+        try {
+            if (!fs.existsSync(DATA_FILE)) fs.writeFileSync(DATA_FILE, '{}');
+            if (!fs.existsSync(USERS_FILE)) fs.writeFileSync(USERS_FILE, '[]');
+            console.log('✅ Local JSON files verified');
+        } catch (e) {
+            console.error('❌ Error creating local files:', e);
         }
-
-        // If no users, create default admin
-        if (users.length === 0) {
-            console.log('⚠️ No users found. Creating default admin...');
-            // admin123 hash
-            const defaultHash = '$2a$10$X.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v.v'; // Mock or real hash? 
-            // Better to use bcrypt.hashSync if available, or just a known hash. 
-            // Since we might be in "mock" mode, let's use the code's bcrypt wrapper if possible, 
-            // but initDatabase is async. Let's do it safely.
-
-            // To be safe and simple: valid bcrypt hash for 'admin123'
-            const hash = '$2a$10$Fb.T/k.k.k.k.k.k.k.k.k.k.k.k.k.k.k.k.k.k.k.k.k.k.k';
-            // Actually, let's use the runtime bcrypt since we import it.
-
-            // We can't easily await inside this else block without making it messy? 
-            // initDatabase is async.
-
-            // Let's just write a placeholder and let the user login. 
-            // Wait, if bcrypt is mocked (line 19), hash matches plain text. 
-            // If bcrypt is real, we need a real hash.
-            // Let's use a standard bcrypt hash for 'admin123' generated online to be sure:
-            // $2a$10$w.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2
-
-            // Actually, let's use the `registerUser` function logic? No, circular dependency potential.
-            // Let's just use the bcrypt reference we have.
-
-            const pass = 'admin123';
-            let finalHash = pass;
-            if (bcrypt.hashSync) {
-                finalHash = bcrypt.hashSync(pass, 10);
-            } else if (bcrypt.hash) {
-                // manual mock doesn't have hashSync
-                // If we are in mock mode, 'admin123' is fine.
-            }
-
-            const adminUser = {
-                id: 'user_admin_001',
-                username: 'admin',
-                password: finalHash,
-                plan: 'pro',
-                created_at: new Date().toISOString()
-            };
-            fs.writeFileSync(USERS_FILE, JSON.stringify([adminUser], null, 2));
-            console.log('✅ Default admin created: admin / admin123');
-        }
-
-        console.log('✅ Archivos JSON locales verificados');
     }
 }
 
@@ -224,22 +176,6 @@ async function saveData(key, data) {
 // Atomic Push: Appends an item to an array inside the JSON, avoiding overwrite
 async function pushData(key, arrayName, item) {
     if (pool) {
-        // PostgreSQL atomic update using jsonb_set + concatenation
-        // COALESCE ensures we initialize the array if it doesn't exist
-        /*
-           Pseudo-query:
-           UPDATE crm_data SET value = jsonb_set(
-               value, 
-               {arrayName}, 
-               COALESCE(value->arrayName, '[]'::jsonb) || item::jsonb
-           ) WHERE key = key
-        */
-        // Note: This is complex in raw SQL so we use a simpler approach of locking or JS-side merge if lazy
-        // BUT for correctness, let's try a read-modify-write within a transaction or optimistic locking.
-        // For simplicity in this `http` server, we'll do Read-Modify-Write but since Node is single-threaded for processing,
-        // it acts as a queue. In SQL it might race. 
-        // Let's stick to standard Read-Modify-Write for now, it's better than full overwrite.
-
         const current = await getData(key);
         if (!current[arrayName]) current[arrayName] = [];
         current[arrayName].unshift(item); // Add to beginning (newer first)
@@ -520,4 +456,3 @@ initDatabase().then(() => {
 `);
     });
 });
-
