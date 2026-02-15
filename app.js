@@ -58,6 +58,8 @@ async function checkAuth() {
                 // Show Admin Tab if admin
                 if (user.username === 'admin') {
                     document.getElementById('nav-suscriptores').style.display = 'block';
+                    // Auto-load subscribers
+                    setTimeout(() => renderSuscriptores(), 100);
                 }
 
                 loadData();
