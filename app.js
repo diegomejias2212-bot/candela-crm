@@ -1456,11 +1456,39 @@ function contactCliente(nombre) { window.open(`https://wa.me/?text=Hola ${encode
 
 function marcarPagado(id) {
     const venta = data.ventas.find(v => v.id === id);
-    if (venta) {
-        venta.pagado = true;
-        saveData();
-        renderAll();
-        showToast('✅ Venta marcada como pagada');
+    venta.pagado = true;
+    // ... (sync)
+}
+}
+
+async function renderSuscriptores() {
+    console.log('👥 Rendering Suscriptores...');
+    const container = document.getElementById('suscriptores-list');
+    if (!container) return;
+
+    try {
+        const res = await fetch('/api/users', {
+            headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+        });
+        if (res.ok) {
+            const users = await res.json();
+            container.innerHTML = users.map(u => `
+                <div class="card" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">
+                    <div>
+                        <strong>${u.username}</strong>
+                        <span class="badge ${u.plan === 'pro' ? 'badge-success' : 'badge-warning'}">${u.plan}</span>
+                        <div style="font-size:0.8rem;color:var(--text-secondary)">ID: ${u.id} | Creado: ${new Date(u.created_at).toLocaleDateString()}</div>
+                    </div>
+                </div>
+            `).join('');
+        } else {
+            console.error('Error fetching users:', await res.text());
+        }
+    } catch (e) { console.error('Error rendering subs:', e); }
+}
+saveData();
+renderAll();
+showToast('✅ Venta marcada como pagada');
     }
 }
 
