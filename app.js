@@ -262,33 +262,33 @@ function showToast() {
 }
 
 function renderAll() {
-    // ... items ...
+    console.log('🎨 renderAll executing...');
+
+    // Admin check
     if (currentUser && currentUser.username === 'admin') {
         renderSuscriptores();
     }
-}
-console.log('🎨 renderAll executing...');
-try {
-    renderStats();
-    renderMetasProgress();
-    renderMetasOverview();
-    renderEstadoResultados();
-    renderVentasResumen();
-    renderVentas();
-    renderFlujo();
-    renderAgentes();
-    renderPlanes();
-    renderClientes();
-    renderCalendario();
-    renderTareas();
-    renderInventario();
-    renderUrgentTasks();
-    renderCajaDiaria();
-    console.log('✅ renderAll completed successfully');
-} catch (e) {
-    console.error('❌ Error inside renderAll:', e);
-    alert('Error Renderizando: ' + e.message);
-}
+    try {
+        renderStats();
+        renderMetasProgress();
+        renderMetasOverview();
+        renderEstadoResultados();
+        renderVentasResumen();
+        renderVentas();
+        renderFlujo();
+        renderAgentes();
+        renderPlanes();
+        renderClientes();
+        renderCalendario();
+        renderTareas();
+        renderInventario();
+        renderUrgentTasks();
+        renderCajaDiaria();
+        console.log('✅ renderAll completed successfully');
+    } catch (e) {
+        console.error('❌ Error inside renderAll:', e);
+        alert('Error Renderizando: ' + e.message);
+    }
 }
 
 function setupVentasFilters() {
@@ -1055,7 +1055,30 @@ function closeModal() {
 
 function renderModalBody(type, id) {
     let html = '';
-    if (type === 'venta') {
+    if (type === 'create_user') {
+        html = `
+            <div class="form-group">
+                <label class="form-label">Nombre de Usuario</label>
+                <input type="text" id="new-user-name" class="form-input" placeholder="ej. demo">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Contraseña</label>
+                <input type="text" id="new-user-pass" class="form-input" placeholder="ej. demo123">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Plan</label>
+                <select id="new-user-plan" class="form-select">
+                    <option value="free">Gratuito (Básico)</option>
+                    <option value="pro">PRO ($13/mes)</option>
+                </select>
+            </div>
+        `;
+        // Bind save button
+        setTimeout(() => {
+            const btn = document.getElementById('modal-save');
+            if (btn) btn.onclick = createUser;
+        }, 100);
+    } else if (type === 'venta') {
         const origenes = ['Brasil', 'Colombia', 'Peru', 'Bolivia', 'Costa Rica', 'Honduras', 'Etiopia', 'Robusta', 'Blend', 'Mix'];
         const formatos = ['1kg Grano', '1kg Molido', '500g Grano', '500g Molido', '250g Grano', '250g Molido', 'Granel'];
 
