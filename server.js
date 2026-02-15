@@ -110,22 +110,49 @@ const server = http.createServer(async (req, res) => {
 
         // 3. AUTH - REGISTER (Admin Only)
         if (req.method === 'POST' && req.url === '/api/register') {
-            // Check auth header logic here if stricter security needed
-            const { username, password } = await getBody(req);
+            const authHeader = req.headers.authorization;
+            if (!authHeader || !authHeader.startsWith('Bearer ')) return sendJSON(res, 401, { error: 'No autorizado' });
+
+            try {
+                const token = authHeader.split(' ')[1];
+                const decoded = jwt.verify(token, SECRET_KEY);
+                if (decoded.username !== 'admin') return sendJSON(res, 403, { error: 'Acceso denegado: Solo admin' });
+            } catch (e) { return sendJSON(res, 401, { error: 'Token inválido' }); }
+
+            const { username, password, plan } = await getBody(req);
             const hashed = await bcrypt.hash(password, 10);
+            const userPlan = plan || 'free';
 
             if (pool) {
                 try {
                     const r = await pool.query(
                         'INSERT INTO users (username, password, plan) VALUES ($1, $2, $3) RETURNING id',
-                        [username, hashed, 'free']
+                        [username, hashed, userPlan]
                     );
                     return sendJSON(res, 201, { id: r.rows[0].id, username });
                 } catch (e) { return sendJSON(res, 400, { error: 'Usuario ya existe' }); }
             } else {
-                // Local logic...
-                return sendJSON(res, 501, { error: 'Not implemented locally fully' });
+                return sendJSON(res, 501, { error: 'DB required' });
             }
+        }
+
+        // 3.5 AUTH - LIST USERS (Admin Only)
+        if (req.method === 'GET' && req.url === '/api/users') {
+            const authHeader = req.headers.authorization;
+            if (!authHeader || !authHeader.startsWith('Bearer ')) return sendJSON(res, 401, { error: 'No autorizado' });
+
+            try {
+                const token = authHeader.split(' ')[1];
+                const decoded = jwt.verify(token, SECRET_KEY);
+                if (decoded.username !== 'admin') return sendJSON(res, 403, { error: 'Acceso denegado' });
+
+                if (pool) {
+                    const r = await pool.query('SELECT id, username, plan, created_at FROM users ORDER BY id ASC');
+                    return sendJSON(res, 200, r.rows);
+                } else {
+                    return sendJSON(res, 200, []);
+                }
+            } catch (e) { return sendJSON(res, 401, { error: 'Token inválido' }); }
         }
 
         // 2.5 AUTH - ME (Session Check)
