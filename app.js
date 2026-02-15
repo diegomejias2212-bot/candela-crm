@@ -1653,5 +1653,13 @@ document.querySelectorAll('.nav-btn').forEach(btn => {
     });
 });
 
+// Export functions to global scope for HTML onclick access
+window.login = login;
+window.register = register;
+window.renderSuscriptores = renderSuscriptores;
+window.openModal = openModal;
+window.closeModal = closeModal;
+// ... other functions are already global in non-module script, but this ensures it.
+
 // Init
 checkAuth();
