@@ -265,20 +265,19 @@ async function initDatabase() {
     if (pool) {
         try {
             console.log('🔄 Sincronizando esquema de base de datos...');
-            await pool.query(`
-                CREATE TABLE IF NOT EXISTS users (
-                    id SERIAL PRIMARY KEY,
-                    username VARCHAR(50) UNIQUE NOT NULL,
-                    password VARCHAR(255) NOT NULL,
-                    plan VARCHAR(20) DEFAULT 'free',
-                    plan_expires TIMESTAMP,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                );
-                CREATE TABLE IF NOT EXISTS crm_data (
-                    key VARCHAR(255) PRIMARY KEY,
-                    value JSONB NOT NULL,
-                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                );
+                CREATE TABLE IF NOT EXISTS users(
+                id SERIAL PRIMARY KEY,
+                username VARCHAR(50) UNIQUE NOT NULL,
+                password VARCHAR(255) NOT NULL,
+                plan VARCHAR(20) DEFAULT 'free',
+                plan_expires TIMESTAMP,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+                CREATE TABLE IF NOT EXISTS user_crm_data(
+                user_id INTEGER PRIMARY KEY REFERENCES users(id),
+                data JSONB,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
             `);
 
             // 3. Seed Admin
@@ -299,6 +298,6 @@ async function initDatabase() {
 }
 
 server.listen(PORT, '0.0.0.0', () => {
-    console.log(`🚀 Server listening on ${PORT}`);
+    console.log(`🚀 Server listening on ${ PORT } `);
     initDatabase(); // Background init
 });
