@@ -1,0 +1,33 @@
+[
+  {
+    "id": 1771079898988,
+    "username": "test_1771079898851",
+    "password": "$2b$10$tNQgwO6ekyO43igvX8hOIuyWpH4gTXE5CTKvnNnKcXhhIYR7nqKi2"
+  },
+  {
+    "id": 1771079910243,
+    "username": "test_1771079910138",
+    "password": "$2b$10$0ltzp5LGEyArT6uuJC7kU.aGTye3VjzeAhkAtPEDxnJNQab4yFNtK"
+  },
+  {
+    "id": 1771080819132,
+    "username": "saas_test_1771080819005",
+    "password": "$2b$10$1y1j.i0P39hvbT2R2vnnSuqfJ29cOw4THWVx2DkBMvncYkHbATWCe",
+    "plan": "pro",
+    "plan_expires": "2026-03-16T14:53:39.235Z"
+  },
+  {
+    "id": 1771080895256,
+    "username": "saas_test_1771080895122",
+    "password": "$2b$10$zuCc63.K44Go.kNv2dTc/ev.sYi5Cc0sVbySeeuuOUjQATjw0A6d6",
+    "plan": "pro",
+    "plan_expires": "2026-03-16T14:54:55.358Z"
+  },
+  {
+    "id": 1771081369399,
+    "username": "admin",
+    "password": "$2b$10$4qdTHimi.UBDXjUvsTgIk.zBUP9cfFBpyL/tqLFb7BuihAHAHjxUm",
+    "plan": "pro",
+    "plan_expires": "2099-12-31T23:59:59.000Z"
+  }
+]

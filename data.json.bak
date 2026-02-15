@@ -1,0 +1,5654 @@
+{
+  "config": {
+    "empresaNombre": "Candela Coffee Roasters",
+    "mesInicio": "2026-02",
+    "timeline": 6
+  },
+  "metas": {
+    "b2b": {
+      "actual": 150,
+      "meta": 300,
+      "unidad": "kg/mes"
+    },
+    "b2p": {
+      "actual": 200000,
+      "meta": 1000000,
+      "unidad": "CLP/mes"
+    }
+  },
+  "ventas": [
+    {
+      "cliente": "Casa Alonssa",
+      "tipo": "b2b",
+      "monto": 271915,
+      "kg": 10,
+      "origen": "Brasil",
+      "fecha": "2026-02-10",
+      "estado": "proceso",
+      "facturado": false,
+      "pagado": false,
+      "notas": "",
+      "productos": [
+        {
+          "origen": "Peru",
+          "formato": "1kg Grano",
+          "kg": 5,
+          "precio": 22900
+        },
+        {
+          "origen": "Brasil",
+          "formato": "1kg Grano",
+          "kg": 5,
+          "precio": 22800
+        }
+      ],
+      "id": 1770746019583
+    },
+    {
+      "cliente": "Taller 9215",
+      "tipo": "b2b",
+      "monto": 222768,
+      "kg": 8,
+      "origen": "Brasil",
+      "fecha": "2026-02-10",
+      "estado": "proceso",
+      "facturado": false,
+      "pagado": false,
+      "notas": "18:00 Retira 11 feb ",
+      "productos": [
+        {
+          "origen": "Colombia",
+          "formato": "1kg Grano",
+          "kg": 4,
+          "precio": 23600
+        },
+        {
+          "origen": "Brasil",
+          "formato": "1kg Grano",
+          "kg": 4,
+          "precio": 23200
+        }
+      ],
+      "id": 1770745824448
+    },
+    {
+      "cliente": "Clock",
+      "tipo": "b2b",
+      "monto": 271320,
+      "kg": 10,
+      "origen": "Bolivia",
+      "fecha": "2026-02-10",
+      "estado": "proceso",
+      "facturado": true,
+      "pagado": true,
+      "notas": "",
+      "productos": [
+        {
+          "origen": "Peru",
+          "formato": "1kg Grano",
+          "kg": 10,
+          "precio": 22800
+        }
+      ],
+      "id": 1770745703280
+    },
+    {
+      "cliente": "",
+      "tipo": "b2b",
+      "monto": 0,
+      "kg": 0,
+      "origen": "Brasil",
+      "fecha": "2026-02-10",
+      "estado": "iniciada",
+      "facturado": false,
+      "pagado": false,
+      "notas": "",
+      "productos": [],
+      "id": 1770734956820
+    },
+    {
+      "id": 101,
+      "fecha": "2025-05-03",
+      "cliente": "Isabellos",
+      "tipo": "b2b",
+      "kg": 1,
+      "monto": 25000,
+      "origen": "Costa Rica",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 102,
+      "fecha": "2025-05-03",
+      "cliente": "Isabellos",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 103,
+      "fecha": "2025-05-06",
+      "cliente": "Rivoz",
+      "tipo": "b2b",
+      "kg": 8,
+      "monto": 166400,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 104,
+      "fecha": "2025-05-05",
+      "cliente": "Mahuida",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 208000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 105,
+      "fecha": "2025-05-05",
+      "cliente": "Kitea",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 106,
+      "fecha": "2025-05-07",
+      "cliente": "Farol",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 107,
+      "fecha": "2025-05-07",
+      "cliente": "Cafe Rosas",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 108,
+      "fecha": "2025-05-12",
+      "cliente": "Cafe Rosas",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 109,
+      "fecha": "2025-05-12",
+      "cliente": "Farol",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 110,
+      "fecha": "2025-05-13",
+      "cliente": "Kitea Rancagua",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 111,
+      "fecha": "2025-05-13",
+      "cliente": "Mahuida",
+      "tipo": "b2b",
+      "kg": 11,
+      "monto": 228800,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 112,
+      "fecha": "2025-05-17",
+      "cliente": "Taurus",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 96500,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 113,
+      "fecha": "2025-05-17",
+      "cliente": "Turquesa",
+      "tipo": "b2b",
+      "kg": 3,
+      "monto": 65400,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 114,
+      "fecha": "2025-05-19",
+      "cliente": "Casa Alonssa",
+      "tipo": "b2b",
+      "kg": 15,
+      "monto": 312000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 115,
+      "fecha": "2025-05-19",
+      "cliente": "Cafe Rosas",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 116,
+      "fecha": "2025-05-19",
+      "cliente": "Kitea Chillan",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 117,
+      "fecha": "2025-05-19",
+      "cliente": "Dynos El Roble",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 96500,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 118,
+      "fecha": "2025-05-26",
+      "cliente": "Farol",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 109000,
+      "origen": "Honduras",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 119,
+      "fecha": "2025-05-30",
+      "cliente": "Dynos El Roble",
+      "tipo": "b2b",
+      "kg": 4,
+      "monto": 77200,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 120,
+      "fecha": "2025-05-30",
+      "cliente": "Onces",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 68000,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 121,
+      "fecha": "2025-06-02",
+      "cliente": "Clock",
+      "tipo": "b2b",
+      "kg": 20,
+      "monto": 436000,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 122,
+      "fecha": "2025-06-02",
+      "cliente": "Casa Alonssa",
+      "tipo": "b2b",
+      "kg": 15,
+      "monto": 327000,
+      "origen": "Honduras",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 123,
+      "fecha": "2025-06-04",
+      "cliente": "Mahuida",
+      "tipo": "b2b",
+      "kg": 11,
+      "monto": 239800,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 124,
+      "fecha": "2025-06-05",
+      "cliente": "Kitea Chillan",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 125,
+      "fecha": "2025-06-09",
+      "cliente": "Cafe Rosas",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 126,
+      "fecha": "2025-06-11",
+      "cliente": "Farol",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 109000,
+      "origen": "Honduras",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 127,
+      "fecha": "2025-06-11",
+      "cliente": "Aurelia",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 109000,
+      "origen": "Honduras",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 128,
+      "fecha": "2025-06-12",
+      "cliente": "Taurus",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Honduras",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 129,
+      "fecha": "2025-06-12",
+      "cliente": "Dynos",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Honduras",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 130,
+      "fecha": "2025-06-18",
+      "cliente": "Kitea Rancagua",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 109000,
+      "origen": "Honduras",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 131,
+      "fecha": "2025-06-19",
+      "cliente": "Mahuida",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 218000,
+      "origen": "Honduras",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 132,
+      "fecha": "2025-06-20",
+      "cliente": "Catedral",
+      "tipo": "b2b",
+      "kg": 3,
+      "monto": 65400,
+      "origen": "Honduras",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 133,
+      "fecha": "2025-06-24",
+      "cliente": "Casa Alonssa",
+      "tipo": "b2b",
+      "kg": 15,
+      "monto": 327000,
+      "origen": "Honduras",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 134,
+      "fecha": "2025-06-26",
+      "cliente": "Clocks",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 218000,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 135,
+      "fecha": "2025-06-26",
+      "cliente": "Kitea Chillan",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 109000,
+      "origen": "Honduras",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 136,
+      "fecha": "2025-06-27",
+      "cliente": "Farol",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 109000,
+      "origen": "Honduras",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 137,
+      "fecha": "2025-07-02",
+      "cliente": "Cafe Rosas",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 138,
+      "fecha": "2025-07-03",
+      "cliente": "Mahuida",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 218000,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 139,
+      "fecha": "2025-07-06",
+      "cliente": "Casa Alonssa",
+      "tipo": "b2b",
+      "kg": 15,
+      "monto": 312000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 140,
+      "fecha": "2025-07-14",
+      "cliente": "Kitea Rancagua",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 141,
+      "fecha": "2025-07-14",
+      "cliente": "Dynos Mall",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 142,
+      "fecha": "2025-07-14",
+      "cliente": "Mahuida",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 218000,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 143,
+      "fecha": "2025-07-14",
+      "cliente": "Tu Delicia",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 144,
+      "fecha": "2025-07-14",
+      "cliente": "Catedral",
+      "tipo": "b2b",
+      "kg": 3,
+      "monto": 62400,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 145,
+      "fecha": "2025-07-21",
+      "cliente": "Turquesa",
+      "tipo": "b2b",
+      "kg": 3,
+      "monto": 65400,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 146,
+      "fecha": "2025-07-21",
+      "cliente": "Farol",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 147,
+      "fecha": "2025-07-21",
+      "cliente": "Cafe Rosas",
+      "tipo": "b2b",
+      "kg": 7,
+      "monto": 145600,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 148,
+      "fecha": "2025-07-23",
+      "cliente": "Kitea Chillan",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 149,
+      "fecha": "2025-07-28",
+      "cliente": "Mahuida",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 218000,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 150,
+      "fecha": "2025-07-28",
+      "cliente": "Casa Alonssa",
+      "tipo": "b2b",
+      "kg": 15,
+      "monto": 312000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 151,
+      "fecha": "2025-07-28",
+      "cliente": "Velarys",
+      "tipo": "b2b",
+      "kg": 20,
+      "monto": 436000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 152,
+      "fecha": "2025-07-31",
+      "cliente": "Clocks",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 218000,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 153,
+      "fecha": "2025-07-31",
+      "cliente": "Taurus",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 97500,
+      "origen": "Blend",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 200,
+      "fecha": "2025-08-05",
+      "cliente": "Cafe Rosas",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 201,
+      "fecha": "2025-08-11",
+      "cliente": "Kitea Chillan",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 202,
+      "fecha": "2025-08-11",
+      "cliente": "Mahuida",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 218000,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 203,
+      "fecha": "2025-08-12",
+      "cliente": "Farol",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 109000,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 204,
+      "fecha": "2025-08-14",
+      "cliente": "Catedral",
+      "tipo": "b2b",
+      "kg": 2,
+      "monto": 41600,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 205,
+      "fecha": "2025-08-16",
+      "cliente": "Carlos Cafe",
+      "tipo": "b2b",
+      "kg": 2,
+      "monto": 43600,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 206,
+      "fecha": "2025-08-16",
+      "cliente": "Turquesa Cafe",
+      "tipo": "b2b",
+      "kg": 3,
+      "monto": 65400,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 207,
+      "fecha": "2025-08-19",
+      "cliente": "Dynos Roble",
+      "tipo": "b2b",
+      "kg": 3,
+      "monto": 62400,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 208,
+      "fecha": "2025-08-19",
+      "cliente": "Casa Alonssa",
+      "tipo": "b2b",
+      "kg": 15,
+      "monto": 312000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 209,
+      "fecha": "2025-08-22",
+      "cliente": "Dynos El Roble",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 210,
+      "fecha": "2025-08-22",
+      "cliente": "Nutre Meals",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 211,
+      "fecha": "2025-08-26",
+      "cliente": "Cafe Rosas",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 212,
+      "fecha": "2025-08-26",
+      "cliente": "Velarys",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 218000,
+      "origen": "Peru",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 213,
+      "fecha": "2025-08-26",
+      "cliente": "Catedral",
+      "tipo": "b2b",
+      "kg": 3,
+      "monto": 62400,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 214,
+      "fecha": "2025-08-29",
+      "cliente": "Kitea",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 109000,
+      "origen": "Peru",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 215,
+      "fecha": "2025-08-30",
+      "cliente": "Taurus",
+      "tipo": "b2b",
+      "kg": 7,
+      "monto": 145600,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 216,
+      "fecha": "2025-08-30",
+      "cliente": "Farol",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 109000,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 217,
+      "fecha": "2025-08-30",
+      "cliente": "Mahuida",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 109000,
+      "origen": "Peru",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 220,
+      "fecha": "2025-09-02",
+      "cliente": "Mahuida",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 208000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 221,
+      "fecha": "2025-09-02",
+      "cliente": "Carlos Cafe",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 222,
+      "fecha": "2025-09-10",
+      "cliente": "Mahuida",
+      "tipo": "b2b",
+      "kg": 6,
+      "monto": 130800,
+      "origen": "Peru",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 223,
+      "fecha": "2025-09-10",
+      "cliente": "Casa Alonssa",
+      "tipo": "b2b",
+      "kg": 15,
+      "monto": 327000,
+      "origen": "Peru",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 224,
+      "fecha": "2025-09-10",
+      "cliente": "Velarys",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 208000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 225,
+      "fecha": "2025-09-15",
+      "cliente": "Catedral",
+      "tipo": "b2b",
+      "kg": 4,
+      "monto": 83200,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 226,
+      "fecha": "2025-09-16",
+      "cliente": "Nevados Cafe",
+      "tipo": "b2b",
+      "kg": 20,
+      "monto": 452000,
+      "origen": "Peru",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 227,
+      "fecha": "2025-09-16",
+      "cliente": "Cafe Rosas",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 228,
+      "fecha": "2025-09-16",
+      "cliente": "Mahuida",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 218000,
+      "origen": "Peru",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 229,
+      "fecha": "2025-09-16",
+      "cliente": "Kitea Rancagua",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 230,
+      "fecha": "2025-09-22",
+      "cliente": "Tu Delicia",
+      "tipo": "b2b",
+      "kg": 4,
+      "monto": 85200,
+      "origen": "Brasil/Peru",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 231,
+      "fecha": "2025-09-22",
+      "cliente": "Kitea Chillan",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 232,
+      "fecha": "2025-09-26",
+      "cliente": "Onces",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 109000,
+      "origen": "Peru",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 233,
+      "fecha": "2025-09-26",
+      "cliente": "Sattva Chile",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 120000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 234,
+      "fecha": "2025-09-26",
+      "cliente": "Velarys",
+      "tipo": "b2b",
+      "kg": 11,
+      "monto": 228800,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": false,
+      "pagado": true
+    },
+    {
+      "id": 235,
+      "fecha": "2025-09-26",
+      "cliente": "Farol",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 109000,
+      "origen": "Peru",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 236,
+      "fecha": "2025-09-26",
+      "cliente": "Casa Alonssa",
+      "tipo": "b2b",
+      "kg": 15,
+      "monto": 312000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 237,
+      "fecha": "2025-09-29",
+      "cliente": "Velarys",
+      "tipo": "b2b",
+      "kg": 11,
+      "monto": 228800,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 238,
+      "fecha": "2025-09-29",
+      "cliente": "Turquesa",
+      "tipo": "b2b",
+      "kg": 3,
+      "monto": 65400,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 239,
+      "fecha": "2025-09-22",
+      "cliente": "Dynos Mall",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 98500,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 240,
+      "fecha": "2025-10-03",
+      "cliente": "Carlos Cafe",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 241,
+      "fecha": "2025-10-07",
+      "cliente": "Cafe Rosas",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 242,
+      "fecha": "2025-10-08",
+      "cliente": "Clock",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 223000,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": false,
+      "pagado": true
+    },
+    {
+      "id": 243,
+      "fecha": "2025-10-08",
+      "cliente": "Kitea Chillan",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 244,
+      "fecha": "2025-10-11",
+      "cliente": "Velarys",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 218000,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 245,
+      "fecha": "2025-10-15",
+      "cliente": "Farol",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 109000,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 246,
+      "fecha": "2025-10-16",
+      "cliente": "Clock",
+      "tipo": "b2b",
+      "kg": 16,
+      "monto": 100800,
+      "origen": "Mix",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 247,
+      "fecha": "2025-10-20",
+      "cliente": "Taurus",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 99000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 248,
+      "fecha": "2025-10-20",
+      "cliente": "Cafe Rosas",
+      "tipo": "b2b",
+      "kg": 6,
+      "monto": 124800,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 249,
+      "fecha": "2025-10-21",
+      "cliente": "Catedral",
+      "tipo": "b2b",
+      "kg": 3,
+      "monto": 62400,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 250,
+      "fecha": "2025-10-20",
+      "cliente": "Casa Alonssa",
+      "tipo": "b2b",
+      "kg": 15,
+      "monto": 312000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 251,
+      "fecha": "2025-10-23",
+      "cliente": "Kitea Rancagua",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 252,
+      "fecha": "2025-10-24",
+      "cliente": "Agape Cafeteria",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 253,
+      "fecha": "2025-10-27",
+      "cliente": "Velarys",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 218000,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 254,
+      "fecha": "2025-10-27",
+      "cliente": "Dynos Roble",
+      "tipo": "b2b",
+      "kg": 3,
+      "monto": 59400,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 255,
+      "fecha": "2025-10-27",
+      "cliente": "Agape Cafe",
+      "tipo": "b2b",
+      "kg": 40,
+      "monto": 260000,
+      "origen": "Mix",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 256,
+      "fecha": "2025-10-29",
+      "cliente": "Onces",
+      "tipo": "b2b",
+      "kg": 6,
+      "monto": 130800,
+      "origen": "Peru",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 257,
+      "fecha": "2025-10-29",
+      "cliente": "Turquesa",
+      "tipo": "b2b",
+      "kg": 3,
+      "monto": 65400,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 260,
+      "fecha": "2025-11-04",
+      "cliente": "Gonzalo",
+      "tipo": "b2b",
+      "kg": 1,
+      "monto": 21800,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": false,
+      "pagado": true
+    },
+    {
+      "id": 261,
+      "fecha": "2025-11-04",
+      "cliente": "Kitea Chillan",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 109000,
+      "origen": "Peru",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 262,
+      "fecha": "2025-11-06",
+      "cliente": "Farol",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 109000,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 263,
+      "fecha": "2025-11-11",
+      "cliente": "Casa Alonssa",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 208000,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 264,
+      "fecha": "2025-11-19",
+      "cliente": "Clock",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 220000,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 265,
+      "fecha": "2025-11-19",
+      "cliente": "Catedral",
+      "tipo": "b2b",
+      "kg": 3,
+      "monto": 65400,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 266,
+      "fecha": "2025-11-21",
+      "cliente": "Farol",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 109000,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 267,
+      "fecha": "2025-11-21",
+      "cliente": "Onces",
+      "tipo": "b2b",
+      "kg": 7,
+      "monto": 152600,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 268,
+      "fecha": "2025-11-21",
+      "cliente": "Velarys",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 218000,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 269,
+      "fecha": "2025-11-24",
+      "cliente": "Casa Alonssa",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 109000,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 270,
+      "fecha": "2025-11-24",
+      "cliente": "Toqui",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 218000,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": false,
+      "pagado": true
+    },
+    {
+      "id": 271,
+      "fecha": "2025-11-24",
+      "cliente": "Taurus",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 272,
+      "fecha": "2025-11-24",
+      "cliente": "Kitea Chillan",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 109000,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 273,
+      "fecha": "2025-11-25",
+      "cliente": "Kitea Rancagua",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 109000,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 274,
+      "fecha": "2025-11-27",
+      "cliente": "Dynos Mall",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 104000,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 275,
+      "fecha": "2025-11-28",
+      "cliente": "Silvia",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 110000,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 280,
+      "fecha": "2025-12-05",
+      "cliente": "Farol",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 109000,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 281,
+      "fecha": "2025-12-05",
+      "cliente": "Velarys",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 218000,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 282,
+      "fecha": "2025-12-08",
+      "cliente": "Casa Alonssa",
+      "tipo": "b2b",
+      "kg": 14,
+      "monto": 305200,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 283,
+      "fecha": "2025-12-08",
+      "cliente": "Tu Delicia",
+      "tipo": "b2b",
+      "kg": 2,
+      "monto": 43600,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": false
+    },
+    {
+      "id": 284,
+      "fecha": "2025-12-10",
+      "cliente": "Onces",
+      "tipo": "b2b",
+      "kg": 6,
+      "monto": 130800,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 285,
+      "fecha": "2025-12-10",
+      "cliente": "Kitea Chillan",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 218000,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 286,
+      "fecha": "2025-12-10",
+      "cliente": "Melty",
+      "tipo": "b2b",
+      "kg": 1,
+      "monto": 21800,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": false,
+      "pagado": true
+    },
+    {
+      "id": 287,
+      "fecha": "2025-12-15",
+      "cliente": "Magnolia",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 114000,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 288,
+      "fecha": "2025-12-17",
+      "cliente": "Turquesa",
+      "tipo": "b2b",
+      "kg": 3,
+      "monto": 65400,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 289,
+      "fecha": "2025-12-19",
+      "cliente": "Catedral",
+      "tipo": "b2b",
+      "kg": 3,
+      "monto": 65400,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 290,
+      "fecha": "2025-12-22",
+      "cliente": "Taurus",
+      "tipo": "b2b",
+      "kg": 3,
+      "monto": 65400,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 291,
+      "fecha": "2025-12-22",
+      "cliente": "Velarys",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 218000,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 292,
+      "fecha": "2025-12-22",
+      "cliente": "Casa Alonssa",
+      "tipo": "b2b",
+      "kg": 15,
+      "monto": 327000,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 293,
+      "fecha": "2025-12-26",
+      "cliente": "Farol",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 109000,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 300,
+      "fecha": "2026-01-05",
+      "cliente": "Onces",
+      "tipo": "b2b",
+      "kg": 6,
+      "monto": 130800,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 301,
+      "fecha": "2026-01-07",
+      "cliente": "Clock",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 114000,
+      "origen": "Peru",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 302,
+      "fecha": "2026-01-07",
+      "cliente": "Clock 1/4",
+      "tipo": "b2b",
+      "kg": 15,
+      "monto": 97500,
+      "origen": "Mix",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 303,
+      "fecha": "2026-01-07",
+      "cliente": "Velarys",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 228000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 304,
+      "fecha": "2026-01-09",
+      "cliente": "Mahuida",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 228000,
+      "origen": "Peru",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 305,
+      "fecha": "2026-01-09",
+      "cliente": "Myreth",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 114000,
+      "origen": "Peru",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 306,
+      "fecha": "2026-01-13",
+      "cliente": "Dynos El Roble",
+      "tipo": "b2b",
+      "kg": 2,
+      "monto": 39600,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 307,
+      "fecha": "2026-01-13",
+      "cliente": "Taurus",
+      "tipo": "b2b",
+      "kg": 2,
+      "monto": 39600,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 308,
+      "fecha": "2026-01-13",
+      "cliente": "Kitea",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 117810,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": false,
+      "notas": "",
+      "productos": [
+        {
+          "origen": "Robusta",
+          "formato": "1kg Grano",
+          "kg": 5,
+          "precio": 19800
+        }
+      ]
+    },
+    {
+      "id": 309,
+      "fecha": "2026-01-13",
+      "cliente": "Clocks",
+      "tipo": "b2b",
+      "kg": 20,
+      "monto": 456000,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 310,
+      "fecha": "2026-01-16",
+      "cliente": "Farol",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 116000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 311,
+      "fecha": "2026-01-16",
+      "cliente": "Dynos El Roble",
+      "tipo": "b2b",
+      "kg": 3,
+      "monto": 59400,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 312,
+      "fecha": "2026-01-21",
+      "cliente": "Velarys",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 232000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 313,
+      "fecha": "2026-01-21",
+      "cliente": "Casa Alonssa",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 229000,
+      "origen": "Peru",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": false
+    },
+    {
+      "id": 314,
+      "fecha": "2026-01-26",
+      "cliente": "Catedral",
+      "tipo": "b2b",
+      "kg": 3,
+      "monto": 69600,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": false
+    },
+    {
+      "id": 315,
+      "fecha": "2026-01-26",
+      "cliente": "Manuel",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 114500,
+      "origen": "Peru",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 316,
+      "fecha": "2026-01-27",
+      "cliente": "Turquesa",
+      "tipo": "b2b",
+      "kg": 3,
+      "monto": 83538,
+      "origen": "Bolivia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true,
+      "notas": "",
+      "productos": [
+        {
+          "origen": "Bolivia",
+          "formato": "1kg Grano",
+          "kg": 3,
+          "precio": 23400
+        }
+      ]
+    },
+    {
+      "id": 317,
+      "fecha": "2026-01-27",
+      "cliente": "Nevado",
+      "tipo": "b2b",
+      "kg": 15,
+      "monto": 354000,
+      "origen": "Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 318,
+      "fecha": "2026-01-30",
+      "cliente": "Kitea R",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 116000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": false
+    },
+    {
+      "id": 319,
+      "fecha": "2026-01-30",
+      "cliente": "Cafe Rosas",
+      "tipo": "b2b",
+      "kg": 7,
+      "monto": 161700,
+      "origen": "Peru/Colombia",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 320,
+      "fecha": "2026-02-02",
+      "cliente": "Agape",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 116000,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    },
+    {
+      "id": 321,
+      "fecha": "2026-02-04",
+      "cliente": "Taurus",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 117810,
+      "origen": "Robusta",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true,
+      "notas": "",
+      "productos": [
+        {
+          "origen": "Robusta",
+          "formato": "1kg Grano",
+          "kg": 1,
+          "precio": 19800
+        },
+        {
+          "origen": "Robusta",
+          "formato": "1kg Grano",
+          "kg": 4,
+          "precio": 19800
+        }
+      ]
+    },
+    {
+      "id": 322,
+      "fecha": "2026-02-04",
+      "cliente": "Nevados",
+      "tipo": "b2b",
+      "kg": 42,
+      "monto": 1159655,
+      "origen": "Mix",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": false,
+      "notas": "",
+      "productos": [
+        {
+          "origen": "Bolivia",
+          "formato": "1kg Grano",
+          "kg": 5,
+          "precio": 23400
+        },
+        {
+          "origen": "Colombia",
+          "formato": "1kg Grano",
+          "kg": 34,
+          "precio": 23200
+        },
+        {
+          "origen": "Peru",
+          "formato": "1kg Grano",
+          "kg": 3,
+          "precio": 22900
+        }
+      ]
+    },
+    {
+      "id": 323,
+      "fecha": "2026-02-04",
+      "cliente": "Karu",
+      "tipo": "b2b",
+      "kg": 4,
+      "monto": 109004,
+      "origen": "Peru",
+      "estado": "entregada",
+      "facturado": false,
+      "pagado": false,
+      "notas": "",
+      "productos": [
+        {
+          "origen": "Peru",
+          "formato": "1kg Grano",
+          "kg": 4,
+          "precio": 22900
+        }
+      ]
+    },
+    {
+      "id": 324,
+      "fecha": "2026-02-05",
+      "cliente": "Farol",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 138040,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true,
+      "notas": "",
+      "productos": [
+        {
+          "origen": "Brasil",
+          "formato": "1kg Grano",
+          "kg": 5,
+          "precio": 23200
+        }
+      ]
+    },
+    {
+      "id": 325,
+      "fecha": "2026-02-06",
+      "cliente": "Kitea Chillan",
+      "tipo": "b2b",
+      "kg": 5,
+      "monto": 117810,
+      "origen": "Brasil",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": false,
+      "notas": "",
+      "productos": [
+        {
+          "origen": "Brasil",
+          "formato": "1kg Grano",
+          "kg": 5,
+          "precio": 19800
+        }
+      ]
+    },
+    {
+      "id": 326,
+      "fecha": "2026-02-06",
+      "cliente": "Manuel Stavva",
+      "tipo": "b2b",
+      "kg": 10,
+      "monto": 229000,
+      "origen": "Peru",
+      "estado": "entregada",
+      "facturado": true,
+      "pagado": true
+    }
+  ],
+  "estadoResultados": {
+    "meses": [
+      {
+        "mes": "2025-01",
+        "ingresos": {
+          "b2b": 2100000,
+          "b2p": 50000,
+          "total": 2150000
+        },
+        "costos": {
+          "cafeVerde": 600000,
+          "empaque": 50000,
+          "envios": 30000,
+          "marketing": 0,
+          "otros": 20000,
+          "total": 700000
+        },
+        "utilidad": 1450000,
+        "kgVendidos": {
+          "b2b": 120,
+          "b2p": 5
+        }
+      },
+      {
+        "mes": "2025-02",
+        "ingresos": {
+          "b2b": 2800000,
+          "b2p": 60000,
+          "total": 2860000
+        },
+        "costos": {
+          "cafeVerde": 800000,
+          "empaque": 60000,
+          "envios": 40000,
+          "marketing": 50000,
+          "otros": 25000,
+          "total": 975000
+        },
+        "utilidad": 1885000,
+        "kgVendidos": {
+          "b2b": 150,
+          "b2p": 6
+        }
+      },
+      {
+        "mes": "2025-03",
+        "ingresos": {
+          "b2b": 3200000,
+          "b2p": 70000,
+          "total": 3270000
+        },
+        "costos": {
+          "cafeVerde": 900000,
+          "empaque": 70000,
+          "envios": 45000,
+          "marketing": 100000,
+          "otros": 30000,
+          "total": 1145000
+        },
+        "utilidad": 2125000,
+        "kgVendidos": {
+          "b2b": 180,
+          "b2p": 7
+        }
+      },
+      {
+        "mes": "2025-04",
+        "ingresos": {
+          "b2b": 2500000,
+          "b2p": 80000,
+          "total": 2580000
+        },
+        "costos": {
+          "cafeVerde": 700000,
+          "empaque": 55000,
+          "envios": 35000,
+          "marketing": 100000,
+          "otros": 25000,
+          "total": 915000
+        },
+        "utilidad": 1665000,
+        "kgVendidos": {
+          "b2b": 130,
+          "b2p": 8
+        }
+      }
+    ]
+  },
+  "planesAccion": [
+    {
+      "id": 1,
+      "fase": "Mes 1-2: Fundación",
+      "estado": "activo",
+      "acciones": [
+        {
+          "accion": "Configurar CRM en app local",
+          "completado": true
+        },
+        {
+          "accion": "Sincronizar ventas de Google Sheets",
+          "completado": true
+        },
+        {
+          "accion": "Reactivar 5 clientes inactivos",
+          "completado": false
+        },
+        {
+          "accion": "Lanzar campaña Meta Ads ($100)",
+          "completado": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "fase": "Mes 3-4: Crecimiento",
+      "estado": "pendiente",
+      "acciones": [
+        {
+          "accion": "Captar 8 nuevos clientes B2B",
+          "completado": false
+        },
+        {
+          "accion": "Alcanzar 200 kg/mes B2B",
+          "completado": false
+        },
+        {
+          "accion": "Duplicar frecuencia de contenido",
+          "completado": false
+        },
+        {
+          "accion": "Escalar Meta Ads a $300/mes",
+          "completado": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "fase": "Mes 5-6: Consolidación",
+      "estado": "pendiente",
+      "acciones": [
+        {
+          "accion": "Alcanzar meta 300 kg/mes B2B",
+          "completado": false
+        },
+        {
+          "accion": "Alcanzar meta $1M/mes B2P",
+          "completado": false
+        },
+        {
+          "accion": "Automatizar seguimiento",
+          "completado": false
+        }
+      ]
+    }
+  ],
+  "agentes": [
+    {
+      "id": 1,
+      "nombre": "Agente Ventas B2B",
+      "emoji": "🎯",
+      "responsabilidades": [
+        "Seguimiento clientes",
+        "Prospección",
+        "Negociación"
+      ],
+      "kpis": [
+        {
+          "nombre": "Tasa recompra",
+          "meta": 80,
+          "actual": 75,
+          "unidad": "%"
+        },
+        {
+          "nombre": "Nuevos clientes/mes",
+          "meta": 4,
+          "actual": 2,
+          "unidad": ""
+        },
+        {
+          "nombre": "Ticket promedio",
+          "meta": 175000,
+          "actual": 150000,
+          "unidad": "CLP"
+        }
+      ],
+      "tareasSemana": [
+        "Revisar clientes sin compra 3+ semanas",
+        "Enviar seguimiento",
+        "Agendar visitas"
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Agente Contenido",
+      "emoji": "📸",
+      "responsabilidades": [
+        "Creación contenido",
+        "Fotografía",
+        "Copywriting"
+      ],
+      "kpis": [
+        {
+          "nombre": "Posts/semana",
+          "meta": 4,
+          "actual": 2,
+          "unidad": ""
+        },
+        {
+          "nombre": "Engagement",
+          "meta": 5,
+          "actual": 3,
+          "unidad": "%"
+        }
+      ],
+      "tareasSemana": [
+        "Grabar 2 Reels",
+        "Diseñar carrusel",
+        "Stories diarias"
+      ]
+    },
+    {
+      "id": 3,
+      "nombre": "Agente Operaciones",
+      "emoji": "⚙️",
+      "responsabilidades": [
+        "Gestión tareas",
+        "Coordinación",
+        "Control inventario"
+      ],
+      "kpis": [
+        {
+          "nombre": "Entregas a tiempo",
+          "meta": 95,
+          "actual": 90,
+          "unidad": "%"
+        },
+        {
+          "nombre": "Tareas completadas",
+          "meta": 100,
+          "actual": 80,
+          "unidad": "%"
+        }
+      ],
+      "tareasSemana": [
+        "Revisar stock",
+        "Coordinar entregas",
+        "Actualizar inventario"
+      ]
+    }
+  ],
+  "clientes": [
+    {
+      "id": 1,
+      "nombre": "Mahuida",
+      "estado": "activo",
+      "ciudad": "Chillán",
+      "kgPromedio": 10,
+      "origenFavorito": "Brasil + Bolivia",
+      "notas": "Cliente recurrente top"
+    },
+    {
+      "id": 2,
+      "nombre": "Casa Alonsa",
+      "estado": "activo",
+      "ciudad": "Chillán",
+      "kgPromedio": 10,
+      "origenFavorito": "Brasil",
+      "notas": "Alto volumen"
+    },
+    {
+      "id": 3,
+      "nombre": "Nevados",
+      "estado": "activo",
+      "ciudad": "",
+      "kgPromedio": 20,
+      "origenFavorito": "Colombia Lav",
+      "notas": "Mayor comprador por pedido"
+    },
+    {
+      "id": 4,
+      "nombre": "Rivoz",
+      "estado": "activo",
+      "ciudad": "",
+      "kgPromedio": 6,
+      "origenFavorito": "Brasil + Bolivia",
+      "notas": "Frecuente"
+    },
+    {
+      "id": 5,
+      "nombre": "Kitea Chillan",
+      "estado": "activo",
+      "ciudad": "Chillán",
+      "kgPromedio": 5,
+      "origenFavorito": "Brasil",
+      "notas": ""
+    },
+    {
+      "id": 6,
+      "nombre": "Kitea Rancagua",
+      "estado": "activo",
+      "ciudad": "Rancagua",
+      "kgPromedio": 5,
+      "origenFavorito": "Bolivia",
+      "notas": "Expansión"
+    },
+    {
+      "id": 7,
+      "nombre": "Agatha",
+      "estado": "activo",
+      "ciudad": "",
+      "kgPromedio": 5,
+      "origenFavorito": "Brasil",
+      "notas": "Sin factura"
+    },
+    {
+      "id": 8,
+      "nombre": "Clocks Cafeteria",
+      "estado": "activo",
+      "ciudad": "",
+      "kgPromedio": 5,
+      "origenFavorito": "Bolivia + Costa Rica",
+      "notas": ""
+    },
+    {
+      "id": 9,
+      "nombre": "Café Rosas",
+      "estado": "activo",
+      "ciudad": "",
+      "kgPromedio": 5,
+      "origenFavorito": "Brasil + Colombia",
+      "notas": ""
+    },
+    {
+      "id": 10,
+      "nombre": "Onces",
+      "estado": "activo",
+      "ciudad": "",
+      "kgPromedio": 5,
+      "origenFavorito": "Brasil + Bolivia",
+      "notas": ""
+    },
+    {
+      "id": 11,
+      "nombre": "Dynos",
+      "estado": "activo",
+      "ciudad": "",
+      "kgPromedio": 5,
+      "origenFavorito": "Brasil",
+      "notas": "Varias sucursales"
+    },
+    {
+      "id": 12,
+      "nombre": "Farol",
+      "estado": "activo",
+      "ciudad": "",
+      "kgPromedio": 4,
+      "origenFavorito": "Bolivia + Colombia",
+      "notas": ""
+    },
+    {
+      "id": 13,
+      "nombre": "Catedral",
+      "estado": "activo",
+      "ciudad": "",
+      "kgPromedio": 3,
+      "origenFavorito": "Brasil + Bolivia",
+      "notas": ""
+    },
+    {
+      "id": 14,
+      "nombre": "Circular Coffee",
+      "estado": "activo",
+      "ciudad": "",
+      "kgPromedio": 4,
+      "origenFavorito": "Brasil + Colombia",
+      "notas": ""
+    },
+    {
+      "id": 15,
+      "nombre": "7 Cups",
+      "estado": "activo",
+      "ciudad": "",
+      "kgPromedio": 12,
+      "origenFavorito": "Varios",
+      "notas": "Alto volumen mix"
+    },
+    {
+      "id": 16,
+      "nombre": "Taller 9215",
+      "estado": "activo",
+      "ciudad": "",
+      "kgPromedio": 5,
+      "origenFavorito": "Colombia + Bolivia",
+      "notas": ""
+    },
+    {
+      "id": 17,
+      "nombre": "Isabellos Coffee",
+      "estado": "activo",
+      "ciudad": "",
+      "kgPromedio": 5,
+      "origenFavorito": "Brasil",
+      "notas": ""
+    },
+    {
+      "id": 18,
+      "nombre": "El Mundo del Cafe",
+      "estado": "activo",
+      "ciudad": "",
+      "kgPromedio": 58,
+      "origenFavorito": "Varios",
+      "notas": "Mayorista grande"
+    },
+    {
+      "id": 19,
+      "nombre": "Lazos Cafe",
+      "estado": "activo",
+      "ciudad": "",
+      "kgPromedio": 5,
+      "origenFavorito": "Colombia Lav",
+      "notas": ""
+    },
+    {
+      "id": 20,
+      "nombre": "Tu Delicia",
+      "estado": "activo",
+      "ciudad": "",
+      "kgPromedio": 4,
+      "origenFavorito": "Brasil",
+      "notas": ""
+    },
+    {
+      "id": 21,
+      "nombre": "Sanguchon Criollo",
+      "estado": "activo",
+      "ciudad": "",
+      "kgPromedio": 5,
+      "origenFavorito": "Brasil",
+      "notas": "Nuevo"
+    },
+    {
+      "id": 22,
+      "nombre": "Martin Ignacio",
+      "estado": "prospecto",
+      "ciudad": "",
+      "kgPromedio": 8,
+      "origenFavorito": "Brasil",
+      "notas": "No iniciada"
+    },
+    {
+      "id": 1770583203118,
+      "nombre": "",
+      "estado": "perdido",
+      "ciudad": "",
+      "kgPromedio": 0,
+      "notas": ""
+    }
+  ],
+  "calendario": [
+    {
+      "id": 1,
+      "titulo": "¿Por qué el especialidad es más caro?",
+      "fecha": "2026-02-10",
+      "pilar": "educacion",
+      "formato": "reel",
+      "estado": "idea",
+      "copy": "HOOK: ¿Por qué este café cuesta 3 veces más?"
+    },
+    {
+      "id": 2,
+      "titulo": "Presentación Brasil Amarelo",
+      "fecha": "2026-02-12",
+      "pilar": "producto",
+      "formato": "carrusel",
+      "estado": "idea",
+      "copy": "5 slides: origen, proceso, notas, maridaje, CTA"
+    },
+    {
+      "id": 3,
+      "titulo": "Time-lapse de tueste",
+      "fecha": "2026-02-14",
+      "pilar": "bts",
+      "formato": "reel",
+      "estado": "idea",
+      "copy": "Grano verde → marrón → empaque"
+    },
+    {
+      "id": 4,
+      "titulo": "3 errores que arruinan tu café",
+      "fecha": "2026-02-17",
+      "pilar": "educacion",
+      "formato": "reel",
+      "estado": "idea",
+      "copy": "Moler anticipado, agua caliente, sin balanza"
+    },
+    {
+      "id": 5,
+      "titulo": "Bolivia Wara Wara",
+      "fecha": "2026-02-19",
+      "pilar": "producto",
+      "formato": "carrusel",
+      "estado": "idea",
+      "copy": "Historia del productor + perfil de taza"
+    },
+    {
+      "id": 6,
+      "titulo": "Un día en el roast lab",
+      "fecha": "2026-02-21",
+      "pilar": "bts",
+      "formato": "reel",
+      "estado": "idea",
+      "copy": "Rutina de tostado, vlog style"
+    },
+    {
+      "id": 7,
+      "titulo": "Testimonio cafetería",
+      "fecha": "2026-02-23",
+      "pilar": "social",
+      "formato": "post",
+      "estado": "idea",
+      "copy": "Quote de cliente B2B con foto"
+    }
+  ],
+  "tareas": [
+    {
+      "id": 1,
+      "tarea": "Contactar cliente inactivo #1",
+      "responsable": "Diego",
+      "prioridad": "alta",
+      "area": "ventas",
+      "fechaLimite": "2026-02-12",
+      "completado": false
+    },
+    {
+      "id": 2,
+      "tarea": "Grabar Reel '¿Por qué es más caro?'",
+      "responsable": "",
+      "prioridad": "alta",
+      "area": "contenido",
+      "fechaLimite": "2026-02-10",
+      "completado": false
+    },
+    {
+      "id": 3,
+      "tarea": "Lanzar campaña Meta Ads $100",
+      "responsable": "Diego",
+      "prioridad": "alta",
+      "area": "marketing",
+      "fechaLimite": "2026-02-12",
+      "completado": false
+    },
+    {
+      "id": 4,
+      "tarea": "Revisar stock café verde",
+      "responsable": "",
+      "prioridad": "baja",
+      "area": "operaciones",
+      "fechaLimite": "2026-02-14",
+      "completado": false
+    }
+  ],
+  "inventario": [
+    {
+      "id": 1,
+      "origen": "Brasil Amarelo",
+      "stockActual": 0,
+      "puntoReorden": 10,
+      "ultimoIngreso": "",
+      "proveedor": "",
+      "notas": "Más vendido"
+    },
+    {
+      "id": 2,
+      "origen": "Bolivia Wara Wara",
+      "stockActual": 0,
+      "puntoReorden": 10,
+      "ultimoIngreso": "",
+      "proveedor": ""
+    },
+    {
+      "id": 3,
+      "origen": "Colombia Lavado",
+      "stockActual": 0,
+      "puntoReorden": 10,
+      "ultimoIngreso": "",
+      "proveedor": ""
+    },
+    {
+      "id": 4,
+      "origen": "Costa Rica",
+      "stockActual": 0,
+      "puntoReorden": 5,
+      "ultimoIngreso": "",
+      "proveedor": "",
+      "notas": "Premium"
+    }
+  ],
+  "gastos": [
+    {
+      "id": 1770744094744,
+      "descripcion": "Arabica SPA",
+      "categoria": "materia_prima",
+      "monto": 1795710,
+      "fecha": "2026-02-10",
+      "notas": "14 Enero"
+    },
+    {
+      "id": 1770743619747,
+      "descripcion": "Arriendo",
+      "categoria": "fijo",
+      "monto": 250000,
+      "fecha": "2026-02-10",
+      "notas": "Feb "
+    }
+  ],
+  "ventasWeb": [],
+  "user_1771079898988": {
+    "ventas": [
+      {
+        "id": 101,
+        "item": "Cafe",
+        "amount": 5000
+      }
+    ]
+  },
+  "user_1771079910243": {
+    "ventas": [
+      {
+        "id": 101,
+        "item": "Cafe",
+        "amount": 5000
+      }
+    ]
+  },
+  "user_1771080819132": {
+    "inventario": [
+      {
+        "origen": "Brasil",
+        "stockActual": 9
+      }
+    ],
+    "ventasLocales": [
+      {
+        "sale": {
+          "id": 1771080819241,
+          "items": "Café Brasil",
+          "monto": 5000
+        },
+        "deductInventory": [
+          {
+            "origen": "Brasil",
+            "kg": 1
+          }
+        ]
+      }
+    ]
+  },
+  "user_1771080895256": {
+    "inventario": [
+      {
+        "origen": "Brasil",
+        "stockActual": 9
+      }
+    ],
+    "ventasLocales": [
+      {
+        "id": 1771080895360,
+        "items": "Café Brasil",
+        "monto": 5000
+      }
+    ]
+  },
+  "user_1771081369399": {
+    "config": {
+      "empresaNombre": "Candela Coffee Roasters",
+      "mesInicio": "2026-02",
+      "timeline": 6
+    },
+    "metas": {
+      "b2b": {
+        "actual": 150,
+        "meta": 300,
+        "unidad": "kg/mes"
+      },
+      "b2p": {
+        "actual": 200000,
+        "meta": 1000000,
+        "unidad": "CLP/mes"
+      }
+    },
+    "ventas": [
+      {
+        "cliente": "Casa Alonssa",
+        "tipo": "b2b",
+        "monto": 271915,
+        "kg": 10,
+        "origen": "Brasil",
+        "fecha": "2026-02-10",
+        "estado": "proceso",
+        "facturado": false,
+        "pagado": false,
+        "notas": "",
+        "productos": [
+          {
+            "origen": "Peru",
+            "formato": "1kg Grano",
+            "kg": 5,
+            "precio": 22900
+          },
+          {
+            "origen": "Brasil",
+            "formato": "1kg Grano",
+            "kg": 5,
+            "precio": 22800
+          }
+        ],
+        "id": 1770746019583
+      },
+      {
+        "cliente": "Taller 9215",
+        "tipo": "b2b",
+        "monto": 222768,
+        "kg": 8,
+        "origen": "Brasil",
+        "fecha": "2026-02-10",
+        "estado": "proceso",
+        "facturado": false,
+        "pagado": false,
+        "notas": "18:00 Retira 11 feb ",
+        "productos": [
+          {
+            "origen": "Colombia",
+            "formato": "1kg Grano",
+            "kg": 4,
+            "precio": 23600
+          },
+          {
+            "origen": "Brasil",
+            "formato": "1kg Grano",
+            "kg": 4,
+            "precio": 23200
+          }
+        ],
+        "id": 1770745824448
+      },
+      {
+        "cliente": "Clock",
+        "tipo": "b2b",
+        "monto": 271320,
+        "kg": 10,
+        "origen": "Bolivia",
+        "fecha": "2026-02-10",
+        "estado": "proceso",
+        "facturado": true,
+        "pagado": true,
+        "notas": "",
+        "productos": [
+          {
+            "origen": "Peru",
+            "formato": "1kg Grano",
+            "kg": 10,
+            "precio": 22800
+          }
+        ],
+        "id": 1770745703280
+      },
+      {
+        "cliente": "",
+        "tipo": "b2b",
+        "monto": 0,
+        "kg": 0,
+        "origen": "Brasil",
+        "fecha": "2026-02-10",
+        "estado": "iniciada",
+        "facturado": false,
+        "pagado": false,
+        "notas": "",
+        "productos": [],
+        "id": 1770734956820
+      },
+      {
+        "id": 101,
+        "fecha": "2025-05-03",
+        "cliente": "Isabellos",
+        "tipo": "b2b",
+        "kg": 1,
+        "monto": 25000,
+        "origen": "Costa Rica",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 102,
+        "fecha": "2025-05-03",
+        "cliente": "Isabellos",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 103,
+        "fecha": "2025-05-06",
+        "cliente": "Rivoz",
+        "tipo": "b2b",
+        "kg": 8,
+        "monto": 166400,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 104,
+        "fecha": "2025-05-05",
+        "cliente": "Mahuida",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 208000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 105,
+        "fecha": "2025-05-05",
+        "cliente": "Kitea",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 106,
+        "fecha": "2025-05-07",
+        "cliente": "Farol",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 107,
+        "fecha": "2025-05-07",
+        "cliente": "Cafe Rosas",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 108,
+        "fecha": "2025-05-12",
+        "cliente": "Cafe Rosas",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 109,
+        "fecha": "2025-05-12",
+        "cliente": "Farol",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 110,
+        "fecha": "2025-05-13",
+        "cliente": "Kitea Rancagua",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 111,
+        "fecha": "2025-05-13",
+        "cliente": "Mahuida",
+        "tipo": "b2b",
+        "kg": 11,
+        "monto": 228800,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 112,
+        "fecha": "2025-05-17",
+        "cliente": "Taurus",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 96500,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 113,
+        "fecha": "2025-05-17",
+        "cliente": "Turquesa",
+        "tipo": "b2b",
+        "kg": 3,
+        "monto": 65400,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 114,
+        "fecha": "2025-05-19",
+        "cliente": "Casa Alonssa",
+        "tipo": "b2b",
+        "kg": 15,
+        "monto": 312000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 115,
+        "fecha": "2025-05-19",
+        "cliente": "Cafe Rosas",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 116,
+        "fecha": "2025-05-19",
+        "cliente": "Kitea Chillan",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 117,
+        "fecha": "2025-05-19",
+        "cliente": "Dynos El Roble",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 96500,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 118,
+        "fecha": "2025-05-26",
+        "cliente": "Farol",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 109000,
+        "origen": "Honduras",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 119,
+        "fecha": "2025-05-30",
+        "cliente": "Dynos El Roble",
+        "tipo": "b2b",
+        "kg": 4,
+        "monto": 77200,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 120,
+        "fecha": "2025-05-30",
+        "cliente": "Onces",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 68000,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 121,
+        "fecha": "2025-06-02",
+        "cliente": "Clock",
+        "tipo": "b2b",
+        "kg": 20,
+        "monto": 436000,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 122,
+        "fecha": "2025-06-02",
+        "cliente": "Casa Alonssa",
+        "tipo": "b2b",
+        "kg": 15,
+        "monto": 327000,
+        "origen": "Honduras",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 123,
+        "fecha": "2025-06-04",
+        "cliente": "Mahuida",
+        "tipo": "b2b",
+        "kg": 11,
+        "monto": 239800,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 124,
+        "fecha": "2025-06-05",
+        "cliente": "Kitea Chillan",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 125,
+        "fecha": "2025-06-09",
+        "cliente": "Cafe Rosas",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 126,
+        "fecha": "2025-06-11",
+        "cliente": "Farol",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 109000,
+        "origen": "Honduras",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 127,
+        "fecha": "2025-06-11",
+        "cliente": "Aurelia",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 109000,
+        "origen": "Honduras",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 128,
+        "fecha": "2025-06-12",
+        "cliente": "Taurus",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Honduras",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 129,
+        "fecha": "2025-06-12",
+        "cliente": "Dynos",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Honduras",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 130,
+        "fecha": "2025-06-18",
+        "cliente": "Kitea Rancagua",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 109000,
+        "origen": "Honduras",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 131,
+        "fecha": "2025-06-19",
+        "cliente": "Mahuida",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 218000,
+        "origen": "Honduras",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 132,
+        "fecha": "2025-06-20",
+        "cliente": "Catedral",
+        "tipo": "b2b",
+        "kg": 3,
+        "monto": 65400,
+        "origen": "Honduras",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 133,
+        "fecha": "2025-06-24",
+        "cliente": "Casa Alonssa",
+        "tipo": "b2b",
+        "kg": 15,
+        "monto": 327000,
+        "origen": "Honduras",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 134,
+        "fecha": "2025-06-26",
+        "cliente": "Clocks",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 218000,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 135,
+        "fecha": "2025-06-26",
+        "cliente": "Kitea Chillan",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 109000,
+        "origen": "Honduras",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 136,
+        "fecha": "2025-06-27",
+        "cliente": "Farol",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 109000,
+        "origen": "Honduras",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 137,
+        "fecha": "2025-07-02",
+        "cliente": "Cafe Rosas",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 138,
+        "fecha": "2025-07-03",
+        "cliente": "Mahuida",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 218000,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 139,
+        "fecha": "2025-07-06",
+        "cliente": "Casa Alonssa",
+        "tipo": "b2b",
+        "kg": 15,
+        "monto": 312000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 140,
+        "fecha": "2025-07-14",
+        "cliente": "Kitea Rancagua",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 141,
+        "fecha": "2025-07-14",
+        "cliente": "Dynos Mall",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 142,
+        "fecha": "2025-07-14",
+        "cliente": "Mahuida",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 218000,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 143,
+        "fecha": "2025-07-14",
+        "cliente": "Tu Delicia",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 144,
+        "fecha": "2025-07-14",
+        "cliente": "Catedral",
+        "tipo": "b2b",
+        "kg": 3,
+        "monto": 62400,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 145,
+        "fecha": "2025-07-21",
+        "cliente": "Turquesa",
+        "tipo": "b2b",
+        "kg": 3,
+        "monto": 65400,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 146,
+        "fecha": "2025-07-21",
+        "cliente": "Farol",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 147,
+        "fecha": "2025-07-21",
+        "cliente": "Cafe Rosas",
+        "tipo": "b2b",
+        "kg": 7,
+        "monto": 145600,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 148,
+        "fecha": "2025-07-23",
+        "cliente": "Kitea Chillan",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 149,
+        "fecha": "2025-07-28",
+        "cliente": "Mahuida",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 218000,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 150,
+        "fecha": "2025-07-28",
+        "cliente": "Casa Alonssa",
+        "tipo": "b2b",
+        "kg": 15,
+        "monto": 312000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 151,
+        "fecha": "2025-07-28",
+        "cliente": "Velarys",
+        "tipo": "b2b",
+        "kg": 20,
+        "monto": 436000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 152,
+        "fecha": "2025-07-31",
+        "cliente": "Clocks",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 218000,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 153,
+        "fecha": "2025-07-31",
+        "cliente": "Taurus",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 97500,
+        "origen": "Blend",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 200,
+        "fecha": "2025-08-05",
+        "cliente": "Cafe Rosas",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 201,
+        "fecha": "2025-08-11",
+        "cliente": "Kitea Chillan",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 202,
+        "fecha": "2025-08-11",
+        "cliente": "Mahuida",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 218000,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 203,
+        "fecha": "2025-08-12",
+        "cliente": "Farol",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 109000,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 204,
+        "fecha": "2025-08-14",
+        "cliente": "Catedral",
+        "tipo": "b2b",
+        "kg": 2,
+        "monto": 41600,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 205,
+        "fecha": "2025-08-16",
+        "cliente": "Carlos Cafe",
+        "tipo": "b2b",
+        "kg": 2,
+        "monto": 43600,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 206,
+        "fecha": "2025-08-16",
+        "cliente": "Turquesa Cafe",
+        "tipo": "b2b",
+        "kg": 3,
+        "monto": 65400,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 207,
+        "fecha": "2025-08-19",
+        "cliente": "Dynos Roble",
+        "tipo": "b2b",
+        "kg": 3,
+        "monto": 62400,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 208,
+        "fecha": "2025-08-19",
+        "cliente": "Casa Alonssa",
+        "tipo": "b2b",
+        "kg": 15,
+        "monto": 312000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 209,
+        "fecha": "2025-08-22",
+        "cliente": "Dynos El Roble",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 210,
+        "fecha": "2025-08-22",
+        "cliente": "Nutre Meals",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 211,
+        "fecha": "2025-08-26",
+        "cliente": "Cafe Rosas",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 212,
+        "fecha": "2025-08-26",
+        "cliente": "Velarys",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 218000,
+        "origen": "Peru",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 213,
+        "fecha": "2025-08-26",
+        "cliente": "Catedral",
+        "tipo": "b2b",
+        "kg": 3,
+        "monto": 62400,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 214,
+        "fecha": "2025-08-29",
+        "cliente": "Kitea",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 109000,
+        "origen": "Peru",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 215,
+        "fecha": "2025-08-30",
+        "cliente": "Taurus",
+        "tipo": "b2b",
+        "kg": 7,
+        "monto": 145600,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 216,
+        "fecha": "2025-08-30",
+        "cliente": "Farol",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 109000,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 217,
+        "fecha": "2025-08-30",
+        "cliente": "Mahuida",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 109000,
+        "origen": "Peru",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 220,
+        "fecha": "2025-09-02",
+        "cliente": "Mahuida",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 208000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 221,
+        "fecha": "2025-09-02",
+        "cliente": "Carlos Cafe",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 222,
+        "fecha": "2025-09-10",
+        "cliente": "Mahuida",
+        "tipo": "b2b",
+        "kg": 6,
+        "monto": 130800,
+        "origen": "Peru",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 223,
+        "fecha": "2025-09-10",
+        "cliente": "Casa Alonssa",
+        "tipo": "b2b",
+        "kg": 15,
+        "monto": 327000,
+        "origen": "Peru",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 224,
+        "fecha": "2025-09-10",
+        "cliente": "Velarys",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 208000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 225,
+        "fecha": "2025-09-15",
+        "cliente": "Catedral",
+        "tipo": "b2b",
+        "kg": 4,
+        "monto": 83200,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 226,
+        "fecha": "2025-09-16",
+        "cliente": "Nevados Cafe",
+        "tipo": "b2b",
+        "kg": 20,
+        "monto": 452000,
+        "origen": "Peru",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 227,
+        "fecha": "2025-09-16",
+        "cliente": "Cafe Rosas",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 228,
+        "fecha": "2025-09-16",
+        "cliente": "Mahuida",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 218000,
+        "origen": "Peru",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 229,
+        "fecha": "2025-09-16",
+        "cliente": "Kitea Rancagua",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 230,
+        "fecha": "2025-09-22",
+        "cliente": "Tu Delicia",
+        "tipo": "b2b",
+        "kg": 4,
+        "monto": 85200,
+        "origen": "Brasil/Peru",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 231,
+        "fecha": "2025-09-22",
+        "cliente": "Kitea Chillan",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 232,
+        "fecha": "2025-09-26",
+        "cliente": "Onces",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 109000,
+        "origen": "Peru",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 233,
+        "fecha": "2025-09-26",
+        "cliente": "Sattva Chile",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 120000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 234,
+        "fecha": "2025-09-26",
+        "cliente": "Velarys",
+        "tipo": "b2b",
+        "kg": 11,
+        "monto": 228800,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": false,
+        "pagado": true
+      },
+      {
+        "id": 235,
+        "fecha": "2025-09-26",
+        "cliente": "Farol",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 109000,
+        "origen": "Peru",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 236,
+        "fecha": "2025-09-26",
+        "cliente": "Casa Alonssa",
+        "tipo": "b2b",
+        "kg": 15,
+        "monto": 312000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 237,
+        "fecha": "2025-09-29",
+        "cliente": "Velarys",
+        "tipo": "b2b",
+        "kg": 11,
+        "monto": 228800,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 238,
+        "fecha": "2025-09-29",
+        "cliente": "Turquesa",
+        "tipo": "b2b",
+        "kg": 3,
+        "monto": 65400,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 239,
+        "fecha": "2025-09-22",
+        "cliente": "Dynos Mall",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 98500,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 240,
+        "fecha": "2025-10-03",
+        "cliente": "Carlos Cafe",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 241,
+        "fecha": "2025-10-07",
+        "cliente": "Cafe Rosas",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 242,
+        "fecha": "2025-10-08",
+        "cliente": "Clock",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 223000,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": false,
+        "pagado": true
+      },
+      {
+        "id": 243,
+        "fecha": "2025-10-08",
+        "cliente": "Kitea Chillan",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 244,
+        "fecha": "2025-10-11",
+        "cliente": "Velarys",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 218000,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 245,
+        "fecha": "2025-10-15",
+        "cliente": "Farol",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 109000,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 246,
+        "fecha": "2025-10-16",
+        "cliente": "Clock",
+        "tipo": "b2b",
+        "kg": 16,
+        "monto": 100800,
+        "origen": "Mix",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 247,
+        "fecha": "2025-10-20",
+        "cliente": "Taurus",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 99000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 248,
+        "fecha": "2025-10-20",
+        "cliente": "Cafe Rosas",
+        "tipo": "b2b",
+        "kg": 6,
+        "monto": 124800,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 249,
+        "fecha": "2025-10-21",
+        "cliente": "Catedral",
+        "tipo": "b2b",
+        "kg": 3,
+        "monto": 62400,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 250,
+        "fecha": "2025-10-20",
+        "cliente": "Casa Alonssa",
+        "tipo": "b2b",
+        "kg": 15,
+        "monto": 312000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 251,
+        "fecha": "2025-10-23",
+        "cliente": "Kitea Rancagua",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 252,
+        "fecha": "2025-10-24",
+        "cliente": "Agape Cafeteria",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 253,
+        "fecha": "2025-10-27",
+        "cliente": "Velarys",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 218000,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 254,
+        "fecha": "2025-10-27",
+        "cliente": "Dynos Roble",
+        "tipo": "b2b",
+        "kg": 3,
+        "monto": 59400,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 255,
+        "fecha": "2025-10-27",
+        "cliente": "Agape Cafe",
+        "tipo": "b2b",
+        "kg": 40,
+        "monto": 260000,
+        "origen": "Mix",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 256,
+        "fecha": "2025-10-29",
+        "cliente": "Onces",
+        "tipo": "b2b",
+        "kg": 6,
+        "monto": 130800,
+        "origen": "Peru",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 257,
+        "fecha": "2025-10-29",
+        "cliente": "Turquesa",
+        "tipo": "b2b",
+        "kg": 3,
+        "monto": 65400,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 260,
+        "fecha": "2025-11-04",
+        "cliente": "Gonzalo",
+        "tipo": "b2b",
+        "kg": 1,
+        "monto": 21800,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": false,
+        "pagado": true
+      },
+      {
+        "id": 261,
+        "fecha": "2025-11-04",
+        "cliente": "Kitea Chillan",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 109000,
+        "origen": "Peru",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 262,
+        "fecha": "2025-11-06",
+        "cliente": "Farol",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 109000,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 263,
+        "fecha": "2025-11-11",
+        "cliente": "Casa Alonssa",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 208000,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 264,
+        "fecha": "2025-11-19",
+        "cliente": "Clock",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 220000,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 265,
+        "fecha": "2025-11-19",
+        "cliente": "Catedral",
+        "tipo": "b2b",
+        "kg": 3,
+        "monto": 65400,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 266,
+        "fecha": "2025-11-21",
+        "cliente": "Farol",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 109000,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 267,
+        "fecha": "2025-11-21",
+        "cliente": "Onces",
+        "tipo": "b2b",
+        "kg": 7,
+        "monto": 152600,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 268,
+        "fecha": "2025-11-21",
+        "cliente": "Velarys",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 218000,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 269,
+        "fecha": "2025-11-24",
+        "cliente": "Casa Alonssa",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 109000,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 270,
+        "fecha": "2025-11-24",
+        "cliente": "Toqui",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 218000,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": false,
+        "pagado": true
+      },
+      {
+        "id": 271,
+        "fecha": "2025-11-24",
+        "cliente": "Taurus",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 272,
+        "fecha": "2025-11-24",
+        "cliente": "Kitea Chillan",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 109000,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 273,
+        "fecha": "2025-11-25",
+        "cliente": "Kitea Rancagua",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 109000,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 274,
+        "fecha": "2025-11-27",
+        "cliente": "Dynos Mall",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 104000,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 275,
+        "fecha": "2025-11-28",
+        "cliente": "Silvia",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 110000,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 280,
+        "fecha": "2025-12-05",
+        "cliente": "Farol",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 109000,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 281,
+        "fecha": "2025-12-05",
+        "cliente": "Velarys",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 218000,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 282,
+        "fecha": "2025-12-08",
+        "cliente": "Casa Alonssa",
+        "tipo": "b2b",
+        "kg": 14,
+        "monto": 305200,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 283,
+        "fecha": "2025-12-08",
+        "cliente": "Tu Delicia",
+        "tipo": "b2b",
+        "kg": 2,
+        "monto": 43600,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": false
+      },
+      {
+        "id": 284,
+        "fecha": "2025-12-10",
+        "cliente": "Onces",
+        "tipo": "b2b",
+        "kg": 6,
+        "monto": 130800,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 285,
+        "fecha": "2025-12-10",
+        "cliente": "Kitea Chillan",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 218000,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 286,
+        "fecha": "2025-12-10",
+        "cliente": "Melty",
+        "tipo": "b2b",
+        "kg": 1,
+        "monto": 21800,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": false,
+        "pagado": true
+      },
+      {
+        "id": 287,
+        "fecha": "2025-12-15",
+        "cliente": "Magnolia",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 114000,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 288,
+        "fecha": "2025-12-17",
+        "cliente": "Turquesa",
+        "tipo": "b2b",
+        "kg": 3,
+        "monto": 65400,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 289,
+        "fecha": "2025-12-19",
+        "cliente": "Catedral",
+        "tipo": "b2b",
+        "kg": 3,
+        "monto": 65400,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 290,
+        "fecha": "2025-12-22",
+        "cliente": "Taurus",
+        "tipo": "b2b",
+        "kg": 3,
+        "monto": 65400,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 291,
+        "fecha": "2025-12-22",
+        "cliente": "Velarys",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 218000,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 292,
+        "fecha": "2025-12-22",
+        "cliente": "Casa Alonssa",
+        "tipo": "b2b",
+        "kg": 15,
+        "monto": 327000,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 293,
+        "fecha": "2025-12-26",
+        "cliente": "Farol",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 109000,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 300,
+        "fecha": "2026-01-05",
+        "cliente": "Onces",
+        "tipo": "b2b",
+        "kg": 6,
+        "monto": 130800,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 301,
+        "fecha": "2026-01-07",
+        "cliente": "Clock",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 114000,
+        "origen": "Peru",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 302,
+        "fecha": "2026-01-07",
+        "cliente": "Clock 1/4",
+        "tipo": "b2b",
+        "kg": 15,
+        "monto": 97500,
+        "origen": "Mix",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 303,
+        "fecha": "2026-01-07",
+        "cliente": "Velarys",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 228000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 304,
+        "fecha": "2026-01-09",
+        "cliente": "Mahuida",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 228000,
+        "origen": "Peru",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 305,
+        "fecha": "2026-01-09",
+        "cliente": "Myreth",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 114000,
+        "origen": "Peru",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 306,
+        "fecha": "2026-01-13",
+        "cliente": "Dynos El Roble",
+        "tipo": "b2b",
+        "kg": 2,
+        "monto": 39600,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 307,
+        "fecha": "2026-01-13",
+        "cliente": "Taurus",
+        "tipo": "b2b",
+        "kg": 2,
+        "monto": 39600,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 308,
+        "fecha": "2026-01-13",
+        "cliente": "Kitea",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 117810,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": false,
+        "notas": "",
+        "productos": [
+          {
+            "origen": "Robusta",
+            "formato": "1kg Grano",
+            "kg": 5,
+            "precio": 19800
+          }
+        ]
+      },
+      {
+        "id": 309,
+        "fecha": "2026-01-13",
+        "cliente": "Clocks",
+        "tipo": "b2b",
+        "kg": 20,
+        "monto": 456000,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 310,
+        "fecha": "2026-01-16",
+        "cliente": "Farol",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 116000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 311,
+        "fecha": "2026-01-16",
+        "cliente": "Dynos El Roble",
+        "tipo": "b2b",
+        "kg": 3,
+        "monto": 59400,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 312,
+        "fecha": "2026-01-21",
+        "cliente": "Velarys",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 232000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 313,
+        "fecha": "2026-01-21",
+        "cliente": "Casa Alonssa",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 229000,
+        "origen": "Peru",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": false
+      },
+      {
+        "id": 314,
+        "fecha": "2026-01-26",
+        "cliente": "Catedral",
+        "tipo": "b2b",
+        "kg": 3,
+        "monto": 69600,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": false
+      },
+      {
+        "id": 315,
+        "fecha": "2026-01-26",
+        "cliente": "Manuel",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 114500,
+        "origen": "Peru",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 316,
+        "fecha": "2026-01-27",
+        "cliente": "Turquesa",
+        "tipo": "b2b",
+        "kg": 3,
+        "monto": 83538,
+        "origen": "Bolivia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true,
+        "notas": "",
+        "productos": [
+          {
+            "origen": "Bolivia",
+            "formato": "1kg Grano",
+            "kg": 3,
+            "precio": 23400
+          }
+        ]
+      },
+      {
+        "id": 317,
+        "fecha": "2026-01-27",
+        "cliente": "Nevado",
+        "tipo": "b2b",
+        "kg": 15,
+        "monto": 354000,
+        "origen": "Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 318,
+        "fecha": "2026-01-30",
+        "cliente": "Kitea R",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 116000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": false
+      },
+      {
+        "id": 319,
+        "fecha": "2026-01-30",
+        "cliente": "Cafe Rosas",
+        "tipo": "b2b",
+        "kg": 7,
+        "monto": 161700,
+        "origen": "Peru/Colombia",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 320,
+        "fecha": "2026-02-02",
+        "cliente": "Agape",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 116000,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      },
+      {
+        "id": 321,
+        "fecha": "2026-02-04",
+        "cliente": "Taurus",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 117810,
+        "origen": "Robusta",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true,
+        "notas": "",
+        "productos": [
+          {
+            "origen": "Robusta",
+            "formato": "1kg Grano",
+            "kg": 1,
+            "precio": 19800
+          },
+          {
+            "origen": "Robusta",
+            "formato": "1kg Grano",
+            "kg": 4,
+            "precio": 19800
+          }
+        ]
+      },
+      {
+        "id": 322,
+        "fecha": "2026-02-04",
+        "cliente": "Nevados",
+        "tipo": "b2b",
+        "kg": 42,
+        "monto": 1159655,
+        "origen": "Mix",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": false,
+        "notas": "",
+        "productos": [
+          {
+            "origen": "Bolivia",
+            "formato": "1kg Grano",
+            "kg": 5,
+            "precio": 23400
+          },
+          {
+            "origen": "Colombia",
+            "formato": "1kg Grano",
+            "kg": 34,
+            "precio": 23200
+          },
+          {
+            "origen": "Peru",
+            "formato": "1kg Grano",
+            "kg": 3,
+            "precio": 22900
+          }
+        ]
+      },
+      {
+        "id": 323,
+        "fecha": "2026-02-04",
+        "cliente": "Karu",
+        "tipo": "b2b",
+        "kg": 4,
+        "monto": 109004,
+        "origen": "Peru",
+        "estado": "entregada",
+        "facturado": false,
+        "pagado": false,
+        "notas": "",
+        "productos": [
+          {
+            "origen": "Peru",
+            "formato": "1kg Grano",
+            "kg": 4,
+            "precio": 22900
+          }
+        ]
+      },
+      {
+        "id": 324,
+        "fecha": "2026-02-05",
+        "cliente": "Farol",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 138040,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true,
+        "notas": "",
+        "productos": [
+          {
+            "origen": "Brasil",
+            "formato": "1kg Grano",
+            "kg": 5,
+            "precio": 23200
+          }
+        ]
+      },
+      {
+        "id": 325,
+        "fecha": "2026-02-06",
+        "cliente": "Kitea Chillan",
+        "tipo": "b2b",
+        "kg": 5,
+        "monto": 117810,
+        "origen": "Brasil",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": false,
+        "notas": "",
+        "productos": [
+          {
+            "origen": "Brasil",
+            "formato": "1kg Grano",
+            "kg": 5,
+            "precio": 19800
+          }
+        ]
+      },
+      {
+        "id": 326,
+        "fecha": "2026-02-06",
+        "cliente": "Manuel Stavva",
+        "tipo": "b2b",
+        "kg": 10,
+        "monto": 229000,
+        "origen": "Peru",
+        "estado": "entregada",
+        "facturado": true,
+        "pagado": true
+      }
+    ],
+    "estadoResultados": {
+      "meses": [
+        {
+          "mes": "2025-01",
+          "ingresos": {
+            "b2b": 2100000,
+            "b2p": 50000,
+            "total": 2150000
+          },
+          "costos": {
+            "cafeVerde": 600000,
+            "empaque": 50000,
+            "envios": 30000,
+            "marketing": 0,
+            "otros": 20000,
+            "total": 700000
+          },
+          "utilidad": 1450000,
+          "kgVendidos": {
+            "b2b": 120,
+            "b2p": 5
+          }
+        },
+        {
+          "mes": "2025-02",
+          "ingresos": {
+            "b2b": 2800000,
+            "b2p": 60000,
+            "total": 2860000
+          },
+          "costos": {
+            "cafeVerde": 800000,
+            "empaque": 60000,
+            "envios": 40000,
+            "marketing": 50000,
+            "otros": 25000,
+            "total": 975000
+          },
+          "utilidad": 1885000,
+          "kgVendidos": {
+            "b2b": 150,
+            "b2p": 6
+          }
+        },
+        {
+          "mes": "2025-03",
+          "ingresos": {
+            "b2b": 3200000,
+            "b2p": 70000,
+            "total": 3270000
+          },
+          "costos": {
+            "cafeVerde": 900000,
+            "empaque": 70000,
+            "envios": 45000,
+            "marketing": 100000,
+            "otros": 30000,
+            "total": 1145000
+          },
+          "utilidad": 2125000,
+          "kgVendidos": {
+            "b2b": 180,
+            "b2p": 7
+          }
+        },
+        {
+          "mes": "2025-04",
+          "ingresos": {
+            "b2b": 2500000,
+            "b2p": 80000,
+            "total": 2580000
+          },
+          "costos": {
+            "cafeVerde": 700000,
+            "empaque": 55000,
+            "envios": 35000,
+            "marketing": 100000,
+            "otros": 25000,
+            "total": 915000
+          },
+          "utilidad": 1665000,
+          "kgVendidos": {
+            "b2b": 130,
+            "b2p": 8
+          }
+        }
+      ]
+    },
+    "planesAccion": [
+      {
+        "id": 1,
+        "fase": "Mes 1-2: Fundación",
+        "estado": "activo",
+        "acciones": [
+          {
+            "accion": "Configurar CRM en app local",
+            "completado": true
+          },
+          {
+            "accion": "Sincronizar ventas de Google Sheets",
+            "completado": true
+          },
+          {
+            "accion": "Reactivar 5 clientes inactivos",
+            "completado": false
+          },
+          {
+            "accion": "Lanzar campaña Meta Ads ($100)",
+            "completado": false
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "fase": "Mes 3-4: Crecimiento",
+        "estado": "pendiente",
+        "acciones": [
+          {
+            "accion": "Captar 8 nuevos clientes B2B",
+            "completado": false
+          },
+          {
+            "accion": "Alcanzar 200 kg/mes B2B",
+            "completado": false
+          },
+          {
+            "accion": "Duplicar frecuencia de contenido",
+            "completado": false
+          },
+          {
+            "accion": "Escalar Meta Ads a $300/mes",
+            "completado": false
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "fase": "Mes 5-6: Consolidación",
+        "estado": "pendiente",
+        "acciones": [
+          {
+            "accion": "Alcanzar meta 300 kg/mes B2B",
+            "completado": false
+          },
+          {
+            "accion": "Alcanzar meta $1M/mes B2P",
+            "completado": false
+          },
+          {
+            "accion": "Automatizar seguimiento",
+            "completado": false
+          }
+        ]
+      }
+    ],
+    "agentes": [
+      {
+        "id": 1,
+        "nombre": "Agente Ventas B2B",
+        "emoji": "🎯",
+        "responsabilidades": [
+          "Seguimiento clientes",
+          "Prospección",
+          "Negociación"
+        ],
+        "kpis": [
+          {
+            "nombre": "Tasa recompra",
+            "meta": 80,
+            "actual": 75,
+            "unidad": "%"
+          },
+          {
+            "nombre": "Nuevos clientes/mes",
+            "meta": 4,
+            "actual": 2,
+            "unidad": ""
+          },
+          {
+            "nombre": "Ticket promedio",
+            "meta": 175000,
+            "actual": 150000,
+            "unidad": "CLP"
+          }
+        ],
+        "tareasSemana": [
+          "Revisar clientes sin compra 3+ semanas",
+          "Enviar seguimiento",
+          "Agendar visitas"
+        ]
+      },
+      {
+        "id": 2,
+        "nombre": "Agente Contenido",
+        "emoji": "📸",
+        "responsabilidades": [
+          "Creación contenido",
+          "Fotografía",
+          "Copywriting"
+        ],
+        "kpis": [
+          {
+            "nombre": "Posts/semana",
+            "meta": 4,
+            "actual": 2,
+            "unidad": ""
+          },
+          {
+            "nombre": "Engagement",
+            "meta": 5,
+            "actual": 3,
+            "unidad": "%"
+          }
+        ],
+        "tareasSemana": [
+          "Grabar 2 Reels",
+          "Diseñar carrusel",
+          "Stories diarias"
+        ]
+      },
+      {
+        "id": 3,
+        "nombre": "Agente Operaciones",
+        "emoji": "⚙️",
+        "responsabilidades": [
+          "Gestión tareas",
+          "Coordinación",
+          "Control inventario"
+        ],
+        "kpis": [
+          {
+            "nombre": "Entregas a tiempo",
+            "meta": 95,
+            "actual": 90,
+            "unidad": "%"
+          },
+          {
+            "nombre": "Tareas completadas",
+            "meta": 100,
+            "actual": 80,
+            "unidad": "%"
+          }
+        ],
+        "tareasSemana": [
+          "Revisar stock",
+          "Coordinar entregas",
+          "Actualizar inventario"
+        ]
+      }
+    ],
+    "clientes": [
+      {
+        "id": 1,
+        "nombre": "Mahuida",
+        "estado": "activo",
+        "ciudad": "Chillán",
+        "kgPromedio": 10,
+        "origenFavorito": "Brasil + Bolivia",
+        "notas": "Cliente recurrente top"
+      },
+      {
+        "id": 2,
+        "nombre": "Casa Alonsa",
+        "estado": "activo",
+        "ciudad": "Chillán",
+        "kgPromedio": 10,
+        "origenFavorito": "Brasil",
+        "notas": "Alto volumen"
+      },
+      {
+        "id": 3,
+        "nombre": "Nevados",
+        "estado": "activo",
+        "ciudad": "",
+        "kgPromedio": 20,
+        "origenFavorito": "Colombia Lav",
+        "notas": "Mayor comprador por pedido"
+      },
+      {
+        "id": 4,
+        "nombre": "Rivoz",
+        "estado": "activo",
+        "ciudad": "",
+        "kgPromedio": 6,
+        "origenFavorito": "Brasil + Bolivia",
+        "notas": "Frecuente"
+      },
+      {
+        "id": 5,
+        "nombre": "Kitea Chillan",
+        "estado": "activo",
+        "ciudad": "Chillán",
+        "kgPromedio": 5,
+        "origenFavorito": "Brasil",
+        "notas": ""
+      },
+      {
+        "id": 6,
+        "nombre": "Kitea Rancagua",
+        "estado": "activo",
+        "ciudad": "Rancagua",
+        "kgPromedio": 5,
+        "origenFavorito": "Bolivia",
+        "notas": "Expansión"
+      },
+      {
+        "id": 7,
+        "nombre": "Agatha",
+        "estado": "activo",
+        "ciudad": "",
+        "kgPromedio": 5,
+        "origenFavorito": "Brasil",
+        "notas": "Sin factura"
+      },
+      {
+        "id": 8,
+        "nombre": "Clocks Cafeteria",
+        "estado": "activo",
+        "ciudad": "",
+        "kgPromedio": 5,
+        "origenFavorito": "Bolivia + Costa Rica",
+        "notas": ""
+      },
+      {
+        "id": 9,
+        "nombre": "Café Rosas",
+        "estado": "activo",
+        "ciudad": "",
+        "kgPromedio": 5,
+        "origenFavorito": "Brasil + Colombia",
+        "notas": ""
+      },
+      {
+        "id": 10,
+        "nombre": "Onces",
+        "estado": "activo",
+        "ciudad": "",
+        "kgPromedio": 5,
+        "origenFavorito": "Brasil + Bolivia",
+        "notas": ""
+      },
+      {
+        "id": 11,
+        "nombre": "Dynos",
+        "estado": "activo",
+        "ciudad": "",
+        "kgPromedio": 5,
+        "origenFavorito": "Brasil",
+        "notas": "Varias sucursales"
+      },
+      {
+        "id": 12,
+        "nombre": "Farol",
+        "estado": "activo",
+        "ciudad": "",
+        "kgPromedio": 4,
+        "origenFavorito": "Bolivia + Colombia",
+        "notas": ""
+      },
+      {
+        "id": 13,
+        "nombre": "Catedral",
+        "estado": "activo",
+        "ciudad": "",
+        "kgPromedio": 3,
+        "origenFavorito": "Brasil + Bolivia",
+        "notas": ""
+      },
+      {
+        "id": 14,
+        "nombre": "Circular Coffee",
+        "estado": "activo",
+        "ciudad": "",
+        "kgPromedio": 4,
+        "origenFavorito": "Brasil + Colombia",
+        "notas": ""
+      },
+      {
+        "id": 15,
+        "nombre": "7 Cups",
+        "estado": "activo",
+        "ciudad": "",
+        "kgPromedio": 12,
+        "origenFavorito": "Varios",
+        "notas": "Alto volumen mix"
+      },
+      {
+        "id": 16,
+        "nombre": "Taller 9215",
+        "estado": "activo",
+        "ciudad": "",
+        "kgPromedio": 5,
+        "origenFavorito": "Colombia + Bolivia",
+        "notas": ""
+      },
+      {
+        "id": 17,
+        "nombre": "Isabellos Coffee",
+        "estado": "activo",
+        "ciudad": "",
+        "kgPromedio": 5,
+        "origenFavorito": "Brasil",
+        "notas": ""
+      },
+      {
+        "id": 18,
+        "nombre": "El Mundo del Cafe",
+        "estado": "activo",
+        "ciudad": "",
+        "kgPromedio": 58,
+        "origenFavorito": "Varios",
+        "notas": "Mayorista grande"
+      },
+      {
+        "id": 19,
+        "nombre": "Lazos Cafe",
+        "estado": "activo",
+        "ciudad": "",
+        "kgPromedio": 5,
+        "origenFavorito": "Colombia Lav",
+        "notas": ""
+      },
+      {
+        "id": 20,
+        "nombre": "Tu Delicia",
+        "estado": "activo",
+        "ciudad": "",
+        "kgPromedio": 4,
+        "origenFavorito": "Brasil",
+        "notas": ""
+      },
+      {
+        "id": 21,
+        "nombre": "Sanguchon Criollo",
+        "estado": "activo",
+        "ciudad": "",
+        "kgPromedio": 5,
+        "origenFavorito": "Brasil",
+        "notas": "Nuevo"
+      },
+      {
+        "id": 22,
+        "nombre": "Martin Ignacio",
+        "estado": "prospecto",
+        "ciudad": "",
+        "kgPromedio": 8,
+        "origenFavorito": "Brasil",
+        "notas": "No iniciada"
+      },
+      {
+        "id": 1770583203118,
+        "nombre": "",
+        "estado": "perdido",
+        "ciudad": "",
+        "kgPromedio": 0,
+        "notas": ""
+      }
+    ],
+    "calendario": [
+      {
+        "id": 1,
+        "titulo": "¿Por qué el especialidad es más caro?",
+        "fecha": "2026-02-10",
+        "pilar": "educacion",
+        "formato": "reel",
+        "estado": "idea",
+        "copy": "HOOK: ¿Por qué este café cuesta 3 veces más?"
+      },
+      {
+        "id": 2,
+        "titulo": "Presentación Brasil Amarelo",
+        "fecha": "2026-02-12",
+        "pilar": "producto",
+        "formato": "carrusel",
+        "estado": "idea",
+        "copy": "5 slides: origen, proceso, notas, maridaje, CTA"
+      },
+      {
+        "id": 3,
+        "titulo": "Time-lapse de tueste",
+        "fecha": "2026-02-14",
+        "pilar": "bts",
+        "formato": "reel",
+        "estado": "idea",
+        "copy": "Grano verde → marrón → empaque"
+      },
+      {
+        "id": 4,
+        "titulo": "3 errores que arruinan tu café",
+        "fecha": "2026-02-17",
+        "pilar": "educacion",
+        "formato": "reel",
+        "estado": "idea",
+        "copy": "Moler anticipado, agua caliente, sin balanza"
+      },
+      {
+        "id": 5,
+        "titulo": "Bolivia Wara Wara",
+        "fecha": "2026-02-19",
+        "pilar": "producto",
+        "formato": "carrusel",
+        "estado": "idea",
+        "copy": "Historia del productor + perfil de taza"
+      },
+      {
+        "id": 6,
+        "titulo": "Un día en el roast lab",
+        "fecha": "2026-02-21",
+        "pilar": "bts",
+        "formato": "reel",
+        "estado": "idea",
+        "copy": "Rutina de tostado, vlog style"
+      },
+      {
+        "id": 7,
+        "titulo": "Testimonio cafetería",
+        "fecha": "2026-02-23",
+        "pilar": "social",
+        "formato": "post",
+        "estado": "idea",
+        "copy": "Quote de cliente B2B con foto"
+      }
+    ],
+    "tareas": [
+      {
+        "id": 1,
+        "tarea": "Contactar cliente inactivo #1",
+        "responsable": "Diego",
+        "prioridad": "alta",
+        "area": "ventas",
+        "fechaLimite": "2026-02-12",
+        "completado": false
+      },
+      {
+        "id": 2,
+        "tarea": "Grabar Reel '¿Por qué es más caro?'",
+        "responsable": "",
+        "prioridad": "alta",
+        "area": "contenido",
+        "fechaLimite": "2026-02-10",
+        "completado": false
+      },
+      {
+        "id": 3,
+        "tarea": "Lanzar campaña Meta Ads $100",
+        "responsable": "Diego",
+        "prioridad": "alta",
+        "area": "marketing",
+        "fechaLimite": "2026-02-12",
+        "completado": false
+      },
+      {
+        "id": 4,
+        "tarea": "Revisar stock café verde",
+        "responsable": "",
+        "prioridad": "baja",
+        "area": "operaciones",
+        "fechaLimite": "2026-02-14",
+        "completado": false
+      }
+    ],
+    "inventario": [
+      {
+        "id": 1,
+        "origen": "Brasil Amarelo",
+        "stockActual": 0,
+        "puntoReorden": 10,
+        "ultimoIngreso": "",
+        "proveedor": "",
+        "notas": "Más vendido"
+      },
+      {
+        "id": 2,
+        "origen": "Bolivia Wara Wara",
+        "stockActual": 0,
+        "puntoReorden": 10,
+        "ultimoIngreso": "",
+        "proveedor": ""
+      },
+      {
+        "id": 3,
+        "origen": "Colombia Lavado",
+        "stockActual": 0,
+        "puntoReorden": 10,
+        "ultimoIngreso": "",
+        "proveedor": ""
+      },
+      {
+        "id": 4,
+        "origen": "Costa Rica",
+        "stockActual": 0,
+        "puntoReorden": 5,
+        "ultimoIngreso": "",
+        "proveedor": "",
+        "notas": "Premium"
+      }
+    ],
+    "gastos": [
+      {
+        "id": 1770744094744,
+        "descripcion": "Arabica SPA",
+        "categoria": "materia_prima",
+        "monto": 1795710,
+        "fecha": "2026-02-10",
+        "notas": "14 Enero"
+      },
+      {
+        "id": 1770743619747,
+        "descripcion": "Arriendo",
+        "categoria": "fijo",
+        "monto": 250000,
+        "fecha": "2026-02-10",
+        "notas": "Feb "
+      }
+    ],
+    "ventasWeb": []
+  }
+}

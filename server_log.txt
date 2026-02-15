@@ -1,0 +1,10 @@
+✅ Archivos JSON locales verificados
+
+==================================================
+🔥 CANDELA CRM - Multi-Tenant Server
+==================================================
+📍 Local:   http://localhost:5000
+📱 Network: http://192.168.1.81:5000
+💾 Storage: JSON (Users & Data)
+==================================================
+
