@@ -1456,9 +1456,12 @@ function contactCliente(nombre) { window.open(`https://wa.me/?text=Hola ${encode
 
 function marcarPagado(id) {
     const venta = data.ventas.find(v => v.id === id);
-    venta.pagado = true;
-    // ... (sync)
-}
+    if (venta) {
+        venta.pagado = true;
+        saveData();
+        renderAll();
+        showToast('✅ Venta marcada como pagada');
+    }
 }
 
 async function renderSuscriptores() {
@@ -1485,11 +1488,6 @@ async function renderSuscriptores() {
             console.error('Error fetching users:', await res.text());
         }
     } catch (e) { console.error('Error rendering subs:', e); }
-}
-saveData();
-renderAll();
-showToast('✅ Venta marcada como pagada');
-    }
 }
 
 function marcarFacturado(id) {
