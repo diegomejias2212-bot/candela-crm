@@ -1591,55 +1591,31 @@ function calcularTotalesVenta() {
     document.getElementById('venta-monto').value = Math.round(totalMonto);
 }
 
-async function renderSubscribers() {
-    if (currentUser.username !== 'admin') return;
+async function createUser() {
+    const username = document.getElementById('new-user-name').value;
+    const password = document.getElementById('new-user-pass').value;
+    const plan = document.getElementById('new-user-plan').value;
+
+    if (!username || !password) return alert('Por favor completa todos los campos');
+
     try {
-        const users = await api.get('/api/admin/users');
-        const tbody = document.getElementById('subscribers-table');
-
-        // Stats
-        const total = users.length;
-        const pros = users.filter(u => u.plan === 'pro').length;
-        const mrr = pros * 13; // $13 USD
-
-        document.getElementById('subscribers-table').innerHTML = users.map(u => {
-            const isPro = u.plan === 'pro';
-            const expires = u.plan_expires ? new Date(u.plan_expires).toLocaleDateString() : '-';
-            return `
-                <tr style="border-bottom:1px solid var(--border)">
-                    <td style="padding:1rem">
-                        <div style="font-weight:bold">${u.username}</div>
-                        <div style="font-size:0.8rem;color:var(--text-secondary)">ID: ${u.id}</div>
-                    </td>
-                    <td style="padding:1rem">
-                        <span class="badge ${isPro ? 'badge-activo' : 'badge-idea'}">${u.plan || 'free'}</span>
-                    </td>
-                    <td style="padding:1rem">
-                        <span style="color:${isPro ? 'var(--success)' : 'var(--text-secondary)'}">● ${isPro ? 'Activo' : 'Inactivo'}</span>
-                    </td>
-                    <td style="padding:1rem">${expires}</td>
-                    <td style="padding:1rem">
-                        <button class="btn btn-secondary" style="font-size:0.8rem" onclick="alert('Funcionalidad en desarrollo')">Gestionar</button>
-                    </td>
-                </tr>
-            `;
-        }).join('');
-
-        document.getElementById('sub-total').textContent = total;
-        document.getElementById('sub-pro').textContent = pros;
-        document.getElementById('sub-mrr').textContent = `$${mrr} USD`;
-
+        const res = await api.post('/api/register', { username, password, plan });
+        if (res && res.id) {
+            showToast('✅ Usuario creado exitosamente');
+            closeModal();
+            renderSuscriptores();
+        }
     } catch (e) {
-        console.error(e);
-        document.getElementById('subscribers-table').innerHTML = '<tr><td colspan="5" style="padding:1rem;text-align:center">Error cargando usuarios</td></tr>';
+        alert('Error creando usuario: ' + e.message);
     }
 }
 
 // Hook into navigation to load subscribers
+// Hook into navigation to load subscribers
 document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         if (btn.dataset.section === 'suscriptores') {
-            renderSubscribers();
+            renderSuscriptores();
         }
     });
 });
