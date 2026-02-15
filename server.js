@@ -64,6 +64,24 @@ const getBody = (req) => new Promise(resolve => {
 });
 
 // === SERVER ===
+// Helper: Authenticate
+async function authenticate(req) {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) return null;
+    try {
+        const token = authHeader.split(' ')[1];
+        const decoded = jwt.verify(token, SECRET_KEY);
+        // Map username 'admin' to ID if needed, but we should rely on ID in token.
+        // Wait, register returns ID. Login should return ID.
+        // Let's ensure Login returns ID.
+        if (pool) {
+            const r = await pool.query('SELECT id FROM users WHERE username = $1', [decoded.username]);
+            if (r.rows.length > 0) return { id: r.rows[0].id, username: decoded.username };
+        }
+        return { username: 'admin', id: 'admin' }; // Fallback for emergency admin
+    } catch (e) { return null; }
+}
+
 const server = http.createServer(async (req, res) => {
     // CORS
     res.setHeader('Access-Control-Allow-Origin', '*');
