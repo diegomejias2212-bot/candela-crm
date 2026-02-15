@@ -1466,8 +1466,11 @@ function marcarPagado(id) {
 
 async function renderSuscriptores() {
     console.log('👥 Rendering Suscriptores...');
-    const container = document.getElementById('suscriptores-list');
-    if (!container) return;
+    const container = document.getElementById('subscribers-table');
+    if (!container) {
+        console.error('❌ Error: Container subscribers-table not found');
+        return;
+    }
 
     try {
         const res = await fetch('/api/users', {
@@ -1475,15 +1478,43 @@ async function renderSuscriptores() {
         });
         if (res.ok) {
             const users = await res.json();
-            container.innerHTML = users.map(u => `
-                <div class="card" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">
-                    <div>
-                        <strong>${u.username}</strong>
-                        <span class="badge ${u.plan === 'pro' ? 'badge-success' : 'badge-warning'}">${u.plan}</span>
-                        <div style="font-size:0.8rem;color:var(--text-secondary)">ID: ${u.id} | Creado: ${new Date(u.created_at).toLocaleDateString()}</div>
-                    </div>
-                </div>
-            `).join('');
+
+            // Render Stats if elements exist
+            try {
+                const total = users.length;
+                const pros = users.filter(u => u.plan === 'pro').length;
+                const mrr = pros * 13;
+
+                const elTotal = document.getElementById('sub-total');
+                const elPro = document.getElementById('sub-pro');
+                const elMrr = document.getElementById('sub-mrr');
+
+                if (elTotal) elTotal.textContent = total;
+                if (elPro) elPro.textContent = pros;
+                if (elMrr) elMrr.textContent = `$${mrr} USD`;
+            } catch (e) { console.warn('Stats elements not found', e); }
+
+            // Render Table Rows
+            container.innerHTML = users.map(u => {
+                const isPro = u.plan === 'pro';
+                return `
+                <tr style="border-bottom:1px solid var(--border)">
+                    <td style="padding:1rem">
+                        <div style="font-weight:bold">${u.username}</div>
+                        <div style="font-size:0.8rem;color:var(--text-secondary)">ID: ${u.id}</div>
+                    </td>
+                    <td style="padding:1rem">
+                        <span class="badge ${isPro ? 'badge-activo' : 'badge-idea'}">${u.plan || 'free'}</span>
+                    </td>
+                    <td style="padding:1rem">
+                        <span style="color:${isPro ? 'var(--success)' : 'var(--text-secondary)'}">● ${isPro ? 'Activo' : 'Inactivo'}</span>
+                    </td>
+                    <td style="padding:1rem">${new Date(u.created_at).toLocaleDateString()}</td>
+                    <td style="padding:1rem">
+                        <button class="btn btn-secondary" style="font-size:0.8rem" onclick="editUser(${u.id})">Editar</button>
+                    </td>
+                </tr>
+            `}).join('');
         } else {
             console.error('Error fetching users:', await res.text());
         }
