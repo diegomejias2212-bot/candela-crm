@@ -196,7 +196,7 @@ const server = http.createServer(async (req, res) => {
 
             if (pool) {
                 try {
-                    const r = await pool.query('SELECT data FROM crm_data WHERE user_id = $1', [user.id]);
+                    const r = await pool.query('SELECT data FROM user_crm_data WHERE user_id = $1', [user.id]);
                     if (r.rows.length > 0) return sendJSON(res, 200, r.rows[0].data);
                     else return sendJSON(res, 200, {});
                 } catch (e) { return sendJSON(res, 500, { error: e.message }); }
@@ -211,22 +211,24 @@ const server = http.createServer(async (req, res) => {
             const user = await authenticate(req);
             if (!user) return sendJSON(res, 401, { error: 'Unauthorized' });
 
-            const data = await getBody(req);
+            const body = await getBody(req);
 
             if (pool) {
                 try {
-                    const check = await pool.query('SELECT id FROM crm_data WHERE user_id = $1', [user.id]);
+                    const check = await pool.query('SELECT user_id FROM user_crm_data WHERE user_id = $1', [user.id]);
                     if (check.rows.length > 0) {
-                        await pool.query('UPDATE crm_data SET data = $1, updated_at = NOW() WHERE user_id = $2', [data, user.id]);
+                        await pool.query('UPDATE user_crm_data SET data = $1, updated_at = NOW() WHERE user_id = $2', [JSON.stringify(body), user.id]);
                     } else {
-                        await pool.query('INSERT INTO crm_data (user_id, data) VALUES ($1, $2)', [user.id, data]);
+                        await pool.query('INSERT INTO user_crm_data (user_id, data) VALUES ($1, $2)', [user.id, JSON.stringify(body)]);
                     }
                     return sendJSON(res, 200, { success: true });
                 } catch (e) { return sendJSON(res, 500, { error: e.message }); }
             } else {
-                // Local logic... simplified
-                return sendJSON(res, 200, { success: true });
+                const data = JSON.parse(fs.readFileSync(DATA_FILE));
+                data['main'] = body;
+                fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
             }
+            return sendJSON(res, 200, { success: true });
         }
 
         // 6. STATIC FILES
