@@ -262,28 +262,33 @@ function showToast() {
 }
 
 function renderAll() {
-    console.log('🎨 renderAll executing...');
-    try {
-        renderStats();
-        renderMetasProgress();
-        renderMetasOverview();
-        renderEstadoResultados();
-        renderVentasResumen();
-        renderVentas();
-        renderFlujo();
-        renderAgentes();
-        renderPlanes();
-        renderClientes();
-        renderCalendario();
-        renderTareas();
-        renderInventario();
-        renderUrgentTasks();
-        renderCajaDiaria();
-        console.log('✅ renderAll completed successfully');
-    } catch (e) {
-        console.error('❌ Error inside renderAll:', e);
-        alert('Error Renderizando: ' + e.message);
+    // ... items ...
+    if (currentUser && currentUser.username === 'admin') {
+        renderSuscriptores();
     }
+}
+console.log('🎨 renderAll executing...');
+try {
+    renderStats();
+    renderMetasProgress();
+    renderMetasOverview();
+    renderEstadoResultados();
+    renderVentasResumen();
+    renderVentas();
+    renderFlujo();
+    renderAgentes();
+    renderPlanes();
+    renderClientes();
+    renderCalendario();
+    renderTareas();
+    renderInventario();
+    renderUrgentTasks();
+    renderCajaDiaria();
+    console.log('✅ renderAll completed successfully');
+} catch (e) {
+    console.error('❌ Error inside renderAll:', e);
+    alert('Error Renderizando: ' + e.message);
+}
 }
 
 function setupVentasFilters() {
