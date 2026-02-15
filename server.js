@@ -78,7 +78,8 @@ const server = http.createServer(async (req, res) => {
             return sendJSON(res, 200, {
                 status: 'ok',
                 uptime: process.uptime(),
-                db: pool ? 'connected' : 'local-json'
+                db: pool ? 'connected' : 'local-json',
+                env_check: !!process.env.DATABASE_URL
             });
         }
 
