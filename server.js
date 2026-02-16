@@ -231,7 +231,119 @@ const server = http.createServer(async (req, res) => {
             return sendJSON(res, 200, { success: true });
         }
 
-        // 6. STATIC FILES
+        // 6. ATOMIC PUSH (append item to array in user data)
+        if (req.method === 'POST' && req.url.startsWith('/api/push')) {
+            const user = await authenticate(req);
+            if (!user) return sendJSON(res, 401, { error: 'Unauthorized' });
+
+            const urlObj = new URL(req.url, `http://${req.headers.host}`);
+            const arrayName = urlObj.searchParams.get('array');
+            if (!arrayName) return sendJSON(res, 400, { error: 'Missing array param' });
+
+            const item = await getBody(req);
+
+            if (pool) {
+                try {
+                    // Get current data
+                    const r = await pool.query('SELECT data FROM user_crm_data WHERE user_id = $1', [user.id]);
+                    let userData = r.rows.length > 0 ? r.rows[0].data : {};
+                    if (!userData[arrayName]) userData[arrayName] = [];
+                    userData[arrayName].push(item);
+
+                    // Save back
+                    if (r.rows.length > 0) {
+                        await pool.query('UPDATE user_crm_data SET data = $1, updated_at = NOW() WHERE user_id = $2', [JSON.stringify(userData), user.id]);
+                    } else {
+                        await pool.query('INSERT INTO user_crm_data (user_id, data) VALUES ($1, $2)', [user.id, JSON.stringify(userData)]);
+                    }
+                    return sendJSON(res, 200, userData[arrayName]);
+                } catch (e) { return sendJSON(res, 500, { error: e.message }); }
+            } else {
+                // Local JSON fallback
+                const fileData = JSON.parse(fs.readFileSync(DATA_FILE));
+                const key = 'main';
+                if (!fileData[key]) fileData[key] = {};
+                if (!fileData[key][arrayName]) fileData[key][arrayName] = [];
+                fileData[key][arrayName].push(item);
+                fs.writeFileSync(DATA_FILE, JSON.stringify(fileData, null, 2));
+                return sendJSON(res, 200, fileData[key][arrayName]);
+            }
+        }
+
+        // 7. LOCAL SALES (venta de cafetería con descuento de inventario)
+        if (req.method === 'POST' && req.url === '/api/sales/local') {
+            const user = await authenticate(req);
+            if (!user) return sendJSON(res, 401, { error: 'Unauthorized' });
+
+            const { sale, deductInventory } = await getBody(req);
+            if (!sale) return sendJSON(res, 400, { error: 'Missing sale data' });
+
+            if (pool) {
+                try {
+                    const r = await pool.query('SELECT data FROM user_crm_data WHERE user_id = $1', [user.id]);
+                    let userData = r.rows.length > 0 ? r.rows[0].data : {};
+                    if (!userData.ventasLocales) userData.ventasLocales = [];
+                    if (!userData.inventario) userData.inventario = [];
+
+                    // Add sale
+                    userData.ventasLocales.push(sale);
+
+                    // Deduct inventory if requested
+                    if (deductInventory && deductInventory.length > 0) {
+                        deductInventory.forEach(d => {
+                            const inv = userData.inventario.find(i => i.origen === d.origen);
+                            if (inv) {
+                                inv.stockActual = Math.max(0, (inv.stockActual || 0) - d.kg);
+                            }
+                        });
+                    }
+
+                    // Save
+                    if (r.rows.length > 0) {
+                        await pool.query('UPDATE user_crm_data SET data = $1, updated_at = NOW() WHERE user_id = $2', [JSON.stringify(userData), user.id]);
+                    } else {
+                        await pool.query('INSERT INTO user_crm_data (user_id, data) VALUES ($1, $2)', [user.id, JSON.stringify(userData)]);
+                    }
+
+                    return sendJSON(res, 200, { sales: userData.ventasLocales, inventory: userData.inventario });
+                } catch (e) { return sendJSON(res, 500, { error: e.message }); }
+            } else {
+                const fileData = JSON.parse(fs.readFileSync(DATA_FILE));
+                const key = 'main';
+                if (!fileData[key]) fileData[key] = {};
+                if (!fileData[key].ventasLocales) fileData[key].ventasLocales = [];
+                if (!fileData[key].inventario) fileData[key].inventario = [];
+
+                fileData[key].ventasLocales.push(sale);
+                if (deductInventory && deductInventory.length > 0) {
+                    deductInventory.forEach(d => {
+                        const inv = fileData[key].inventario.find(i => i.origen === d.origen);
+                        if (inv) inv.stockActual = Math.max(0, (inv.stockActual || 0) - d.kg);
+                    });
+                }
+                fs.writeFileSync(DATA_FILE, JSON.stringify(fileData, null, 2));
+                return sendJSON(res, 200, { sales: fileData[key].ventasLocales, inventory: fileData[key].inventario });
+            }
+        }
+
+        // 8. UPGRADE PLAN
+        if (req.method === 'POST' && req.url === '/api/upgrade') {
+            const user = await authenticate(req);
+            if (!user) return sendJSON(res, 401, { error: 'Unauthorized' });
+
+            if (pool) {
+                try {
+                    const expires = new Date();
+                    expires.setMonth(expires.getMonth() + 1);
+                    await pool.query('UPDATE users SET plan = $1, plan_expires = $2 WHERE id = $3', ['pro', expires, user.id]);
+                    return sendJSON(res, 200, { success: true, plan: 'pro', expires: expires.toISOString() });
+                } catch (e) { return sendJSON(res, 500, { error: e.message }); }
+            } else {
+                return sendJSON(res, 200, { success: true, plan: 'pro' });
+            }
+        }
+
+        // 9. STATIC FILES
         let filePath = req.url === '/' ? '/index.html' : req.url;
         filePath = filePath.split('?')[0];
         const safePath = path.join(__dirname, path.normalize(filePath).replace(/^(\.\.[\/\\])+/, ''));
